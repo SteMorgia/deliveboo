@@ -20,8 +20,8 @@ class DishController extends Controller
     {
         $id = Auth::id();
         $restaurant = Restaurant::find($id);
-        if ($restaurant == null) {
-            abort(404);
+        if ($restaurant === null) {
+            abort(404, 'Non esistono piatti per questo ristorante');
         };
         $dishes = Dish::where('restaurant_id', $restaurant->id)->get();
     
@@ -100,7 +100,7 @@ class DishController extends Controller
             $dish->delete();
             return view('admin.dishes.index');
         } else {
-            abort(404);
+            abort(404, 'Non esiste il piatto da cancellare');
         }
     }
 }
