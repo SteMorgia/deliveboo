@@ -20,7 +20,11 @@ class DishController extends Controller
     {
         $id = Auth::id();
         $restaurant = Restaurant::find($id);
+        if ($restaurant == null) {
+            abort(404);
+        };
         $dishes = Dish::where('restaurant_id', $restaurant->id)->get();
+    
         return view('admin.dishes.index', compact('dishes', 'id', 'restaurant'));
     }
 
@@ -31,7 +35,10 @@ class DishController extends Controller
      */
     public function create()
     {
-        
+        $id = Auth::id();
+        $restaurant = Restaurant::find($id);
+
+        return view('admin.dishes.create', compact('id', 'restaurant'));
     }
 
     /**
@@ -88,6 +95,12 @@ class DishController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $dish = Dish::find($id);
+        if ($dish) {
+            $dish->delete();
+            return view('admin.dishes.index');
+        } else {
+            abort(404);
+        }
     }
 }

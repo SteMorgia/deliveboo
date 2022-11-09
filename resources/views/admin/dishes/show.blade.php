@@ -13,7 +13,13 @@
             <p class="card-text">Descrizione: <br> {{$dish->description}}</p>
             <p class="card-text">Prezzo: {{$dish->price}} €</p>
             <a href="#" class="btn btn-warning m-1">Modifica</a><br>
-            <a href="#" class="btn btn-danger m-1">Elimina</a>
+
+            <form action="{{route('admin.dishes.destroy', ['dish' => $dish->id])}}" method="POST">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="btn btn-danger mx-1">Elimina</button>
+            </form>
+
         </div>
 
         <a href="{{route('admin.dishes.index')}}" class="btn btn-primary">Torna alla lista dei tuoi piatti</a>

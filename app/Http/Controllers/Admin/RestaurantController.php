@@ -123,6 +123,6 @@ class RestaurantController extends Controller
      */
     public function destroy($id)
     {
-        
+
     }
 }
