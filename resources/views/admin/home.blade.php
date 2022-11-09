@@ -7,7 +7,9 @@
         @if ($user->restaurant)
             <a href="{{route('admin.restaurants.index')}}" class="btn btn-primary">Vai al tuo ristorante</a>
         @else
-            {{-- <a href="{{route('admin.restaurants.create')}}" class="btn btn-primary">Vai al tuo ristorante</a> --}}
+            <hr>
+            <h4>Non hai ancora un tuo ristorante!</h4>
+            <a href="{{route('admin.restaurants.create')}}" class="btn btn-primary">Crea il tuo ristorante</a>
         @endif
     </div>
 

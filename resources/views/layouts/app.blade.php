@@ -72,6 +72,28 @@
             </div>
         </nav>
 
+        <div class="container mt-4">
+
+            {{-- conferma creazione ristorante --}}
+            @if (session('status'))
+                <div class="alert alert-success">
+                    {{ session('status') }}
+                </div>
+            @endif
+
+            {{-- validation error creazione ristorante --}}
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
+        </div>
+
         <main class="py-4">
             @yield('content')
         </main>

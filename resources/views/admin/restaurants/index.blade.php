@@ -4,11 +4,16 @@
 
     <div class="container">
 
-        <h1>Ecco il ristorante:</h1>
+        <h1>Ecco il tuo ristorante:</h1>
 
         @foreach ($restaurant as $restaurant)
         <div class="card mb-3">
-            <img class="card-img-top" src="{{asset('images/ristorante1.jpeg')}}" alt="{{$restaurant->name}}">
+            @if ($restaurant->image)
+                <img class="card-img-top" src="{{asset($restaurant->image)}}" alt="{{$restaurant->name}}">
+            @else
+                <img class="card-img-top" style="width:20%" src="{{asset('images/no_img.jpg')}}" alt="{{$restaurant->name}}">
+            @endif
+
             <div class="card-body">
                 <h5 class="card-title">Nome: {{$restaurant->name}}</h5>
                 <p class="card-text">Indirizzo: {{$restaurant->address}}</p>
@@ -19,6 +24,7 @@
             </div>
         </div>
         @endforeach
+
     </div>
 
 @endsection

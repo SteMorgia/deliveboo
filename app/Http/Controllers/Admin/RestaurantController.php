@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Restaurant;
+use App\Category;
 use Illuminate\Support\Facades\Auth;
 
 class RestaurantController extends Controller
@@ -28,7 +29,9 @@ class RestaurantController extends Controller
      */
     public function create()
     {
-        //
+        $user = Auth::user();
+        $categories = Category::all();
+        return view('admin.restaurants.create', compact('user', 'categories'));
     }
 
     /**
@@ -39,7 +42,28 @@ class RestaurantController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|max:50|min:1|string',
+            'address' => 'required|max:255|min:6|string',
+            'phone_number' => 'required|digits_between:6,30',
+            'description' => 'nullable|max:65535|string',
+            'vat' => 'required|numeric|digits:11',
+            'categories' => 'exists:categories,id'
+        ]);
+
+        $data = $request->all();
+
+        $newRestaurant = new Restaurant();
+        $newRestaurant->fill($data);
+        $id = Auth::id();
+        $newRestaurant->user_id = $id;
+        $newRestaurant->save();
+
+        if (array_key_exists('categories', $data)) {
+            $newRestaurant->categories()->sync($data['categories']);
+        }
+
+        return redirect()->route('admin.restaurants.index')->with('status', 'Ristorante creato con successo.');
     }
 
     /**
@@ -84,6 +108,6 @@ class RestaurantController extends Controller
      */
     public function destroy($id)
     {
-        //
+        
     }
 }
