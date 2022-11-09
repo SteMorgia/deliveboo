@@ -1,8 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    @if ($dishes)
+    <div class="container">
             <h1>Ecco i piatti del tuo ristorante:</h1>
 
             <a href="{{route('admin.dishes.create')}}" class="btn btn-success">Crea un nuovo piatto</a>
@@ -25,11 +24,7 @@
                 @endforeach
 
             </div>
-    @else
-        <h1>Non hai piatti per il tuo ristorante.</h1>
-        <a href="{{route('admin.dishes.create')}}" class="btn btn-primary">Crea piatti</a>
-    @endif
-    <a href="{{route('admin.restaurants.index')}}" class="btn btn-primary">Torna al tuo ristorante</a>
-</div>
+        <a href="{{route('admin.restaurants.index')}}" class="btn btn-primary">Torna al tuo ristorante</a>
+    </div>
 
 @endsection
