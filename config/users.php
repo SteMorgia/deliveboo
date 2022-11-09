@@ -12,16 +12,6 @@ return [
         'password' => 'mneri1'
     ],
     [
-        'name' => 'Marco Rossi',
-        'email' => 'marco@rossi.com',
-        'password' => 'mrossi1'
-    ],
-    [
-        'name' => 'Marco Verdi',
-        'email' => 'marco@verdi.com',
-        'password' => 'mverdi1'
-    ],
-    [
         'name' => 'Aldo Baglio',
         'email' => 'aldo@baglio.com',
         'password' => 'abaglio1'
