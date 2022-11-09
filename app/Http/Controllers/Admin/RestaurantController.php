@@ -49,6 +49,20 @@ class RestaurantController extends Controller
             'description' => 'nullable|max:65535|string',
             'vat' => 'required|numeric|digits:11',
             'categories' => 'exists:categories,id'
+        ],
+        [
+            'name.required' => 'Inserisci il nome (almeno un carattere)',
+            'name.min' => 'Il nome deve avere almeno un carattere',
+            'name.max' => 'Il nome può essere al massimo di 50 caratteri',
+            'address.required' => 'Inserisci un indirizzo',
+            'address.max' => 'L\'indirizzo deve contenere almeno 6 caratteri',
+            'address.max' => 'L\'indirizzo può essere al massimo di 255 caratteri',
+            'phone_number.required' => 'Inserisci un numero valido',
+            'phone_number.digits_between' => 'Il numero deve avere tra le 6 e le 30 cifre',
+            'description.max' => 'La descrizione deve avere massimo 65535 caratteri',
+            'vat.required' => 'Inserisci la partita iva',
+            'vat.numeric' => 'La partita iva deve essere un numero',
+            'vat.digits' => 'La partita iva deve essere di 11 numeri',
         ]);
 
         $data = $request->all();
