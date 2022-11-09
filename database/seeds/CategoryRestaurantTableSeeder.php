@@ -13,21 +13,19 @@ class CategoryRestaurantTableSeeder extends Seeder
     public function run()
     {
         $categories = [
-            [13],
-            [24],
-            [23, 13],
-            [19],
-            [18, 14],
-            [20]
+            [0],
+            [1],
+            [12],
+            [1, 11],
+            [7],
+            [2, 6],
+            [8]
         ];
 
-        $k = 0;
-        for ($i = 7; $i < 13; $i++) {
+        for ($i = 1; $i < 7; $i++) {
             $restaurant = Restaurant::find($i);
-            $restaurant->categories()->sync($categories[$k]);
-            $k++;
+            $restaurant->categories()->sync($categories[$i]);
             $restaurant->save();
         }
     }
 }
-
