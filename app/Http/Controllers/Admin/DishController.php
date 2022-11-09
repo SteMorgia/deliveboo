@@ -53,7 +53,8 @@ class DishController extends Controller
      */
     public function show($id)
     {
-        //
+        $dish = Dish::find($id);
+        return view('admin.dishes.show', compact('dish'));
     }
 
     /**
