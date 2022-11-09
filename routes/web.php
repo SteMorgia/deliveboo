@@ -16,11 +16,11 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-Route::middleware('auth')   //
-    ->namespace('Admin')    //
-    ->name('admin.')    //
-    ->prefix('admin')   //
-    ->group(function () {   //
+Route::middleware('auth')
+    ->namespace('Admin')
+    ->name('admin.')
+    ->prefix('admin')
+    ->group(function () {
         Route::get('/', 'HomeController@Index')->name('home');
         Route::resource('restaurants','RestaurantController');
     });

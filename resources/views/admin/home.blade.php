@@ -3,7 +3,12 @@
 @section('content')
 
     <div class="container">
-        <h1>Benvenuto nell'area amministrativa {{$user->name}} - {{$user->email}}</h1> {{-- in alternativa posso scrivere, senza passare variabili dal controller: {{Auth::user()->name}} --}}
+        <h1>Bentornato {{$user->name}}.</h1>
+        @if ($user->restaurant)
+            <a href="{{route('admin.restaurants.index')}}" class="btn btn-primary">Vai al tuo ristorante</a>
+        @else
+            {{-- <a href="{{route('admin.restaurants.create')}}" class="btn btn-primary">Vai al tuo ristorante</a> --}}
+        @endif
     </div>
 
 @endsection
