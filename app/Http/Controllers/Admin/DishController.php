@@ -53,6 +53,7 @@ class DishController extends Controller
             'name' => 'required|max:50|min:3|string',
             'description' => 'required|max:1000|min:10|string',
             'price' => 'required|numeric|between:0,999.99',
+            'visibility' => 'required|boolean'
         ],
         [
             'name.required' => 'Inserisci il nome (almeno tre caratteri)',
@@ -63,7 +64,8 @@ class DishController extends Controller
             'description.min' => 'La descrizione deve avere minimo 10 caratteri',
             'price.required' => 'Inserisci un prezzo',
             'price.numeric' => 'Inserisci un numero',
-            'price.between' => 'Inserisci un numero compreso tra 0 e 999.99'
+            'price.between' => 'Inserisci un numero compreso tra 0 e 999.99',
+            'visibility.required' => 'Scegli se rendere il piatto visibile',
         ]);
 
         $data = $request->all();
@@ -72,16 +74,10 @@ class DishController extends Controller
         $newDish->fill($data);
 
         $id = Auth::id();
-        //$restaurant = Restaurant::find($id);
+        // $restaurant = Restaurant::find($id);
 
         $newDish->restaurant_id = $id;
         $newDish->save();
-
-        /*
-        if (array_key_exists('categories', $data)) {
-            $newRestaurant->categories()->sync($data['categories']);
-        }
-        */
 
         return redirect()->route('admin.dishes.index')->with('status', 'Piatto creato con successo');
     }

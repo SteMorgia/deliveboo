@@ -14,7 +14,7 @@
             <p class="card-text">Prezzo: {{$dish->price}} €</p>
             <a href="#" class="btn btn-warning m-1">Modifica</a><br>
 
-            <form action="{{route('admin.dishes.destroy', ['dish' => $dish->id])}}" method="POST">
+            <form action="{{route('admin.dishes.destroy', ['dish' => $dish->id])}}" method="POST" onsubmit="return confirm('Confermi di voler cancellare il piatto?')">
                 @csrf
                 @method('DELETE')
                 <button type="submit" class="btn btn-danger mx-1">Elimina</button>

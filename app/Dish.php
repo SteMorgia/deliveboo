@@ -9,7 +9,8 @@ class Dish extends Model
     protected $fillable = [
         'name',
         'description',
-        'price'
+        'price',
+        'visibility'
     ];
 
     public function restaurant()

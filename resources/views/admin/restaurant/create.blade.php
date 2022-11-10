@@ -4,7 +4,7 @@
 
     <div class="container">
 
-        <form action="{{ route('admin.restaurants.store') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('admin.restaurant.store') }}" method="POST" enctype="multipart/form-data">
 
             @csrf
 

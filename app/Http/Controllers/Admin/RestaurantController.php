@@ -20,7 +20,7 @@ class RestaurantController extends Controller
     {
         $user = Auth::user();
         $restaurant = Restaurant::where('user_id', $user->id)->get();
-        return view('admin.restaurants.index', compact('restaurant','user'));
+        return view('admin.restaurant.index', compact('restaurant','user'));
     }
 
     /**
@@ -32,7 +32,7 @@ class RestaurantController extends Controller
     {
         $user = Auth::user();
         $categories = Category::all();
-        return view('admin.restaurants.create', compact('user', 'categories'));
+        return view('admin.restaurant.create', compact('user', 'categories'));
     }
 
     /**
@@ -78,7 +78,7 @@ class RestaurantController extends Controller
             $newRestaurant->categories()->sync($data['categories']);
         }
 
-        return redirect()->route('admin.restaurants.index')->with('status', 'Ristorante creato con successo.');
+        return redirect()->route('admin.restaurant.index')->with('status', 'Ristorante creato con successo.');
     }
 
     /**

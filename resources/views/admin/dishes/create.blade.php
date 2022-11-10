@@ -60,6 +60,19 @@
                 @enderror
             </div>
 
+            <div class="form-group mb-3">
+                <label for="visibilityId">Visibilità</label>
+                <select id="visibilityId" name="visibility" class="form-control @error('category_id') is-invalid @enderror" required>
+                    <option {{(old('visibility')=="")?'selected':''}} value="" default>Nessuna opzione selezionata</option>
+                    <option {{(old('visibility')=="true")?'selected':''}} value=1>Visibile</option>
+                    <option {{(old('visibility')=="false")?'selected':''}} value=0>Non visibile</option>                   
+                </select>
+
+                @error('visibility')
+                    <div class="alert alert-danger mt-1">{{ $message }}</div>
+                @enderror
+            </div>
+
             <button type="submit" class="mt-3 btn btn-primary">Crea piatto</button>
         
             {{--
