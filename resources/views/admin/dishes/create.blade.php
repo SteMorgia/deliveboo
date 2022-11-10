@@ -64,31 +64,27 @@
                 <label for="visibilityId">Visibilità</label>
                 <select id="visibilityId" name="visibility" class="form-control @error('category_id') is-invalid @enderror" required>
                     <option {{(old('visibility')=="")?'selected':''}} value="" default>Nessuna opzione selezionata</option>
-                    <option {{(old('visibility')=="true")?'selected':''}} value=1>Visibile</option>
-                    <option {{(old('visibility')=="false")?'selected':''}} value=0>Non visibile</option>                   
+                    <option {{(old('visibility')==1)?'selected':''}} value=1>Visibile</option>
+                    <option {{(old('visibility')==0)?'selected':''}} value=0>Non visibile</option>
                 </select>
 
                 @error('visibility')
                     <div class="alert alert-danger mt-1">{{ $message }}</div>
                 @enderror
             </div>
-
-            <button type="submit" class="mt-3 btn btn-primary">Crea piatto</button>
         
-            {{--
-            GESTIONE UPLOAD IMMAGINI
+            <div class="form-group">
+                <label for="coverId">Immagine</label>
+                <input type="file" name="cover" id="coverId" class="form-control-file @error('cover') is-invalid @enderror" />
 
-            <div class="form-group mb-3">
-                <label for="cover">Immagine: </label>
-                <input type="file" name="image" id="cover" class="form-control-file @error('image') is-invalid @enderror" />
-
-                @error('image')
+                @error('cover')
                     <div class="invalid-feedback">
                         {{ $message }}
                     </div>
                 @enderror
             </div>
-            --}}
+
+            <button type="submit" class="mt-3 btn btn-primary">Crea piatto</button>
 
         </form>
 

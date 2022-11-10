@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Dish;
 use App\Restaurant;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class DishController extends Controller
 {
@@ -53,7 +54,8 @@ class DishController extends Controller
             'name' => 'required|max:50|min:3|string',
             'description' => 'required|max:1000|min:10|string',
             'price' => 'required|numeric|between:0,999.99',
-            'visibility' => 'required|boolean'
+            'visibility' => 'required|boolean',
+            'cover' => 'nullable|mimes:png,jpg,jpeg'
         ],
         [
             'name.required' => 'Inserisci il nome (almeno tre caratteri)',
@@ -66,9 +68,14 @@ class DishController extends Controller
             'price.numeric' => 'Inserisci un numero',
             'price.between' => 'Inserisci un numero compreso tra 0 e 999.99',
             'visibility.required' => 'Scegli se rendere il piatto visibile',
+            'cover.mimes' => 'Caricare un\'immagine in formato png, jpg o jpeg',
+            'cover.max' => 'L\'immagine deve pesare massimo 8 mb'
         ]);
 
         $data = $request->all();
+
+        $image_path = Storage::put('cover', $data['cover']);
+        $data['image'] = $image_path;
 
         $newDish = new Dish();
         $newDish->fill($data);
