@@ -14,10 +14,13 @@
 
                 @foreach ($dishes as $dish)
                     <div class="card m-2" style="width: 20rem;">
-                        {{-- 
-                            PLACEHOLDER IMMAGINI PIATTI
-                            <img class="card-img-top" src="..." alt="Card image cap">
-                        --}}
+
+                    @if ($dish->image != null)
+                        <img class="card-img-top" src="{{asset('storage/' . $dish->image)}}" alt="{{$dish->name}}">
+                    @else
+                        <img class="card-img-top" src="{{asset('images/no_img.jpg')}}" alt="{{$dish->name}}">
+                    @endif
+
                         <div class="card-body">
                             <h5 class="card-title">{{$dish->name}}</h5>
                             <p class="card-text">Descrizione: <br> {{$dish->description}}</p>
@@ -25,6 +28,7 @@
                             <p class="card-text">Visibile: {{$dish->visibility?'Sì':'No'}}</p>
                             <a href="{{route('admin.dishes.show', ['dish' => $dish->id])}}" class="btn btn-primary m-1">Vedi</a><br>
                         </div>
+
                     </div>
                 @endforeach
 

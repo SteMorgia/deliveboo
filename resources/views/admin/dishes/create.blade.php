@@ -61,11 +61,11 @@
             </div>
 
             <div class="form-group mb-3">
-                <label for="visibilityId">Visibilità</label>
+                <label for="visibilityId">Visibilità - di default il piatto è non visibile</label>
                 <select id="visibilityId" name="visibility" class="form-control @error('category_id') is-invalid @enderror" required>
-                    <option {{(old('visibility')=="")?'selected':''}} value="" default>Nessuna opzione selezionata</option>
-                    <option {{(old('visibility')==1)?'selected':''}} value=1>Visibile</option>
+                    {{-- <option {{(old('visibility')=="")?'selected':''}} value="">Nessuna opzione selezionata</option> --}}
                     <option {{(old('visibility')==0)?'selected':''}} value=0>Non visibile</option>
+                    <option {{(old('visibility')==1)?'selected':''}} value=1>Visibile</option>
                 </select>
 
                 @error('visibility')

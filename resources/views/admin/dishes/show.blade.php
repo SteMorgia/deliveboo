@@ -6,10 +6,10 @@
 
         <div class="card-body max-width: 30%;">
 
-            @if ($dish->image)
-                <img class="card-img-top" src="{{asset('storage/' . $dish->image)}}" alt="{{$dish->name}}">
+            @if ($dish->image != null)
+                <img class="card-img-top mb-3" style="max-width: 30rem" src="{{asset('storage/' . $dish->image)}}" alt="{{$dish->name}}">
             @else
-                <img class="card-img-top" src="{{asset('images/no_img.jpg')}}" alt="No image">
+                <img class="card-img-top mb-3" style="max-width: 30rem" src="{{asset('images/no_img.jpg')}}" alt="No image">
             @endif
 
             <h5 class="card-title">{{$dish->name}}</h5>
