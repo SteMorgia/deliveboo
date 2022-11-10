@@ -49,7 +49,41 @@ class DishController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|max:50|min:3|string',
+            'description' => 'required|max:1000|min:10|string',
+            'price' => 'required|numeric|between:0,999.99',
+        ],
+        [
+            'name.required' => 'Inserisci il nome (almeno tre caratteri)',
+            'name.min' => 'Il nome deve avere almeno tre caratteri',
+            'name.max' => 'Il nome può essere al massimo di 50 caratteri',
+            'description.required' => 'Inserisci una descrizione',
+            'description.max' => 'La descrizione deve avere massimo 1000 caratteri',
+            'description.min' => 'La descrizione deve avere minimo 10 caratteri',
+            'price.required' => 'Inserisci un prezzo',
+            'price.numeric' => 'Inserisci un numero',
+            'price.between' => 'Inserisci un numero compreso tra 0 e 999.99'
+        ]);
+
+        $data = $request->all();
+
+        $newDish = new Dish();
+        $newDish->fill($data);
+
+        $id = Auth::id();
+        //$restaurant = Restaurant::find($id);
+
+        $newDish->restaurant_id = $id;
+        $newDish->save();
+
+        /*
+        if (array_key_exists('categories', $data)) {
+            $newRestaurant->categories()->sync($data['categories']);
+        }
+        */
+
+        return redirect()->route('admin.dishes.index')->with('status', 'Piatto creato con successo');
     }
 
     /**
@@ -98,7 +132,7 @@ class DishController extends Controller
         $dish = Dish::find($id);
         if ($dish) {
             $dish->delete();
-            return view('admin.dishes.index');
+            return redirect()->route('admin.dishes.index')->with('status', 'Piatto cancellato con successo');
         } else {
             abort(404, 'Non esiste il piatto da cancellare');
         }

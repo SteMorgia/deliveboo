@@ -53,7 +53,7 @@
                     max='999.99'
                     required />
 
-                @error('vat')
+                @error('price')
                     <div class="invalid-feedback">
                         {{ $message }}
                     </div>
