@@ -2,9 +2,13 @@
 
 @section('content')
     <div class="container">
-            <h1>Ecco i piatti del tuo ristorante:</h1>
 
+            <a href="{{route('admin.restaurants.index')}}" class="btn btn-primary">Torna al tuo ristorante</a>
             <a href="{{route('admin.dishes.create')}}" class="btn btn-success">Crea un nuovo piatto</a>
+
+            <hr>
+
+            <h1>Ecco i piatti del tuo ristorante:</h1>
 
             <div class="container d-flex flex-wrap">
 
@@ -24,7 +28,6 @@
                 @endforeach
 
             </div>
-        <a href="{{route('admin.restaurants.index')}}" class="btn btn-primary">Torna al tuo ristorante</a>
     </div>
 
 @endsection

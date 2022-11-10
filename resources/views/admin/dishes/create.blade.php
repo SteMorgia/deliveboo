@@ -4,42 +4,22 @@
 
     <div class="container">
 
-        <form action="{{ route('admin.restaurants.store') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('admin.dishes.store') }}" method="POST" enctype="multipart/form-data">
 
             @csrf
 
-            <h1 class="mb-4">Aggiungi ristorante</h1>
+            <h1 class="mb-4">Aggiungi piatto</h1>
 
             <div class="form-group mb-3">
-                <label for="name">Nome ristorante</label>
-                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}"
-                    name="name" minlength='1' maxlength="50" required />
+                <label for="name">Nome</label>
+                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror"
+                    value="{{ old('name') }}"
+                    name="name"
+                    minlength="3"
+                    maxlength="50"
+                    required />
 
                 @error('name')
-                    <div class="invalid-feedback">
-                        {{ $message }}
-                    </div>
-                @enderror
-            </div>
-
-            <div class="form-group mb-3">
-                <label for="address">Indirizzo</label>
-                <input id="address" type="text" class="form-control @error('address') is-invalid @enderror" value="{{ old('address') }}"
-                    name="address" minlength="6" maxlength="255" required />
-
-                @error('address')
-                    <div class="invalid-feedback">
-                        {{ $message }}
-                    </div>
-                @enderror
-            </div>
-
-            <div class="form-group mb-3">
-                <label for="phone_number">Numero di telefono</label>
-                <input id="phone_number" type="text" class="form-control @error('phone_number') is-invalid @enderror" value="{{ old('phone_number') }}"
-                    name="phone_number" maxlength="30" required />
-
-                @error('phone_number')
                     <div class="invalid-feedback">
                         {{ $message }}
                     </div>
@@ -51,8 +31,8 @@
                 <textarea class="form-control  @error('description') is-invalid @enderror"
                 id="description"
                 name="description"
-                maxlength="65535"
-                >
+                minlength="10"
+                maxlength="1000">
                     {{ old('description') }}
                 </textarea>
 
@@ -64,10 +44,13 @@
             </div>
 
             <div class="form-group mb-3">
-                <label for="vat">Partita IVA</label>
-                <input id="vat" type="text" class="form-control @error('vat') is-invalid @enderror" value="{{ old('vat') }}"
-                    name="vat"
-                    maxlength="11"
+                <label for="price">Prezzo</label>
+                <input id="price" type="number" class="form-control @error('price') is-invalid @enderror"
+                    value="{{ old('price') }}"
+                    name="price"
+                    step='0.01'
+                    min='0'
+                    max='999.99'
                     required />
 
                 @error('vat')
@@ -77,29 +60,7 @@
                 @enderror
             </div>
 
-            <p>Categorie</p>
-            <div class="card p-3">
-                @foreach ($categories as $category)
-                    <div class="form-group form-check">
-                        <input {{(in_array($category->id, old('categories', [])))?'checked':''}}
-                            name="categories[]"
-                            type="checkbox"
-                            class="form-check-input"
-                            value="{{$category->id}}"
-                            id="{{$category->name}}"
-                        />
-                        <label class="form-check-label" for="{{$category->name}}">{{$category->name}}</label>
-                    </div>
-                @endforeach
-
-                @error('categories')
-                    <div class="alert alert-danger">
-                        {{ $message }}
-                    </div>
-                @enderror
-            </div>
-
-            <button type="submit" class="mt-3 btn btn-primary">Crea ristorante</button>
+            <button type="submit" class="mt-3 btn btn-primary">Crea piatto</button>
         
             {{--
             GESTIONE UPLOAD IMMAGINI
@@ -117,6 +78,10 @@
             --}}
 
         </form>
+
+        <br>
+
+        <a href="{{route('admin.dishes.index')}}" class="btn btn-primary">Torna alla lista dei piatti</a>
 
     </div>
 
