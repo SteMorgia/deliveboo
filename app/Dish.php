@@ -10,7 +10,8 @@ class Dish extends Model
         'name',
         'description',
         'price',
-        'visibility'
+        'visibility',
+        'slug'
     ];
 
     public function restaurant()

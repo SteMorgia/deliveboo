@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use App\Dish;
 use App\Restaurant;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
+
 
 class DishController extends Controller
 {
@@ -71,6 +73,8 @@ class DishController extends Controller
         $data = $request->all();
 
         $newDish = new Dish();
+        $slug = $this->calculateSlug($data['name']);
+        $data['slug'] = $slug;
         $newDish->fill($data);
 
         $id = Auth::id();
@@ -114,7 +118,9 @@ class DishController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        /* if ($dish->name !== $data['name']) {
+            $data['slug'] = $this->calculateSlug($data['name']);
+        } */
     }
 
     /**
@@ -132,5 +138,25 @@ class DishController extends Controller
         } else {
             abort(404, 'Non esiste il piatto da cancellare');
         }
+    }
+
+    protected function calculateSlug($name) {
+
+        //inizio calcolo dello slug
+        $slug = Str::slug($name, '-');
+
+        $checkDish = Dish::where('slug', $slug)->first();
+
+        $counter = 1;
+
+        while($checkDish) {
+            $slug = Str::slug($name . '-' . $counter, '-');
+            $counter++;
+            $checkDish = Dish::where('slug', $slug)->first();
+        }
+        //fine calcolo dello slug
+
+        return $slug;
+
     }
 }
