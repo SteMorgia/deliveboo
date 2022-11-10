@@ -7,7 +7,8 @@
             'description' => 'Hamburger, pomodoro, insalata, anelli di cipolla, ketchup e maionese',
             'price' => '10.00',
             'image' => '',
-            'visibility' => ''        
+            'visibility' => '',
+            'slug' => 'hamburger'    
         ],
         [
             'restaurant_id' => '1',
@@ -15,7 +16,8 @@
             'description' => 'Hamburger, pomodoro, insalata, sottiletta, anelli di cipolla, ketchup e maionese',
             'price' => '10.50',
             'image' => '',
-            'visibility' => ''        
+            'visibility' => '',
+            'slug' => 'cheese-burger'
         ],
         [
             'restaurant_id' => '1',
@@ -23,7 +25,8 @@
             'description' => 'Hamburger, insalata, sottiletta, bacon, ketchup e maionese',
             'price' => '10.50',
             'image' => '',
-            'visibility' => ''        
+            'visibility' => '',
+            'slug' => 'cheese-bacon'    
         ],
         [
             'restaurant_id' => '1',
@@ -31,7 +34,8 @@
             'description' => 'Wurstel, insalata, cipolla, ketchup e maionese',
             'price' => '8.50',
             'image' => '',
-            'visibility' => ''        
+            'visibility' => '',
+            'slug' => 'hot-dog'
         ],
         [
             'restaurant_id' => '2',
@@ -39,7 +43,8 @@
             'description' => 'Pomodoro, mozzarella',
             'price' => '6.50',
             'image' => '',
-            'visibility' => ''        
+            'visibility' => '',
+            'slug' => 'pizza-margherita'
         ],
         [
             'restaurant_id' => '2',
@@ -47,7 +52,8 @@
             'description' => 'Pomodoro, mozzarella, funghi champignon',
             'price' => '7.50',
             'image' => '',
-            'visibility' => ''        
+            'visibility' => '',
+            'slug' => 'pizza-funghi'    
         ],
         [
             'restaurant_id' => '2',
@@ -55,7 +61,8 @@
             'description' => 'Pomodoro, mozzarella, prosciutto cotto, carciofi, funghi',
             'price' => '9.50',
             'image' => '',
-            'visibility' => ''        
+            'visibility' => '',
+            'slug' => 'pizza-capricciosa'    
         ],
         [
             'restaurant_id' => '2',
@@ -63,7 +70,8 @@
             'description' => 'Pomodoro, patate, salsiccia',
             'price' => '8.50',
             'image' => '',
-            'visibility' => ''        
+            'visibility' => '',
+            'slug' => 'pizza-patate-e-salsiccia'  
         ],
         [
             'restaurant_id' => '3',
@@ -71,7 +79,8 @@
             'description' => 'Mozzarella, verdure alla griglia',
             'price' => '8.50',
             'image' => '',
-            'visibility' => ''        
+            'visibility' => '',
+            'slug' => 'pizza-vegetariana'
         ],
         [
             'restaurant_id' => '3',
@@ -79,7 +88,8 @@
             'description' => 'Piadina, carne, insalata mista, salse',
             'price' => '4.00',
             'image' => '',
-            'visibility' => ''        
+            'visibility' => '',
+            'slug' => 'piadina-kebab'  
         ],
         [
             'restaurant_id' => '3',
@@ -87,7 +97,8 @@
             'description' => 'Pasta di pizza, carne, insalata mista, salse',
             'price' => '6.00',
             'image' => '',
-            'visibility' => ''        
+            'visibility' => '',
+            'slug' => 'panino-kebab'
         ],
         [
             'restaurant_id' => '3',
@@ -95,7 +106,8 @@
             'description' => 'Pasta fresca, pomodoro, spuntatine di agnello, sale, rosmarino e odori',
             'price' => '7.00',
             'image' => '',
-            'visibility' => ''        
+            'visibility' => '',
+            'slug' => 'tagliatelle-al-sugo'
         ],
         [
             'restaurant_id' => '4',
@@ -103,7 +115,8 @@
             'description' => 'Tagliata di entrecote argentina, sale grosso, rosmarino, contorno di verdure alla griglia',
             'price' => '18.00',
             'image' => '',
-            'visibility' => ''        
+            'visibility' => '',
+            'slug' => 'tagliata'  
         ],
         [
             'restaurant_id' => '4',
@@ -111,7 +124,8 @@
             'description' => 'Pomodoro, olio, aglio, basilico, parmigiano, pinoli',
             'price' => '7.00',
             'image' => '',
-            'visibility' => ''        
+            'visibility' => '',
+            'slug' => 'pennette-al-pesto-trapanese'
         ],
         [
             'restaurant_id' => '4',
@@ -119,7 +133,8 @@
             'description' => 'Pomodoro, melanzane, basilico, ricotta salata',
             'price' => '8.00',
             'image' => '',
-            'visibility' => ''        
+            'visibility' => '',
+            'slug' => 'pennette-alla-norma'
         ],
         [
             'restaurant_id' => '4',
@@ -127,7 +142,8 @@
             'description' => 'Passata di pomodoro, basilico, carne macinata',
             'price' => '8.00',
             'image' => '',
-            'visibility' => ''        
+            'visibility' => '',
+            'slug' => 'scialatelle-con-ragù-bolognese'
         ],
         [
             'restaurant_id' => '5',
@@ -135,7 +151,8 @@
             'description' => 'Pasta fresca, salmone affumicato',
             'price' => '12.00',
             'image' => '',
-            'visibility' => ''        
+            'visibility' => '',
+            'slug' => 'linguine-al-salmone-affumicato'
         ],
         [
             'restaurant_id' => '5',
@@ -143,7 +160,8 @@
             'description' => 'Gamberi, cozze, vongole e seppie',
             'price' => '11.00',
             'image' => '',
-            'visibility' => ''        
+            'visibility' => '',
+            'slug' => 'mezze-maniche-ai-frutti-di-mare'
         ],
         [
             'restaurant_id' => '5',
@@ -151,7 +169,8 @@
             'description' => 'Coda di rospo, filetto di branzino, seppia, trancio di salmone',
             'price' => '14.00',
             'image' => '',
-            'visibility' => ''        
+            'visibility' => '',
+            'slug' => 'grigliata-mista'
         ],
         [
             'restaurant_id' => '5',
@@ -159,7 +178,8 @@
             'description' => 'Gamberi, calamari',
             'price' => '13.00',
             'image' => '',
-            'visibility' => ''        
+            'visibility' => '',
+            'slug' => 'spiedini-di-pesce'
         ],
         [
             'restaurant_id' => '6',
@@ -167,7 +187,8 @@
             'description' => 'Gamberi, calamari',
             'price' => '13.00',
             'image' => '',
-            'visibility' => ''        
+            'visibility' => '',
+            'slug' => 'frittura'
         ],
         [
             'restaurant_id' => '6',
@@ -175,7 +196,8 @@
             'description' => 'Cipolle, lenticchie, patate ed erbe',
             'price' => '7.00',
             'image' => '',
-            'visibility' => ''        
+            'visibility' => '',
+            'slug' => 'onions-bhajee'
         ],
         [
             'restaurant_id' => '6',
@@ -183,7 +205,8 @@
             'description' => 'Coscia di pollo marinato e cotto nel tandoor',
             'price' => '6.00',
             'image' => '',
-            'visibility' => ''        
+            'visibility' => '',
+            'slug' => 'tandori-chicken'
         ],
         [
             'restaurant_id' => '6',
@@ -191,6 +214,7 @@
             'description' => 'Gamberoni marinati in spezie e grigliati in forno tandoori',
             'price' => '7.00',
             'image' => '',
-            'visibility' => ''
+            'visibility' => '',
+            'slug' => 'gamberoni-tandoori'
         ],
     ];

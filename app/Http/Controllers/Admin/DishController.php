@@ -80,14 +80,15 @@ class DishController extends Controller
         $data['image'] = $image_path;
 
         $newDish = new Dish();
+
         $slug = $this->calculateSlug($data['name']);
         $data['slug'] = $slug;
+
         $newDish->fill($data);
 
         $id = Auth::id();
-        // $restaurant = Restaurant::find($id);
-
         $newDish->restaurant_id = $id;
+
         $newDish->save();
 
         return redirect()->route('admin.dishes.index')->with('status', 'Piatto creato con successo');
@@ -99,9 +100,10 @@ class DishController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
-        $dish = Dish::find($id);
+        // $dish = Dish::find($id);
+        $dish = Dish::where('slug', $slug)->first();
         return view('admin.dishes.show', compact('dish'));
     }
 
@@ -111,9 +113,10 @@ class DishController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($slug)
     {
-        //
+        $dish = Dish::where('slug', $slug)->first();
+        return view('admin.dishes.edit', compact('dish'));
     }
 
     /**
@@ -123,11 +126,47 @@ class DishController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Dish $dish)
     {
-        /* if ($dish->name !== $data['name']) {
+        $request->validate([
+            'name' => 'required|max:50|min:3|string',
+            'description' => 'required|max:1000|min:10|string',
+            'price' => 'required|numeric|between:0,999.99',
+            'visibility' => 'required|boolean',
+            'cover' => 'nullable|mimes:png,jpg,jpeg'
+        ],
+        [
+            'name.required' => 'Inserisci il nome (almeno tre caratteri)',
+            'name.min' => 'Il nome deve avere almeno tre caratteri',
+            'name.max' => 'Il nome può essere al massimo di 50 caratteri',
+            'description.required' => 'Inserisci una descrizione',
+            'description.max' => 'La descrizione deve avere massimo 1000 caratteri',
+            'description.min' => 'La descrizione deve avere minimo 10 caratteri',
+            'price.required' => 'Inserisci un prezzo',
+            'price.numeric' => 'Inserisci un numero',
+            'price.between' => 'Inserisci un numero compreso tra 0 e 999.99',
+            'visibility.required' => 'Scegli se rendere il piatto visibile',
+            'cover.mimes' => 'Caricare un\'immagine in formato png, jpg o jpeg',
+            'cover.max' => 'L\'immagine deve pesare massimo 8 mb'
+        ]);
+
+        $data = $request->all();
+
+        if (array_key_exists('cover', $data)) {
+            if ($dish->image) {
+                Storage::delete($dish->image);
+            }
+            $image_path = Storage::put('cover', $data['cover']);
+            $data['image'] = $image_path;
+        }
+
+        if ($dish->name !== $data['name']) {
             $data['slug'] = $this->calculateSlug($data['name']);
-        } */
+        }
+
+        $dish->update($data);
+
+        return redirect()->route('admin.dishes.index')->with('status', 'Piatto modificato con successo');
     }
 
     /**
@@ -148,22 +187,14 @@ class DishController extends Controller
     }
 
     protected function calculateSlug($name) {
-
-        //inizio calcolo dello slug
         $slug = Str::slug($name, '-');
-
         $checkDish = Dish::where('slug', $slug)->first();
-
         $counter = 1;
-
         while($checkDish) {
             $slug = Str::slug($name . '-' . $counter, '-');
             $counter++;
             $checkDish = Dish::where('slug', $slug)->first();
         }
-        //fine calcolo dello slug
-
         return $slug;
-
     }
 }

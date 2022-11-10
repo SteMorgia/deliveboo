@@ -15,7 +15,7 @@
             <h5 class="card-title">{{$dish->name}}</h5>
             <p class="card-text">Descrizione: <br> {{$dish->description}}</p>
             <p class="card-text">Prezzo: {{$dish->price}} €</p>
-            <a href="#" class="btn btn-warning m-1">Modifica</a><br>
+            <a href="{{route('admin.dishes.edit', ['dish' => $dish->slug])}}" class="btn btn-warning m-1">Modifica</a><br>
 
             <form action="{{route('admin.dishes.destroy', ['dish' => $dish->id])}}" method="POST" onsubmit="return confirm('Confermi di voler cancellare il piatto?')">
                 @csrf

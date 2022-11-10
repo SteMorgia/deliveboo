@@ -10,8 +10,8 @@
 
         <br>
         
-        <a href="{{route('admin.restaurants.index')}}" class="btn btn-primary">Torna al tuo ristorante</a>
-        <a href="{{route('admin.restaurants.create')}}" class="btn btn-success">Crea il tuo piatto</a>
+        <a href="{{route('admin.restaurant.index')}}" class="btn btn-primary">Torna al tuo ristorante</a>
+        <a href="{{route('admin.restaurant.create')}}" class="btn btn-success">Crea il tuo piatto</a>
 
     </div>
 
