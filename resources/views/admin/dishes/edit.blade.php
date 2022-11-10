@@ -4,12 +4,42 @@
 
     <div class="container">
 
+        <h1 class="mb-4">Modifica piatto</h1>
+
+
+        @if ($dish->image !== null)
+            <form class="btn btn-danger mb-3"
+                action="{{route('admin.dishes.deleteDishImage', ['dish' => $dish])}}"
+                method="POST">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="btn btn-danger">Cancella solo l'immagine del piatto</button>
+            </form>
+        @endif
+
         <form action="{{ route('admin.dishes.update', ['dish' => $dish]) }}" method="POST" enctype="multipart/form-data">
 
             @csrf
             @method('PUT')
 
-            <h1 class="mb-4">Modifica piatto</h1>
+            <div class="form-group">
+                @if ($dish->image)
+                    <img class="card-img-top mb-3" style="max-width: 30rem" src="{{asset('storage/' . $dish->image)}}" alt="{{$dish->name}}">
+                @elseif (!$dish->image)
+                    <p>Il piatto non ha nessuna immagine</p>
+                @endif
+
+                <br>
+
+                <label for="coverId">Nuova immagine</label>
+                <input type="file" name="cover" id="coverId" class="form-control-file @error('cover') is-invalid @enderror" />
+
+                @error('cover')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
+            </div>
 
             <div class="form-group mb-3">
                 <label for="name">Nome</label>
@@ -65,8 +95,8 @@
                 <label for="visibilityId">Visibilità</label>
                 <select id="visibilityId" name="visibility" class="form-control @error('category_id') is-invalid @enderror" required>
                     {{-- <option {{(old('visibility')=="")?'selected':''}} value="">Nessuna opzione selezionata</option> --}}
-                    <option {{(old('visibility')==0)?'selected':''}} value=0>Non visibile</option>
-                    <option {{(old('visibility')==1)?'selected':''}} value=1 selected>Visibile</option>
+                    <option {{(old('visibility', $dish->visibility)==0)?'selected':''}} value=0>Non visibile</option>
+                    <option {{(old('visibility', $dish->visibility)==1)?'selected':''}} value=1>Visibile</option>
                 </select>
 
                 @error('visibility')
@@ -74,32 +104,11 @@
                 @enderror
             </div>
         
-            <div class="form-group">
-                @if ($dish->image)
-                    <img class="card-img-top mb-3" style="max-width: 30rem" src="{{asset('storage/' . $dish->image)}}" alt="{{$dish->name}}">                   
-                @elseif (!$dish->image)
-                    <p>Il piatto non ha nessuna immagine</p>
-                @endif
-
-                <br>
-
-                <label for="coverId">Nuova immagine</label>
-                <input type="file" name="cover" id="coverId" class="form-control-file @error('cover') is-invalid @enderror" />
-
-                @error('cover')
-                    <div class="invalid-feedback">
-                        {{ $message }}
-                    </div>
-                @enderror
-            </div>
-
             <button type="submit" class="mt-3 btn btn-primary">Modifica piatto</button>
 
         </form>
 
-        <br>
-
-        <a href="{{route('admin.dishes.index')}}" class="btn btn-primary">Torna alla lista dei piatti</a>
+        <a href="{{route('admin.dishes.index')}}" class="btn btn-primary mt-3">Torna alla lista dei piatti</a>
 
     </div>
 

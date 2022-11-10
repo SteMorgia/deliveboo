@@ -24,6 +24,7 @@ Route::middleware('auth')
         Route::get('/', 'HomeController@Index')->name('home');
         Route::resource('restaurant','RestaurantController');
         Route::resource('dishes','DishController');
+        Route::delete('dishes/deleteDishImage/{dish}','DishController@deleteDishImage')->name('dishes.deleteDishImage');
     });
 
 Route::get("{any?}", function() {

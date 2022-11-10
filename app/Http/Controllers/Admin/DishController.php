@@ -179,6 +179,7 @@ class DishController extends Controller
     {
         $dish = Dish::find($id);
         if ($dish) {
+            Storage::delete($dish->image);
             $dish->delete();
             return redirect()->route('admin.dishes.index')->with('status', 'Piatto cancellato con successo');
         } else {
@@ -196,5 +197,16 @@ class DishController extends Controller
             $checkDish = Dish::where('slug', $slug)->first();
         }
         return $slug;
+    }
+
+    public function deleteDishImage(Dish $dish) {
+        if ($dish->image) {
+            Storage::delete($dish->image);
+        }
+
+        $dish->image = null;
+        $dish->save();
+
+        return redirect()->route('admin.dishes.edit', ['dish' => $dish->slug])->with('status', 'Immagine cancellata con successo');
     }
 }
