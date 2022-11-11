@@ -21,6 +21,7 @@ class DishTableSeeder extends Seeder
             $newDish->description = $dish['description'];
             $newDish->price = $dish['price'];
             $newDish->visibility = true;
+            $newDish->slug = $dish['slug'];
             $newDish->image = null;
             $newDish->save();
         }
