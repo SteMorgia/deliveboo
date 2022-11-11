@@ -4,9 +4,10 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Restaurant;
 
-class RestaurantController extends Controller
+use App\Category;
+
+class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,22 +16,12 @@ class RestaurantController extends Controller
      */
     public function index()
     {
-         $restaurants = Restaurant::all();
-
-
-   /*       $restaurants->each(function($restaurant) {
-            if ($restaurant->image) {
-               $restaurant->image = asset('storage/' . $restaurant->image);
-           } else {
-               $restaurant->image = asset('images/no_img.jpg');
-           }
-           });   */
-
-         return response()->json([
-                                   'success'=>true,
-                                   'results'=>$restaurants
-                                ]);
-    }                        
+        $categories = Category::all();
+        return response()->json([
+            'success'=>true,
+            'results'=>$categories
+        ]);
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -39,7 +30,7 @@ class RestaurantController extends Controller
      */
     public function create()
     {
-        
+        //
     }
 
     /**
@@ -59,25 +50,11 @@ class RestaurantController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($slug)
+    public function show($id)
     {
-            $restaurant = Restaurant::where('slug', $slug)->first();
-            if($restaurant) {
-                return response()->json(
-                    [
-                        'success' => true,
-                        'result' => $restaurant
-                    ]
-                );
-            } else {
-                return response()->json(
-                    [
-                        'success' => false,
-                        'message' => 'restaurant not found!'
-                    ]
-                );
-             }
-    }         
+        //
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
