@@ -7,6 +7,7 @@
         <h1>Ecco il tuo ristorante, {{$user->name}}:</h1>
 
         @foreach ($restaurant as $restaurant)
+
         <div class="card mb-3">
             @if ($restaurant->image)
                 <img class="card-img-top" src="{{asset($restaurant->image)}}" alt="{{$restaurant->name}}">

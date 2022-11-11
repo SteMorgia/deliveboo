@@ -1959,7 +1959,8 @@ __webpack_require__.r(__webpack_exports__);
     return {
       categories: [],
       restaurants: [],
-      chosenCategories: []
+      selectedCategories: [],
+      testFunzione: ''
     };
   },
   methods: {
@@ -1967,14 +1968,39 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
       axios.get('http://localhost:8000/api/categories').then(function (response) {
         _this.categories = response.data.results;
-        console.log(_this.categories);
       });
     },
     getRestaurants: function getRestaurants() {
       var _this2 = this;
-      axios.get('http://localhost:8000/api/restaurants').then(function (response) {
+      axios
+      // .get('http://localhost:8000/api/restaurants')
+      .get("http://localhost:8000/api/restaurants?".concat([this.selectedCategories].map(function (n) {
+        return "category=".concat(n);
+      }).join('&'))).then(function (response) {
         _this2.restaurants = response.data.results;
-        console.log(_this2.restaurants);
+        // console.log(response.data);
+      });
+      // risultato: http://localhost/api/myController/myAction?storeIds[0]=1&storeIds[1]=2&storeIds[2]=3
+      // codice: axios.get(`/myController/myAction?${[1,2,3].map( (n, index) => `storeIds[ ${index} ] = ${n}`) .join('&')}` );
+      // http://localhost:8000/api/restaurants?category=1&category=2; ecc. ecc. ???
+      // .get(`http://localhost:8000/api/restaurants?${[this.selectedCategories].map( (n) => `category=${n}`) .join('&')}`)
+    },
+    selectedCategoriesF: function selectedCategoriesF(chosenCategories) {
+      chosenCategories = this.selectedCategories;
+      this.testFunzione = this.selectedCategories.map(function (n) {
+        return "category=".concat(n);
+      }).join('&');
+      this.testFiltraggio();
+      console.log(this.testFunzione);
+    },
+    testFiltraggio: function testFiltraggio() {
+      var _this3 = this;
+      axios
+      // .get(`http://localhost:8000/api/restaurants?${this.selectedCategories.map((n)=>`category=${n}`).join('&')}`)
+      .get('http://localhost:8000/api/restaurants?' + this.selectedCategories.map(function (n) {
+        return +'category=' + n;
+      }).join('&')).then(function (response) {
+        _this3.restaurants = response.data.results;
       });
     }
   },
@@ -2096,7 +2122,11 @@ var render = function render() {
     _c = _vm._self._c;
   return _c("div", {
     staticClass: "container"
-  }, [_c("h1", [_vm._v("la mia homepage")]), _vm._v(" "), _c("hr"), _vm._v(" "), _vm._l(_vm.categories, function (category, index) {
+  }, [_c("h1", [_vm._v("la mia homepage")]), _vm._v(" "), _c("hr"), _vm._v(" "), _c("h1", [_vm._v("categorie selezionate")]), _vm._v(" "), _vm._l(_vm.selectedCategories, function (category, index) {
+    return _c("span", {
+      key: "b" + index
+    }, [_vm._v("\n        " + _vm._s(category) + "\n    ")]);
+  }), _vm._v(" "), _c("hr"), _vm._v(" "), _vm._l(_vm.categories, function (category, index) {
     return _c("div", {
       key: index
     }, [_c("label", {
@@ -2107,40 +2137,46 @@ var render = function render() {
       directives: [{
         name: "model",
         rawName: "v-model",
-        value: _vm.chosenCategories,
-        expression: "chosenCategories"
+        value: _vm.selectedCategories,
+        expression: "selectedCategories"
       }],
       attrs: {
         type: "checkbox",
         id: category.id
       },
       domProps: {
-        value: category.name,
-        checked: Array.isArray(_vm.chosenCategories) ? _vm._i(_vm.chosenCategories, category.name) > -1 : _vm.chosenCategories
+        value: category.id,
+        checked: Array.isArray(_vm.selectedCategories) ? _vm._i(_vm.selectedCategories, category.id) > -1 : _vm.selectedCategories
       },
       on: {
-        change: function change($event) {
-          var $$a = _vm.chosenCategories,
+        change: [function ($event) {
+          var $$a = _vm.selectedCategories,
             $$el = $event.target,
             $$c = $$el.checked ? true : false;
           if (Array.isArray($$a)) {
-            var $$v = category.name,
+            var $$v = category.id,
               $$i = _vm._i($$a, $$v);
             if ($$el.checked) {
-              $$i < 0 && (_vm.chosenCategories = $$a.concat([$$v]));
+              $$i < 0 && (_vm.selectedCategories = $$a.concat([$$v]));
             } else {
-              $$i > -1 && (_vm.chosenCategories = $$a.slice(0, $$i).concat($$a.slice($$i + 1)));
+              $$i > -1 && (_vm.selectedCategories = $$a.slice(0, $$i).concat($$a.slice($$i + 1)));
             }
           } else {
-            _vm.chosenCategories = $$c;
+            _vm.selectedCategories = $$c;
           }
-        }
+        }, function ($event) {
+          return _vm.selectedCategoriesF(_vm.selectedCategories);
+        }]
       }
     })]);
   }), _vm._v(" "), _c("hr"), _vm._v(" "), _vm._l(_vm.restaurants, function (restaurant, index) {
     return _c("div", {
-      key: index
-    }, [_c("p", [_vm._v(_vm._s(restaurant.name))])]);
+      key: "a" + index
+    }, [_c("p", [_vm._v(_vm._s(restaurant.name) + " - \n            "), _vm._l(restaurant.categories, function (category, index) {
+      return _c("span", {
+        key: "d" + index
+      }, [_vm._v("\n                " + _vm._s(category.name) + ",\n            ")]);
+    })], 2)]);
   })], 2);
 };
 var staticRenderFns = [];

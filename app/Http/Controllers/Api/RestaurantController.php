@@ -15,22 +15,23 @@ class RestaurantController extends Controller
      */
     public function index()
     {
-         $restaurants = Restaurant::all();
+        $restaurants = Restaurant::with('categories')->get();
 
-
-   /*       $restaurants->each(function($restaurant) {
+        /*
+         $restaurants->each(function($restaurant) {
             if ($restaurant->image) {
                $restaurant->image = asset('storage/' . $restaurant->image);
            } else {
                $restaurant->image = asset('images/no_img.jpg');
            }
-           });   */
+           });
+        */
 
          return response()->json([
-                                   'success'=>true,
-                                   'results'=>$restaurants
-                                ]);
-    }                        
+            'success' => true,
+            'results' => $restaurants
+        ]);
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -110,5 +111,14 @@ class RestaurantController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function test()
+    {
+        $restaurants = Restaurant::with(['categories'])->get();
+        return response()->json([
+            'success'=>true,
+            'results'=>$restaurants
+        ]);
     }
 }
