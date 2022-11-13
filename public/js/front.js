@@ -1953,14 +1953,14 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "HomePage",
   data: function data() {
     return {
       categories: [],
       restaurants: [],
-      selectedCategories: [],
-      testFunzione: ''
+      selectedCategories: []
     };
   },
   methods: {
@@ -1972,11 +1972,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     getRestaurants: function getRestaurants() {
       var _this2 = this;
-      axios
-      // .get('http://localhost:8000/api/restaurants')
-      .get("http://localhost:8000/api/restaurants?".concat([this.selectedCategories].map(function (n) {
-        return "category=".concat(n);
-      }).join('&'))).then(function (response) {
+      axios.get('http://localhost:8000/api/test')
+      //.get(`http://localhost:8000/api/restaurants?${[this.selectedCategories].map( (n) => `category=${n}`) .join('&')}`)
+      .then(function (response) {
         _this2.restaurants = response.data.results;
         // console.log(response.data);
       });
@@ -1985,23 +1983,42 @@ __webpack_require__.r(__webpack_exports__);
       // http://localhost:8000/api/restaurants?category=1&category=2; ecc. ecc. ???
       // .get(`http://localhost:8000/api/restaurants?${[this.selectedCategories].map( (n) => `category=${n}`) .join('&')}`)
     },
-    selectedCategoriesF: function selectedCategoriesF(chosenCategories) {
-      chosenCategories = this.selectedCategories;
-      this.testFunzione = this.selectedCategories.map(function (n) {
-        return "category=".concat(n);
-      }).join('&');
-      this.testFiltraggio();
-      console.log(this.testFunzione);
-    },
+    /* selectedCategoriesF(chosenCategories){
+        //this.selectedCategories.push(chosenCategories);
+        //chosenCategories = this.selectedCategories;
+          if (this.selectedCategories.length === 0) {
+            console.log('onoinionio');
+            this.restaurants = [];
+            this.getRestaurants();
+        } else {
+            console.log('nononono');
+            //this.testFiltraggio();
+        }
+    }, */
     testFiltraggio: function testFiltraggio() {
       var _this3 = this;
-      axios
-      // .get(`http://localhost:8000/api/restaurants?${this.selectedCategories.map((n)=>`category=${n}`).join('&')}`)
-      .get('http://localhost:8000/api/restaurants?' + this.selectedCategories.map(function (n) {
-        return +'category=' + n;
-      }).join('&')).then(function (response) {
-        _this3.restaurants = response.data.results;
-      });
+      console.log('oooooooooooooooooooooooooooo - ' + _typeof(this.selectedCategories));
+      if (this.selectedCategories.length === 0) {
+        console.log('onoinionio');
+        this.getRestaurants();
+      } else {
+        /*
+        axios
+        // .get(`http://localhost:8000/api/restaurants?${this.selectedCategories.map((n)=>`category=${n}`).join('&')}`)
+        .get('http://localhost:8000/api/restaurants?' + this.selectedCategories.map( (n) => + 'category=' + n).join('&'))
+        .then( response => {
+            this.restaurants = response.data.results;
+            console.log(response.data.results);
+        }) */
+        axios
+        // .get(`http://localhost:8000/api/restaurants?${this.selectedCategories.map((n)=>`category=${n}`).join('&')}`)
+        .get('http://localhost:8000/api/restaurants?categories=' + this.selectedCategories).then(function (response) {
+          //console.log(this.selectedCategories);
+          //console.log(response.data.results);
+          _this3.restaurants = response.data.results;
+          //console.log(this.restaurants);
+        });
+      }
     }
   },
   mounted: function mounted() {
@@ -2165,7 +2182,7 @@ var render = function render() {
             _vm.selectedCategories = $$c;
           }
         }, function ($event) {
-          return _vm.selectedCategoriesF(_vm.selectedCategories);
+          return _vm.testFiltraggio();
         }]
       }
     })]);

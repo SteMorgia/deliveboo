@@ -21,7 +21,7 @@
                 :value="category.id"
                 :id="category.id"
                 v-model="selectedCategories"
-                @change="selectedCategoriesF(selectedCategories)" />
+                @change="testFiltraggio()" />
         </div>
 
     <hr>
@@ -45,7 +45,6 @@
                 categories: [],
                 restaurants: [],
                 selectedCategories: [],
-                testFunzione: ''
             }
         },
         methods: {
@@ -58,8 +57,8 @@
             },
             getRestaurants() {
                 axios
-                // .get('http://localhost:8000/api/restaurants')
-                .get(`http://localhost:8000/api/restaurants?${[this.selectedCategories].map( (n) => `category=${n}`) .join('&')}`)
+                .get('http://localhost:8000/api/test')
+                //.get(`http://localhost:8000/api/restaurants?${[this.selectedCategories].map( (n) => `category=${n}`) .join('&')}`)
                 .then( response => {
                     this.restaurants = response.data.results;
                     // console.log(response.data);
@@ -69,19 +68,42 @@
                 // http://localhost:8000/api/restaurants?category=1&category=2; ecc. ecc. ???
                 // .get(`http://localhost:8000/api/restaurants?${[this.selectedCategories].map( (n) => `category=${n}`) .join('&')}`)
             },
-            selectedCategoriesF(chosenCategories){
-                chosenCategories = this.selectedCategories;
-                this.testFunzione = this.selectedCategories.map( (n) => `category=${n}`) .join('&');
-                this.testFiltraggio();
-                console.log(this.testFunzione);
-            },
+            /* selectedCategoriesF(chosenCategories){
+                //this.selectedCategories.push(chosenCategories);
+                //chosenCategories = this.selectedCategories;
+
+                if (this.selectedCategories.length === 0) {
+                    console.log('onoinionio');
+                    this.restaurants = [];
+                    this.getRestaurants();
+                } else {
+                    console.log('nononono');
+                    //this.testFiltraggio();
+                }
+            }, */
             testFiltraggio() {
+                console.log('oooooooooooooooooooooooooooo - ' + typeof this.selectedCategories);
+                if (this.selectedCategories.length === 0) {
+                    console.log('onoinionio');
+                    this.getRestaurants();
+                } else {
+                /*
                 axios
                 // .get(`http://localhost:8000/api/restaurants?${this.selectedCategories.map((n)=>`category=${n}`).join('&')}`)
                 .get('http://localhost:8000/api/restaurants?' + this.selectedCategories.map( (n) => + 'category=' + n).join('&'))
                 .then( response => {
                     this.restaurants = response.data.results;
-                })
+                    console.log(response.data.results);
+                }) */
+                axios
+                // .get(`http://localhost:8000/api/restaurants?${this.selectedCategories.map((n)=>`category=${n}`).join('&')}`)
+                .get('http://localhost:8000/api/restaurants?categories=' + this.selectedCategories)
+                .then( response => {
+                    //console.log(this.selectedCategories);
+                    //console.log(response.data.results);
+                    this.restaurants = response.data.results;
+                    //console.log(this.restaurants);
+                })}
             },
         },
         mounted() {
