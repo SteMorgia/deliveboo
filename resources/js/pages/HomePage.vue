@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="container MyHomePage">
         <h1>la mia homepage</h1>
 
         <hr>
@@ -92,5 +92,9 @@
     }
 </script>
 
-<style>
+<style scoped lang="scss">
+
+    .MyHomePage {
+        margin-top: 360px;
+    }
 </style>
