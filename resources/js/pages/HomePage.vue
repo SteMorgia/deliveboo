@@ -1,47 +1,46 @@
 <template>
-    <div class="container MyHomePage">
-        <h1>la mia homepage</h1>
+    <div class="container-fluid MyHomePage">
 
-        <hr>
+        <div class="row">
 
-        <h1>categorie selezionate</h1>
+            <div class="col-2">
+                <div v-for="(category, index) in categories" :key="index">
+                    <input
+                        type="checkbox"
+                        :value="category.id"
+                        :id="category.id"
+                        v-model="selectedCategories"
+                        @change="filterRestaurants()" />
+                    <label :for="category.id">
+                        {{category.name}}
+                    </label>
+                </div>
+            </div>
 
-        <span v-for="(category, index) in selectedCategories" :key="'b' + index">
-            {{category}}
-        </span>
+            <div class="col-10">
+                <div v-if="restaurants.length > 0">
+                    <div class="d-flex flex-wrap">
+                        <div v-for="(restaurant, index) in restaurants" :key="'a' + index">      
+                            <div class="card m-2" style="width: 18rem;">
+                                <div class="card-body">
+                                    <img class="card-img-top" :src="restaurant.image" alt="Card image cap">
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{restaurant.name}}</h5>
+                                        <p class="card-text">{{truncateText(restaurant.description, 30)}}</p>
+                                        <a href="#" class="btn btn-sm text-white" style="background-color:#e53170;">Go somewhere</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-        <hr>
+                <div v-if="doRestaurantsExist == false && restaurants.length == 0">
+                    <p style="color: #f25f4c;">Non esiste nessun ristorante in questa categoria</p>
+                </div>
 
-        <div v-for="(category, index) in categories" :key="index">
-            <label :for="category.id">
-                {{category.name}}
-            </label>
-            <input
-                type="checkbox"
-                :value="category.id"
-                :id="category.id"
-                v-model="selectedCategories"
-                @change="filterRestaurants()" />
+            </div>
         </div>
-
-    <hr>
-
-    <h1>Lista ristoranti:</h1>
-
-    <div v-if="restaurants.length > 0">
-        <div v-for="(restaurant, index) in restaurants" :key="'a' + index">
-            <p>{{restaurant.name}} - 
-                <span v-for="(category, index) in restaurant.categories" :key="'d' + index">
-                    {{category.name}},
-                </span>
-            </p>
-        </div>
-    </div>
-
-    <div v-if="doRestaurantsExist == false && restaurants.length == 0">
-        <p class="text-danger">Non esiste nessun ristorante in questa categoria</p>
-    </div>
-
     </div>
 </template>
 
@@ -84,6 +83,13 @@
                     this.doRestaurantsExist = false;
                 })};
             },
+            truncateText(text, maxLength) {
+                if (text.length < maxLength) {
+                    return text;
+                } else {
+                    return text.substring(0, maxLength) + '...';
+                }
+            }
         },
         mounted() {
             this.getCategories();
@@ -95,6 +101,10 @@
 <style scoped lang="scss">
 
     .MyHomePage {
-        margin-top: 360px;
+        margin-top: 350px;
+
+        img {
+            height: 200px;
+        }
     }
 </style>

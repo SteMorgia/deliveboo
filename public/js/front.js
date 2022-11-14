@@ -1990,6 +1990,13 @@ __webpack_require__.r(__webpack_exports__);
         });
       }
       ;
+    },
+    truncateText: function truncateText(text, maxLength) {
+      if (text.length < maxLength) {
+        return text;
+      } else {
+        return text.substring(0, maxLength) + '...';
+      }
     }
   },
   mounted: function mounted() {
@@ -2273,7 +2280,7 @@ var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c("div", {
-    staticClass: "container"
+    staticClass: "container-fluid"
   }, [_c("router-view")], 1);
 };
 var staticRenderFns = [];
@@ -2297,19 +2304,15 @@ var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c("div", {
-    staticClass: "container MyHomePage"
-  }, [_c("h1", [_vm._v("la mia homepage")]), _vm._v(" "), _c("hr"), _vm._v(" "), _c("h1", [_vm._v("categorie selezionate")]), _vm._v(" "), _vm._l(_vm.selectedCategories, function (category, index) {
-    return _c("span", {
-      key: "b" + index
-    }, [_vm._v("\n        " + _vm._s(category) + "\n    ")]);
-  }), _vm._v(" "), _c("hr"), _vm._v(" "), _vm._l(_vm.categories, function (category, index) {
+    staticClass: "container-fluid MyHomePage"
+  }, [_c("div", {
+    staticClass: "row"
+  }, [_c("div", {
+    staticClass: "col-2"
+  }, _vm._l(_vm.categories, function (category, index) {
     return _c("div", {
       key: index
-    }, [_c("label", {
-      attrs: {
-        "for": category.id
-      }
-    }, [_vm._v("\n            " + _vm._s(category.name) + "\n        ")]), _vm._v(" "), _c("input", {
+    }, [_c("input", {
       directives: [{
         name: "model",
         rawName: "v-model",
@@ -2344,18 +2347,51 @@ var render = function render() {
           return _vm.filterRestaurants();
         }]
       }
-    })]);
-  }), _vm._v(" "), _c("hr"), _vm._v(" "), _c("h1", [_vm._v("Lista ristoranti:")]), _vm._v(" "), _vm.restaurants.length > 0 ? _c("div", _vm._l(_vm.restaurants, function (restaurant, index) {
+    }), _vm._v(" "), _c("label", {
+      attrs: {
+        "for": category.id
+      }
+    }, [_vm._v("\n                    " + _vm._s(category.name) + "\n                ")])]);
+  }), 0), _vm._v(" "), _c("div", {
+    staticClass: "col-10"
+  }, [_vm.restaurants.length > 0 ? _c("div", [_c("div", {
+    staticClass: "d-flex flex-wrap"
+  }, _vm._l(_vm.restaurants, function (restaurant, index) {
     return _c("div", {
       key: "a" + index
-    }, [_c("p", [_vm._v(_vm._s(restaurant.name) + " - \n            "), _vm._l(restaurant.categories, function (category, index) {
-      return _c("span", {
-        key: "d" + index
-      }, [_vm._v("\n                " + _vm._s(category.name) + ",\n            ")]);
-    })], 2)]);
-  }), 0) : _vm._e(), _vm._v(" "), _vm.doRestaurantsExist == false && _vm.restaurants.length == 0 ? _c("div", [_c("p", {
-    staticClass: "text-danger"
-  }, [_vm._v("Non esiste nessun ristorante in questa categoria")])]) : _vm._e()], 2);
+    }, [_c("div", {
+      staticClass: "card m-2",
+      staticStyle: {
+        width: "18rem"
+      }
+    }, [_c("div", {
+      staticClass: "card-body"
+    }, [_c("img", {
+      staticClass: "card-img-top",
+      attrs: {
+        src: restaurant.image,
+        alt: "Card image cap"
+      }
+    }), _vm._v(" "), _c("div", {
+      staticClass: "card-body"
+    }, [_c("h5", {
+      staticClass: "card-title"
+    }, [_vm._v(_vm._s(restaurant.name))]), _vm._v(" "), _c("p", {
+      staticClass: "card-text"
+    }, [_vm._v(_vm._s(_vm.truncateText(restaurant.description, 30)))]), _vm._v(" "), _c("a", {
+      staticClass: "btn btn-sm text-white",
+      staticStyle: {
+        "background-color": "#e53170"
+      },
+      attrs: {
+        href: "#"
+      }
+    }, [_vm._v("Go somewhere")])])])])]);
+  }), 0)]) : _vm._e(), _vm._v(" "), _vm.doRestaurantsExist == false && _vm.restaurants.length == 0 ? _c("div", [_c("p", {
+    staticStyle: {
+      color: "#f25f4c"
+    }
+  }, [_vm._v("Non esiste nessun ristorante in questa categoria")])]) : _vm._e()])])]);
 };
 var staticRenderFns = [];
 render._withStripped = true;
@@ -2435,7 +2471,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".MyHomePage[data-v-04c29797] {\n  margin-top: 360px;\n}", ""]);
+exports.push([module.i, ".MyHomePage[data-v-04c29797] {\n  margin-top: 350px;\n}\n.MyHomePage img[data-v-04c29797] {\n  height: 200px;\n}", ""]);
 
 // exports
 
@@ -19193,7 +19229,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\Andrea\Desktop\deliveboo\resources\js\front.js */"./resources/js/front.js");
+module.exports = __webpack_require__(/*! /Users/marta/Desktop/Progetto/deliveboo/resources/js/front.js */"./resources/js/front.js");
 
 
 /***/ })
