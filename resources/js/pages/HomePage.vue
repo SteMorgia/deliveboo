@@ -26,6 +26,9 @@
 
     <hr>
 
+    <h1>Lista ristoranti:</h1>
+
+    <div v-if="restaurants.length > 0">
         <div v-for="(restaurant, index) in restaurants" :key="'a' + index">
             <p>{{restaurant.name}} - 
                 <span v-for="(category, index) in restaurant.categories" :key="'d' + index">
@@ -33,6 +36,11 @@
                 </span>
             </p>
         </div>
+    </div>
+
+    <div v-if="doRestaurantsExist == false && restaurants.length == 0">
+        <p class="text-danger">Non esiste nessun ristorante in questa categoria</p>
+    </div>
 
     </div>
 </template>
@@ -45,6 +53,7 @@
                 categories: [],
                 restaurants: [],
                 selectedCategories: [],
+                doRestaurantsExist: true
             }
         },
         methods: {
@@ -60,7 +69,8 @@
                 .get('http://localhost:8000/api/filterRestaurants')
                 .then( response => {
                     this.restaurants = response.data.results;
-                })
+                    this.doRestaurantsExist = false;
+                });
             },
             filterRestaurants() {
                 if (this.selectedCategories.length === 0) {
@@ -71,7 +81,8 @@
                 .get('http://localhost:8000/api/restaurants?categories=' + this.selectedCategories)
                 .then( response => {
                     this.restaurants = response.data.results;
-                })}
+                    this.doRestaurantsExist = false;
+                })};
             },
         },
         mounted() {

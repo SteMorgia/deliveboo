@@ -144,9 +144,10 @@ class RestaurantController extends Controller
     public function randomRestaurantsB()
     {
         $restaurants = Restaurant::with('categories')->get();
+        $randomRestaurants = $restaurants->random(4);
         return response()->json([
-            'success'=>true,
-            'results'=>$restaurants
+            'success'=> true,
+            'results'=> $randomRestaurants
         ]);
     }
 }

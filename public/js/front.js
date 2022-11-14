@@ -1959,7 +1959,8 @@ __webpack_require__.r(__webpack_exports__);
     return {
       categories: [],
       restaurants: [],
-      selectedCategories: []
+      selectedCategories: [],
+      doRestaurantsExist: true
     };
   },
   methods: {
@@ -1973,6 +1974,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
       axios.get('http://localhost:8000/api/filterRestaurants').then(function (response) {
         _this2.restaurants = response.data.results;
+        _this2.doRestaurantsExist = false;
       });
     },
     filterRestaurants: function filterRestaurants() {
@@ -1984,8 +1986,10 @@ __webpack_require__.r(__webpack_exports__);
         // .get(`http://localhost:8000/api/restaurants?${this.selectedCategories.map((n)=>`category=${n}`).join('&')}`)
         .get('http://localhost:8000/api/restaurants?categories=' + this.selectedCategories).then(function (response) {
           _this3.restaurants = response.data.results;
+          _this3.doRestaurantsExist = false;
         });
       }
+      ;
     }
   },
   mounted: function mounted() {
@@ -2346,7 +2350,7 @@ var render = function render() {
         }]
       }
     })]);
-  }), _vm._v(" "), _c("hr"), _vm._v(" "), _vm._l(_vm.restaurants, function (restaurant, index) {
+  }), _vm._v(" "), _c("hr"), _vm._v(" "), _c("h1", [_vm._v("Lista ristoranti:")]), _vm._v(" "), _vm.restaurants.length > 0 ? _c("div", _vm._l(_vm.restaurants, function (restaurant, index) {
     return _c("div", {
       key: "a" + index
     }, [_c("p", [_vm._v(_vm._s(restaurant.name) + " - \n            "), _vm._l(restaurant.categories, function (category, index) {
@@ -2354,7 +2358,9 @@ var render = function render() {
         key: "d" + index
       }, [_vm._v("\n                " + _vm._s(category.name) + ",\n            ")]);
     })], 2)]);
-  })], 2);
+  }), 0) : _vm._e(), _vm._v(" "), _vm.doRestaurantsExist == false && _vm.restaurants.length == 0 ? _c("div", [_c("p", {
+    staticClass: "text-danger"
+  }, [_vm._v("Non esiste nessun ristorante in questa categoria")])]) : _vm._e()], 2);
 };
 var staticRenderFns = [];
 render._withStripped = true;
