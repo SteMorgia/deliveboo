@@ -15,7 +15,58 @@ class RestaurantController extends Controller
      */
     public function index()
     {
+        $data = request()->all();
         $restaurants = Restaurant::with('categories')->get();
+
+        \Log::info('--inizio data--');
+        \Log::info($data);
+        \Log::info('--fine data--');
+
+        $categoriesAsString = ''; // è una lista di numeri (gli id delle categorie ottenute dal front)
+       
+        if(array_key_exists('categories', $data)){
+            $categoriesAsString = $data['categories'];
+        };
+
+        //$categoriesAsString = substr($categoriesAsString, 1, -1);
+
+        $provaStringa = '999';
+        $provaNumero = intval($provaStringa);
+        
+        $categoriesAsNumbers = [];
+        $test = explode(',', $categoriesAsString);
+
+        \Log::info('----inizio categorieB----');
+        \Log::info($categoriesAsString);
+        \Log::info($provaStringa);
+        \Log::info(gettype($provaNumero));
+        \Log::info(gettype($categoriesAsString));
+        \Log::info(gettype($test));
+        \Log::info('----fine categorieB----');
+
+        foreach ($test as $testa) {
+            array_push($categoriesAsNumbers, intval($testa));
+        }
+
+        \Log::info('----inizio categorie numeri----');
+        \Log::info($categoriesAsNumbers);
+        \Log::info('----fine categorie numeri----');
+
+        if (count($categoriesAsNumbers) > 0) {
+            $filteredRestaurants = [];
+            foreach ($restaurants as $restaurant) {
+                foreach ($restaurant->categories as $category) {
+                    if (in_array($category->id, $categoriesAsNumbers) && !in_array($restaurant, $filteredRestaurants)) {
+                        array_push($filteredRestaurants, $restaurant);
+                    }
+                }
+            }
+            $restaurants = $filteredRestaurants;
+        }
+
+        \Log::info('----inizio filteredRestaurants----');
+        \Log::info($restaurants);
+        \Log::info('----fine filteredRestaurants----');
 
         /*
          $restaurants->each(function($restaurant) {
@@ -29,7 +80,12 @@ class RestaurantController extends Controller
 
          return response()->json([
             'success' => true,
-            'results' => $restaurants
+            'results' => $restaurants,
+            //'pippo' => $filteredRestaurants,
+            //'categoriesAsString' => $categoriesAsString,
+            //'test' => $test,
+            //'categoriesAsNumbers' => $categoriesAsNumbers,
+            //'data' => $data
         ]);
     }
 
@@ -115,7 +171,7 @@ class RestaurantController extends Controller
 
     public function test()
     {
-        $restaurants = Restaurant::with(['categories'])->get();
+        $restaurants = Restaurant::with('categories')->get();
         return response()->json([
             'success'=>true,
             'results'=>$restaurants
