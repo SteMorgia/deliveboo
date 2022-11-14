@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="container MyHomePage">
         <h1>la mia homepage</h1>
 
         <hr>
@@ -21,11 +21,14 @@
                 :value="category.id"
                 :id="category.id"
                 v-model="selectedCategories"
-                @change="testFiltraggio()" />
+                @change="filterRestaurants()" />
         </div>
 
     <hr>
 
+    <h1>Lista ristoranti:</h1>
+
+    <div v-if="restaurants.length > 0">
         <div v-for="(restaurant, index) in restaurants" :key="'a' + index">
             <p>{{restaurant.name}} - 
                 <span v-for="(category, index) in restaurant.categories" :key="'d' + index">
@@ -33,6 +36,11 @@
                 </span>
             </p>
         </div>
+    </div>
+
+    <div v-if="doRestaurantsExist == false && restaurants.length == 0">
+        <p class="text-danger">Non esiste nessun ristorante in questa categoria</p>
+    </div>
 
     </div>
 </template>
@@ -45,6 +53,7 @@
                 categories: [],
                 restaurants: [],
                 selectedCategories: [],
+                doRestaurantsExist: true
             }
         },
         methods: {
@@ -55,63 +64,37 @@
                     this.categories = response.data.results;
                 })
             },
-            getRestaurants() {
+            getRandomRestaurantsF() {
                 axios
-                .get('http://localhost:8000/api/test')
-                //.get(`http://localhost:8000/api/restaurants?${[this.selectedCategories].map( (n) => `category=${n}`) .join('&')}`)
+                .get('http://localhost:8000/api/filterRestaurants')
                 .then( response => {
                     this.restaurants = response.data.results;
-                    // console.log(response.data);
-                })
-                // risultato: http://localhost/api/myController/myAction?storeIds[0]=1&storeIds[1]=2&storeIds[2]=3
-                // codice: axios.get(`/myController/myAction?${[1,2,3].map( (n, index) => `storeIds[ ${index} ] = ${n}`) .join('&')}` );
-                // http://localhost:8000/api/restaurants?category=1&category=2; ecc. ecc. ???
-                // .get(`http://localhost:8000/api/restaurants?${[this.selectedCategories].map( (n) => `category=${n}`) .join('&')}`)
+                    this.doRestaurantsExist = false;
+                });
             },
-            /* selectedCategoriesF(chosenCategories){
-                //this.selectedCategories.push(chosenCategories);
-                //chosenCategories = this.selectedCategories;
-
+            filterRestaurants() {
                 if (this.selectedCategories.length === 0) {
-                    console.log('onoinionio');
-                    this.restaurants = [];
-                    this.getRestaurants();
+                    this.getRandomRestaurantsF();
                 } else {
-                    console.log('nononono');
-                    //this.testFiltraggio();
-                }
-            }, */
-            testFiltraggio() {
-                console.log('oooooooooooooooooooooooooooo - ' + typeof this.selectedCategories);
-                if (this.selectedCategories.length === 0) {
-                    console.log('onoinionio');
-                    this.getRestaurants();
-                } else {
-                /*
-                axios
-                // .get(`http://localhost:8000/api/restaurants?${this.selectedCategories.map((n)=>`category=${n}`).join('&')}`)
-                .get('http://localhost:8000/api/restaurants?' + this.selectedCategories.map( (n) => + 'category=' + n).join('&'))
-                .then( response => {
-                    this.restaurants = response.data.results;
-                    console.log(response.data.results);
-                }) */
                 axios
                 // .get(`http://localhost:8000/api/restaurants?${this.selectedCategories.map((n)=>`category=${n}`).join('&')}`)
                 .get('http://localhost:8000/api/restaurants?categories=' + this.selectedCategories)
                 .then( response => {
-                    //console.log(this.selectedCategories);
-                    //console.log(response.data.results);
                     this.restaurants = response.data.results;
-                    //console.log(this.restaurants);
-                })}
+                    this.doRestaurantsExist = false;
+                })};
             },
         },
         mounted() {
             this.getCategories();
-            this.getRestaurants();
+            this.getRandomRestaurantsF();
         }
     }
 </script>
 
-<style>
+<style scoped lang="scss">
+
+    .MyHomePage {
+        margin-top: 360px;
+    }
 </style>
