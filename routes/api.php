@@ -16,4 +16,4 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('restaurants', 'Api\RestaurantController@index');
 Route::get('categories', 'Api\CategoryController@index');
-Route::get('filterRestaurants', 'Api\RestaurantController@randomRestaurantsB'); // filtraggio ristoranti;
+Route::get('filterRestaurants', 'Api\RestaurantController@getRandomRestaurantsB'); // filtraggio ristoranti;

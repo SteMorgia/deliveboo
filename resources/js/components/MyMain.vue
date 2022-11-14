@@ -1,7 +1,7 @@
 <template>
   <div class="container">
         <router-view>
-          
+          <!-- contiene le pages.vue, che cambiano dinamicamente; -->
         </router-view>
   </div>
 </template>
