@@ -1,13 +1,13 @@
 <template>
     <header  class="my_header">
       <nav class="navbar navbar-expand-lg navbar-light justify-content-between align-items-center">
-          <a class="navbar-brand nav-link" href="/">Deliveboo</a>
+          <a class="navbar-brand" href="/">Deliveboo</a>
           <ul class="navbar-nav">
             <li class="nav-item">
-              <a class="nav-link" href="/register">Registrati</a>
+              <a class="navbar-brand" href="/register">Registrati</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/admin">Accedi</a>
+              <a class="navbar-brand" href="/admin">Accedi</a>
             </li>
           </ul>      
       </nav> 

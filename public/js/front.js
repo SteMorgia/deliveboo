@@ -2159,7 +2159,7 @@ var staticRenderFns = [function () {
     staticStyle: {
       "background-color": "rgb(46, 51, 51) links"
     }
-  }, [_c("span", [_vm._v("Get connected with us on social networks:")]), _vm._v(" "), _c("div", [_c("a", {
+  }, [_c("span", [_vm._v("We love orange")]), _vm._v(" "), _c("div", [_c("a", {
     staticClass: "text-reset fw-bold",
     attrs: {
       href: "#"
@@ -2195,7 +2195,7 @@ var staticRenderFns = [function () {
   }, [_c("nav", {
     staticClass: "navbar navbar-expand-lg navbar-light justify-content-between align-items-center"
   }, [_c("a", {
-    staticClass: "navbar-brand nav-link",
+    staticClass: "navbar-brand",
     attrs: {
       href: "/"
     }
@@ -2204,14 +2204,14 @@ var staticRenderFns = [function () {
   }, [_c("li", {
     staticClass: "nav-item"
   }, [_c("a", {
-    staticClass: "nav-link",
+    staticClass: "navbar-brand",
     attrs: {
       href: "/register"
     }
   }, [_vm._v("Registrati")])]), _vm._v(" "), _c("li", {
     staticClass: "nav-item"
   }, [_c("a", {
-    staticClass: "nav-link",
+    staticClass: "navbar-brand",
     attrs: {
       href: "/admin"
     }
@@ -2264,7 +2264,9 @@ var render = function render() {
     staticClass: "row"
   }, [_c("div", {
     staticClass: "col-2"
-  }, [_c("h3", [_vm._v("Categorie")]), _vm._v(" "), _vm._l(_vm.categories, function (category, index) {
+  }, [_c("h3", {
+    staticClass: "mb-3"
+  }, [_vm._v("Categorie")]), _vm._v(" "), _vm._l(_vm.categories, function (category, index) {
     return _c("div", {
       key: index
     }, [_c("input", {
@@ -2274,6 +2276,7 @@ var render = function render() {
         value: _vm.selectedCategories,
         expression: "selectedCategories"
       }],
+      staticClass: "mt-2",
       attrs: {
         type: "checkbox",
         id: category.id
@@ -2325,7 +2328,7 @@ var render = function render() {
       staticClass: "card-img-top",
       attrs: {
         src: restaurant.image,
-        alt: "Card image cap"
+        alt: restaurant.name
       }
     }), _vm._v(" "), _c("div", {
       staticClass: "card-body"
@@ -2341,8 +2344,8 @@ var render = function render() {
       attrs: {
         href: "/restaurant"
       }
-    }, [_vm._v("Go somewhere")])])])])]);
-  }), 0)]) : _vm._e(), _vm._v(" "), _vm.doRestaurantsExist == false && _vm.restaurants.length == 0 ? _c("div", [_c("p", {
+    }, [_vm._v("Vai al ristorante")])])])])]);
+  }), 0)]) : _vm._e(), _vm._v(" "), _vm.doRestaurantsExist == false && _vm.restaurants.length == 0 ? _c("div", [_c("h2", {
     staticStyle: {
       color: "#f25f4c"
     }
@@ -2496,7 +2499,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "/* inizio jumbotron */\n.MyHomePage img[data-v-04c29797] {\n  height: 200px;\n}\n.MyWrapper[data-v-04c29797] {\n  position: relative;\n}\n.MyWrapper .Myjumbotron[data-v-04c29797] {\n  background-image: url(\"https://images.unsplash.com/photo-1600891964599-f61ba0e24092?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80\");\n  background-size: cover;\n  height: 300px;\n}\n.MyWrapper .MyOverlay[data-v-04c29797] {\n  background-color: rgba(0, 0, 0, 0.5);\n  width: 100%;\n  height: 100%;\n  position: absolute;\n  top: 0;\n  left: 0;\n}\n.text_container[data-v-04c29797] {\n  position: absolute;\n  top: 100px;\n  left: 0;\n}\n\n/* fine jumbotron */", ""]);
+exports.push([module.i, "/* inizio jumbotron */\n.MyHomePage img[data-v-04c29797] {\n  height: 200px;\n}\n.MyWrapper[data-v-04c29797] {\n  position: relative;\n}\n.MyWrapper .Myjumbotron[data-v-04c29797] {\n  background-image: url(\"/images/jumbotron.jpg\");\n  background-size: cover;\n  height: 300px;\n}\n.MyWrapper .MyOverlay[data-v-04c29797] {\n  background-color: rgba(0, 0, 0, 0.5);\n  width: 100%;\n  height: 100%;\n  position: absolute;\n  top: 0;\n  left: 0;\n}\n.text_container[data-v-04c29797] {\n  position: absolute;\n  top: 100px;\n  left: 0;\n}\n\n/* fine jumbotron */", ""]);
 
 // exports
 

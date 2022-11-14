@@ -81,7 +81,7 @@
 
     <!-- Copyright -->
     <div class="text-center p-4 d-flex justify-content-between"   style="background-color: rgb(46, 51, 51) links">
-      <span>Get connected with us on social networks:</span>
+      <span>We love orange</span>
       <div>
         <a class="text-reset fw-bold" href="#">Team Bali © 2022</a>
       </div>

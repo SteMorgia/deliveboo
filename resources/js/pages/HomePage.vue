@@ -16,14 +16,15 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-2">
-                    <h3>Categorie</h3>
+                    <h3 class="mb-3">Categorie</h3>
                     <div v-for="(category, index) in categories" :key="index">
                         <input
                             type="checkbox"
                             :value="category.id"
                             :id="category.id"
                             v-model="selectedCategories"
-                            @change="filterRestaurants()" />
+                            @change="filterRestaurants()"
+                            class="mt-2" />
                         <label :for="category.id">
                             {{category.name}}
                         </label>
@@ -36,11 +37,11 @@
                             <div v-for="(restaurant, index) in restaurants" :key="'a' + index">      
                                 <div class="card m-2" style="width: 18rem;">
                                     <div class="card-body">
-                                        <img class="card-img-top" :src="restaurant.image" alt="Card image cap">
+                                        <img class="card-img-top" :src="restaurant.image" :alt="restaurant.name">
                                         <div class="card-body">
                                             <h5 class="card-title">{{restaurant.name}}</h5>
                                             <p class="card-text">{{truncateText(restaurant.description, 20)}}</p>
-                                            <a href="/restaurant" class="btn btn-sm text-white" style="background-color:#ff8906;">Go somewhere</a>
+                                            <a href="/restaurant" class="btn btn-sm text-white" style="background-color:#ff8906;">Vai al ristorante</a>
                                         </div>
                                     </div>
                                 </div>
@@ -49,7 +50,7 @@
                     </div>
 
                     <div v-if="doRestaurantsExist == false && restaurants.length == 0">
-                        <p style="color: #f25f4c;">Non esiste nessun ristorante in questa categoria</p>
+                        <h2 style="color: #f25f4c;">Non esiste nessun ristorante in questa categoria</h2>
                     </div>
 
                 </div>
@@ -124,7 +125,7 @@
         position: relative;
         
         .Myjumbotron {
-            background-image: url('https://images.unsplash.com/photo-1600891964599-f61ba0e24092?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80');
+            background-image: url('/images/jumbotron.jpg');
             background-size: cover;
             height: 300px;
         }
