@@ -18,40 +18,20 @@ class RestaurantController extends Controller
         $data = request()->all();
         $restaurants = Restaurant::with('categories')->get();
 
-        \Log::info('--inizio data--');
-        \Log::info($data);
-        \Log::info('--fine data--');
-
-        $categoriesAsString = ''; // è una lista di numeri (gli id delle categorie ottenute dal front)
+        $categoriesAsString = ''; // qui salvo le categorie provenienti dal frontend, che sono in formato stringa;
        
         if(array_key_exists('categories', $data)){
             $categoriesAsString = $data['categories'];
         };
 
-        //$categoriesAsString = substr($categoriesAsString, 1, -1);
-
-        $provaStringa = '999';
-        $provaNumero = intval($provaStringa);
-        
+        $categoriesAsStringArray = explode(',', $categoriesAsString); // creo un array con gli id delle categorie separati;
         $categoriesAsNumbers = [];
-        $test = explode(',', $categoriesAsString);
 
-        \Log::info('----inizio categorieB----');
-        \Log::info($categoriesAsString);
-        \Log::info($provaStringa);
-        \Log::info(gettype($provaNumero));
-        \Log::info(gettype($categoriesAsString));
-        \Log::info(gettype($test));
-        \Log::info('----fine categorieB----');
-
-        foreach ($test as $testa) {
-            array_push($categoriesAsNumbers, intval($testa));
+        foreach ($categoriesAsStringArray as $singleCategoryIdAsString) {
+            array_push($categoriesAsNumbers, intval($singleCategoryIdAsString)); // converto gli id da stringa a numero e li pusho nell'array;
         }
 
-        \Log::info('----inizio categorie numeri----');
-        \Log::info($categoriesAsNumbers);
-        \Log::info('----fine categorie numeri----');
-
+        // filtro i ristoranti;
         if (count($categoriesAsNumbers) > 0) {
             $filteredRestaurants = [];
             foreach ($restaurants as $restaurant) {
@@ -64,28 +44,19 @@ class RestaurantController extends Controller
             $restaurants = $filteredRestaurants;
         }
 
-        \Log::info('----inizio filteredRestaurants----');
-        \Log::info($restaurants);
-        \Log::info('----fine filteredRestaurants----');
-
         /*
-         $restaurants->each(function($restaurant) {
-            if ($restaurant->image) {
-               $restaurant->image = asset('storage/' . $restaurant->image);
-           } else {
-               $restaurant->image = asset('images/no_img.jpg');
-           }
-           });
+        $restaurants->each(function($restaurant) {
+        if ($restaurant->image) {
+            $restaurant->image = asset('storage/' . $restaurant->image);
+        } else {
+            $restaurant->image = asset('images/no_img.jpg');
+        }
+        });
         */
 
          return response()->json([
             'success' => true,
-            'results' => $restaurants,
-            //'pippo' => $filteredRestaurants,
-            //'categoriesAsString' => $categoriesAsString,
-            //'test' => $test,
-            //'categoriesAsNumbers' => $categoriesAsNumbers,
-            //'data' => $data
+            'results' => $restaurants
         ]);
     }
 
@@ -118,22 +89,23 @@ class RestaurantController extends Controller
      */
     public function show($slug)
     {
-            $restaurant = Restaurant::where('slug', $slug)->first();
-            if($restaurant) {
-                return response()->json(
-                    [
-                        'success' => true,
-                        'result' => $restaurant
-                    ]
-                );
-            } else {
-                return response()->json(
-                    [
-                        'success' => false,
-                        'message' => 'restaurant not found!'
-                    ]
-                );
-             }
+        $restaurant = Restaurant::where('slug', $slug)->first();
+        
+        if($restaurant) {
+            return response()->json(
+                [
+                    'success' => true,
+                    'result' => $restaurant
+                ]
+            );
+        } else {
+            return response()->json(
+                [
+                    'success' => false,
+                    'message' => 'restaurant not found!'
+                ]
+            );
+            }
     }         
     /**
      * Show the form for editing the specified resource.
@@ -169,7 +141,7 @@ class RestaurantController extends Controller
         //
     }
 
-    public function test()
+    public function randomRestaurantsB()
     {
         $restaurants = Restaurant::with('categories')->get();
         return response()->json([
