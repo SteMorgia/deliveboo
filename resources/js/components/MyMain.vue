@@ -1,9 +1,9 @@
 <template>
-  <div class="container-fluid">
+  <main>
         <router-view>
           <!-- contiene le pages.vue, che cambiano dinamicamente; -->
         </router-view>
-  </div>
+  </main>
 </template>
 
 <script>

@@ -30,4 +30,3 @@ class Restaurant extends Model
         return $this->belongsToMany('App\Category');
     }
 }
-
