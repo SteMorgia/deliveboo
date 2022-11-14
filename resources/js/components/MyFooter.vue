@@ -1,46 +1,16 @@
 <template>
   <!-- Footer -->
-<footer class="text-center text-lg-start  text-muted" style="background-color: rgb(46, 51, 51)">
-  <!-- Section: Social media -->
-  <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
-    <!-- Left -->
-    <div class="me-5 d-none d-lg-block">
-      <span>Get connected with us on social networks:</span>
-    </div>
-    <!-- Left -->
-
-    <!-- Right -->
-    <div>
-      <a href="" class="me-4 text-reset">
-        <i class="fab fa-facebook-f"></i>
-      </a>
-      <a href="" class="me-4 text-reset">
-        <i class="fab fa-twitter"></i>
-      </a>
-      <a href="" class="me-4 text-reset">
-        <i class="fab fa-google"></i>
-      </a>
-      <a href="" class="me-4 text-reset">
-        <i class="fab fa-instagram"></i>
-      </a>
-      <a href="" class="me-4 text-reset">
-        <i class="fab fa-linkedin"></i>
-      </a>
-      <a href="" class="me-4 text-reset">
-        <i class="fab fa-github"></i>
-      </a>
-    </div>
-    <!-- Right -->
-  </section>
-  <!-- Section: Social media -->
+<footer class="text-center text-lg-start  text-muted" style="background-color: #0f0e17">
+ 
+  
 
   <!-- Section: Links  -->
   <section>
-    <div class="container text-center text-md-start mt-5 ">
+    <div class="container text-center text-md-start mt-5">
       <!-- Grid row -->
       <div class="row mt-3">
         <!-- Grid column -->
-        <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4 links">
+        <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4 mt-5 links">
           <!-- Content -->
           <h6 class="text-uppercase fw-bold mb-4">
             <i class="fas fa-gem me-3"></i>deliveboo
@@ -52,16 +22,16 @@
         <!-- Grid column -->
 
         <!-- Grid column -->
-        <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4 links" >
+        <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4 mt-5 links" >
           <!-- Links -->
           <h6 class="text-uppercase fw-bold mb-4">
             Discover Deliveroo
           </h6>
           <p>
-            <a href="#!" class="text-reset">restaurants</a>
+            <a href="#!" class="text-reset">Restaurants</a>
           </p>
           <p>
-            <a href="#!" class="text-reset">Dischs</a>
+            <a href="#!" class="text-reset">Dishes</a>
           </p>
           <p>
             <a href="#!" class="text-reset">Takeaway</a>
@@ -73,10 +43,10 @@
         <!-- Grid column -->
 
         <!-- Grid column -->
-        <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4 links">
+        <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4 mt-5 links">
           <!-- Links -->
           <h6 class="text-uppercase fw-bold mb-4">
-            legale
+            Legal
           </h6>
           <p>
             <a href="#!" class="text-reset">Terms and conditions</a>
@@ -94,9 +64,9 @@
         <!-- Grid column -->
 
         <!-- Grid column -->
-        <div class="col-md-4 col-lg-3 col-xl-3 mx-auto  mb-4 links">
+        <div class="col-md-4 col-lg-3 col-xl-3 mx-auto  mb-4 mt-5 links">
           <!-- Links -->
-          <h6 class="text-uppercase fw-bold mb-2">Help</h6>
+          <h6 class="text-uppercase fw-bold mb-4">Help</h6>
           <p><a href="#!" class="text-reset">Contact</a></p>
           <p><a href="#!" class="text-reset">FAQs</a></p>
           <p><a href="#!" class="text-reset">Cuisines</a></p>
@@ -110,10 +80,14 @@
   <!-- Section: Links  -->
 
   <!-- Copyright -->
-  <div class="text-center p-4"  style="background-color: rgb(46, 51, 51) links">
-    © 2021 Copyright:
-    <a class="text-reset fw-bold" href="#">Team Bali</a>
-  </div>
+  <div class="text-center p-4 d-flex justify-content-between"   style="background-color: rgb(46, 51, 51) links">
+    <span>Get connected with us on social networks:</span>
+    <div>
+    <a class="text-reset fw-bold" href="#">Team Bali © 2021 Copyright:</a>
+
+    </div>
+    
+ </div>
   <!-- Copyright -->
 </footer>
 <!-- Footer -->
@@ -128,11 +102,19 @@ export default {
 <style lang="scss">
    .links{
    // border: 2px solid white;
-    background-color: rgb(67, 72, 72);
+    background-color: #a7a9be;
     padding-top: 2rem;
-    color:white;
-   
-   }
- 
+    color:white; 
+    :hover{
+            color: rgb(0, 184, 169); 
+            text-decoration:none ;
+          }
 
+   }
+    
+    
+  
+ 
+  
+ 
 </style>
