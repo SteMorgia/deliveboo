@@ -2077,66 +2077,20 @@ var staticRenderFns = [function () {
   return _c("footer", {
     staticClass: "text-center text-lg-start text-muted",
     staticStyle: {
-      "background-color": "rgb(46, 51, 51)"
+      "background-color": "#0f0e17"
     }
-  }, [_c("section", {
-    staticClass: "d-flex justify-content-center justify-content-lg-between p-4 border-bottom"
-  }, [_c("div", {
-    staticClass: "me-5 d-none d-lg-block"
-  }, [_c("span", [_vm._v("Get connected with us on social networks:")])]), _vm._v(" "), _c("div", [_c("a", {
-    staticClass: "me-4 text-reset",
-    attrs: {
-      href: ""
-    }
-  }, [_c("i", {
-    staticClass: "fab fa-facebook-f"
-  })]), _vm._v(" "), _c("a", {
-    staticClass: "me-4 text-reset",
-    attrs: {
-      href: ""
-    }
-  }, [_c("i", {
-    staticClass: "fab fa-twitter"
-  })]), _vm._v(" "), _c("a", {
-    staticClass: "me-4 text-reset",
-    attrs: {
-      href: ""
-    }
-  }, [_c("i", {
-    staticClass: "fab fa-google"
-  })]), _vm._v(" "), _c("a", {
-    staticClass: "me-4 text-reset",
-    attrs: {
-      href: ""
-    }
-  }, [_c("i", {
-    staticClass: "fab fa-instagram"
-  })]), _vm._v(" "), _c("a", {
-    staticClass: "me-4 text-reset",
-    attrs: {
-      href: ""
-    }
-  }, [_c("i", {
-    staticClass: "fab fa-linkedin"
-  })]), _vm._v(" "), _c("a", {
-    staticClass: "me-4 text-reset",
-    attrs: {
-      href: ""
-    }
-  }, [_c("i", {
-    staticClass: "fab fa-github"
-  })])])]), _vm._v(" "), _c("section", [_c("div", {
+  }, [_c("section", [_c("div", {
     staticClass: "container text-center text-md-start mt-5"
   }, [_c("div", {
     staticClass: "row mt-3"
   }, [_c("div", {
-    staticClass: "col-md-3 col-lg-4 col-xl-3 mx-auto mb-4 links"
+    staticClass: "col-md-3 col-lg-4 col-xl-3 mx-auto mb-4 mt-5 links"
   }, [_c("h6", {
     staticClass: "text-uppercase fw-bold mb-4"
   }, [_c("i", {
     staticClass: "fas fa-gem me-3"
   }), _vm._v("deliveboo\n          ")]), _vm._v(" "), _c("p", [_vm._v("\n           Your favourite restaurants and takeaways, delivered to your door\n          ")])]), _vm._v(" "), _c("div", {
-    staticClass: "col-md-2 col-lg-2 col-xl-2 mx-auto mb-4 links"
+    staticClass: "col-md-2 col-lg-2 col-xl-2 mx-auto mb-4 mt-5 links"
   }, [_c("h6", {
     staticClass: "text-uppercase fw-bold mb-4"
   }, [_vm._v("\n            Discover Deliveroo\n          ")]), _vm._v(" "), _c("p", [_c("a", {
@@ -2144,12 +2098,12 @@ var staticRenderFns = [function () {
     attrs: {
       href: "#!"
     }
-  }, [_vm._v("restaurants")])]), _vm._v(" "), _c("p", [_c("a", {
+  }, [_vm._v("Restaurants")])]), _vm._v(" "), _c("p", [_c("a", {
     staticClass: "text-reset",
     attrs: {
       href: "#!"
     }
-  }, [_vm._v("Dischs")])]), _vm._v(" "), _c("p", [_c("a", {
+  }, [_vm._v("Dishes")])]), _vm._v(" "), _c("p", [_c("a", {
     staticClass: "text-reset",
     attrs: {
       href: "#!"
@@ -2160,10 +2114,10 @@ var staticRenderFns = [function () {
       href: "#!"
     }
   }, [_vm._v("FastFood")])])]), _vm._v(" "), _c("div", {
-    staticClass: "col-md-3 col-lg-2 col-xl-2 mx-auto mb-4 links"
+    staticClass: "col-md-3 col-lg-2 col-xl-2 mx-auto mb-4 mt-5 links"
   }, [_c("h6", {
     staticClass: "text-uppercase fw-bold mb-4"
-  }, [_vm._v("\n            legale\n          ")]), _vm._v(" "), _c("p", [_c("a", {
+  }, [_vm._v("\n            Legal\n          ")]), _vm._v(" "), _c("p", [_c("a", {
     staticClass: "text-reset",
     attrs: {
       href: "#!"
@@ -2184,9 +2138,9 @@ var staticRenderFns = [function () {
       href: "#!"
     }
   }, [_vm._v("Speak Up")])])]), _vm._v(" "), _c("div", {
-    staticClass: "col-md-4 col-lg-3 col-xl-3 mx-auto mb-4 links"
+    staticClass: "col-md-4 col-lg-3 col-xl-3 mx-auto mb-4 mt-5 links"
   }, [_c("h6", {
-    staticClass: "text-uppercase fw-bold mb-2"
+    staticClass: "text-uppercase fw-bold mb-4"
   }, [_vm._v("Help")]), _vm._v(" "), _c("p", [_c("a", {
     staticClass: "text-reset",
     attrs: {
@@ -2208,16 +2162,16 @@ var staticRenderFns = [function () {
       href: "#!"
     }
   }, [_vm._v("More")])])])])])]), _vm._v(" "), _c("div", {
-    staticClass: "text-center p-4",
+    staticClass: "text-center p-4 d-flex justify-content-between",
     staticStyle: {
       "background-color": "rgb(46, 51, 51) links"
     }
-  }, [_vm._v("\n    © 2021 Copyright:\n    "), _c("a", {
+  }, [_c("span", [_vm._v("Get connected with us on social networks:")]), _vm._v(" "), _c("div", [_c("a", {
     staticClass: "text-reset fw-bold",
     attrs: {
       href: "#"
     }
-  }, [_vm._v("Team Bali")])])]);
+  }, [_vm._v("Team Bali © 2021 Copyright:")])])])]);
 }];
 render._withStripped = true;
 
@@ -2429,7 +2383,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".links {\n  background-color: rgb(67, 72, 72);\n  padding-top: 2rem;\n  color: white;\n}", ""]);
+exports.push([module.i, ".links {\n  background-color: #a7a9be;\n  padding-top: 2rem;\n  color: white;\n}\n.links :hover {\n  color: rgb(0, 184, 169);\n  text-decoration: none;\n}", ""]);
 
 // exports
 
@@ -19158,7 +19112,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\LBoolean\Documents\boolean\progetto_finale\file_progetto_finale\deliveboo\resources\js\front.js */"./resources/js/front.js");
+module.exports = __webpack_require__(/*! C:\Users\Ms\Desktop\deliveboo\resources\js\front.js */"./resources/js/front.js");
 
 
 /***/ })
