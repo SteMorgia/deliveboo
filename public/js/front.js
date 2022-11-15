@@ -2022,7 +2022,8 @@ __webpack_require__.r(__webpack_exports__);
     return {
       restaurant: {},
       dishes: [],
-      doDishesExists: true
+      doDishesExists: true,
+      cart: []
     };
   },
   methods: {
@@ -2044,6 +2045,35 @@ __webpack_require__.r(__webpack_exports__);
           _this2.doDishesExists = false;
         }
       });
+    },
+    addToCart: function addToCart(dishP) {
+      for (var i = 0; i < this.cart.length; i++) {
+        if (this.cart[i].id === dishP.id) {
+          return this.cart[i].quantity++;
+        }
+      }
+      this.cart.push({
+        id: dishP.id,
+        name: dishP.name,
+        price: dishP.price,
+        quantity: 1
+      });
+    }
+  },
+  computed: {
+    itemTotalAmount: function itemTotalAmount() {
+      var itemTotal = 0;
+      for (var dish in this.cart) {
+        itemTotal += this.cart[dish].quantity;
+      }
+      return itemTotal;
+    },
+    cartTotalAmount: function cartTotalAmount() {
+      var total = 0;
+      for (var item in this.cart) {
+        total += this.cart[item].quantity * this.cart[item].price;
+      }
+      return total;
     }
   },
   mounted: function mounted() {
@@ -2298,7 +2328,7 @@ var render = function render() {
   }, [_c("div", {
     staticClass: "row"
   }, [_c("div", {
-    staticClass: "col-3"
+    staticClass: "col-2"
   }, [_c("h3", {
     staticClass: "mb-3 px-3"
   }, [_vm._v("Categorie")]), _vm._v(" "), _vm._l(_vm.categories, function (category, index) {
@@ -2347,7 +2377,7 @@ var render = function render() {
       }
     }, [_vm._v("\n                        " + _vm._s(category.name) + "\n                    ")])]);
   })], 2), _vm._v(" "), _c("div", {
-    staticClass: "col-9"
+    staticClass: "col-9 m-auto"
   }, [_vm.restaurants.length > 0 ? _c("div", [_c("div", {
     staticClass: "d-flex flex-wrap"
   }, _vm._l(_vm.restaurants, function (restaurant, index) {
@@ -2356,7 +2386,7 @@ var render = function render() {
     }, [_c("div", {
       staticClass: "card m-2",
       staticStyle: {
-        width: "18rem"
+        width: "15rem"
       }
     }, [_c("div", {
       staticClass: "card-body"
@@ -2388,7 +2418,7 @@ var render = function render() {
           }
         }
       }
-    }, [_vm._v("Vai al ristorante")])], 1)])])]);
+    }, [_vm._v("\n                                            Vai al ristorante\n                                        ")])], 1)])])]);
   }), 0)]) : _vm._e(), _vm._v(" "), _vm.doRestaurantsExist == false && _vm.restaurants.length == 0 ? _c("div", [_c("h2", {
     staticStyle: {
       color: "#f25f4c"
@@ -2437,7 +2467,11 @@ var render = function render() {
     _c = _vm._self._c;
   return _c("div", {
     staticClass: "container mt-3 mb-3"
-  }, [_c("h1", [_vm._v("Ristorante:")]), _vm._v(" "), _c("p", [_vm._v(_vm._s(_vm.restaurant.name))]), _vm._v(" "), _c("p", [_vm._v(_vm._s(_vm.restaurant.address))]), _vm._v(" "), _c("p", [_vm._v(_vm._s(_vm.restaurant.phone_number))]), _vm._v(" "), _c("p", [_vm._v(_vm._s(_vm.restaurant.description))]), _vm._v(" "), _c("hr"), _vm._v(" "), _c("h1", [_vm._v("Menu:")]), _vm._v(" "), _vm.dishes ? _c("div", {
+  }, [_c("h1", [_vm._v("Ristorante:")]), _vm._v(" "), _c("p", [_vm._v(_vm._s(_vm.restaurant.name))]), _vm._v(" "), _c("p", [_vm._v(_vm._s(_vm.restaurant.address))]), _vm._v(" "), _c("p", [_vm._v(_vm._s(_vm.restaurant.phone_number))]), _vm._v(" "), _c("p", [_vm._v(_vm._s(_vm.restaurant.description))]), _vm._v(" "), _c("hr"), _vm._v(" "), _c("h1", [_vm._v("Menu:")]), _vm._v(" "), _c("div", {
+    staticClass: "row"
+  }, [_c("div", {
+    "class": _vm.cart.length > 0 ? "col-10" : "col-12"
+  }, [_vm.dishes ? _c("div", {
     staticClass: "d-flex flex-wrap"
   }, _vm._l(_vm.dishes, function (dish, index) {
     return _c("div", {
@@ -2458,17 +2492,29 @@ var render = function render() {
       staticClass: "card-title"
     }, [_vm._v(_vm._s(dish.name))]), _vm._v(" "), _c("p", {
       staticClass: "card-text"
-    }, [_vm._v(_vm._s(dish.description))]), _vm._v(" "), _c("a", {
-      staticClass: "btn btn-danger",
-      attrs: {
-        href: "#"
+    }, [_vm._v(_vm._s(dish.description))]), _vm._v(" "), _c("p", {
+      staticClass: "card-text"
+    }, [_vm._v(_vm._s(dish.price) + " €")]), _vm._v(" "), _c("p", {
+      staticClass: "card-text"
+    }, [_vm._v(_vm._s(dish.quantity) + " quantità")]), _vm._v(" "), _c("button", {
+      staticClass: "btn btn-primary",
+      on: {
+        click: function click($event) {
+          return _vm.addToCart(dish);
+        }
       }
     }, [_vm._v("Aggiungi al carrello")])])]);
   }), 0) : _vm._e(), _vm._v(" "), _vm.dishes.length == 0 && _vm.doDishesExists == false ? _c("div", [_c("h2", {
     staticStyle: {
       color: "#f25f4c"
     }
-  }, [_vm._v("Non esiste nessun piatto in questo ristorante")])]) : _vm._e(), _vm._v(" "), _c("router-link", {
+  }, [_vm._v("Non esiste nessun piatto in questo ristorante")])]) : _vm._e()]), _vm._v(" "), _vm.cart.length > 0 ? _c("div", {
+    "class": _vm.cart.length > 0 ? "col-2" : ""
+  }, [_vm._l(_vm.cart, function (cartItem, index) {
+    return _c("div", {
+      key: index
+    }, [_c("p", [_vm._v(_vm._s(cartItem.name))]), _vm._v(" "), _c("p", [_vm._v(_vm._s(cartItem.price))]), _vm._v(" "), _c("p", [_vm._v(_vm._s(cartItem.quantity))])]);
+  }), _vm._v(" "), _c("h1", [_vm._v(_vm._s(_vm.itemTotalAmount))]), _vm._v(" "), _c("h1", [_vm._v(_vm._s(_vm.cartTotalAmount))])], 2) : _vm._e()]), _vm._v(" "), _c("router-link", {
     staticClass: "btn mt-3",
     staticStyle: {
       "background-color": "#ff8906"
@@ -2558,7 +2604,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "/* inizio jumbotron */\n.MyHomePage img[data-v-04c29797] {\n  height: 200px;\n}\n.MyWrapper[data-v-04c29797] {\n  position: relative;\n}\n.MyWrapper .Myjumbotron[data-v-04c29797] {\n  background-image: url(\"/images/jumbotron.jpg\");\n  background-size: cover;\n  height: 300px;\n}\n.MyWrapper .MyOverlay[data-v-04c29797] {\n  background-color: rgba(0, 0, 0, 0.5);\n  width: 100%;\n  height: 100%;\n  position: absolute;\n  top: 0;\n  left: 0;\n}\n.text_container[data-v-04c29797] {\n  position: absolute;\n  top: 100px;\n  left: 0;\n}\n\n/* fine jumbotron */", ""]);
+exports.push([module.i, "/* inizio jumbotron */\n.MyHomePage img[data-v-04c29797] {\n  height: 200px;\n}\n.MyWrapper[data-v-04c29797] {\n  position: relative;\n}\n.MyWrapper .Myjumbotron[data-v-04c29797] {\n  background-image: url(\"/images/jumbotron.jpg\");\n  background-size: cover;\n  height: 300px;\n}\n.MyWrapper .MyOverlay[data-v-04c29797] {\n  background-color: rgba(0, 0, 0, 0.5);\n  width: 100%;\n  height: 100%;\n  position: absolute;\n  top: 0;\n  left: 0;\n}\n.text_container[data-v-04c29797] {\n  position: absolute;\n  top: 100px;\n  left: 0;\n}\n\n/* fine jumbotron */\n.card-body[data-v-04c29797] {\n  padding: 0.5rem;\n}", ""]);
 
 // exports
 
