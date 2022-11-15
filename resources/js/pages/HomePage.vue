@@ -15,7 +15,7 @@
         <!-- main -->
         <div class="container-fluid pb-5">
             <div class="row">
-                <div class="col-3 ">
+                <div class="col-2 ">
                     <h3 class="mb-3 px-3">Categorie</h3>
                     <div class="px-3" v-for="(category, index) in categories" :key="index">
                         <input
@@ -31,11 +31,11 @@
                     </div>
                 </div>
 
-                <div class="col-9">
+                <div class="col-9 m-auto">
                     <div v-if="restaurants.length > 0">
                         <div class="d-flex flex-wrap">
                             <div v-for="(restaurant, index) in restaurants" :key="'a' + index">      
-                                <div class="card m-2" style="width: 18rem;">
+                                <div class="card m-2" style="width: 15rem;">
                                     <div class="card-body">
                                         <img class="card-img-top" style="min-height: 12rem;" :src="restaurant.image" :alt="restaurant.name">
                                         <div class="card-body">
@@ -148,6 +148,8 @@
     }
 
     /* fine jumbotron */
-
+   .card-body{
+     padding: 0.5rem;
+   }
     
 </style>
