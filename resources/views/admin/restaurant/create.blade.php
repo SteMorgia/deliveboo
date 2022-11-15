@@ -99,22 +99,23 @@
                 @enderror
             </div>
 
-            <button type="submit" class="mt-3 btn btn-primary">Crea ristorante</button>
-        
-            {{--
-            GESTIONE UPLOAD IMMAGINI
+            <div class="form-group mt-3">
+                <label for="coverId">Immagine</label>
+                <input class="form-control-file @error('cover') is-invalid @enderror"
+                    type="file"
+                    id="coverId"
+                    name="cover"
+                    accept=".jpg,.jpeg,.png"
+                    required />
 
-            <div class="form-group mb-3">
-                <label for="cover">Immagine: </label>
-                <input type="file" name="image" id="cover" class="form-control-file @error('image') is-invalid @enderror" />
-
-                @error('image')
+                @error('cover')
                     <div class="invalid-feedback">
                         {{ $message }}
                     </div>
                 @enderror
             </div>
-            --}}
+
+            <button type="submit" class="mt-3 btn btn-primary">Crea ristorante</button>
 
         </form>
 

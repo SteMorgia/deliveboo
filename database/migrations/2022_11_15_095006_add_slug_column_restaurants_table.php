@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class UpdateDishesTable extends Migration
+class AddSlugColumnRestaurantsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class UpdateDishesTable extends Migration
      */
     public function up()
     {
-        Schema::table('dishes', function (Blueprint $table) {
+        Schema::table('restaurants', function (Blueprint $table) {
             $table->string('slug', 255)->after('image')->unique();
         });
     }
@@ -25,7 +25,7 @@ class UpdateDishesTable extends Migration
      */
     public function down()
     {
-        Schema::table('dishes', function (Blueprint $table) {
+        Schema::table('restaurants', function (Blueprint $table) {
             $table->dropColumn('slug');
         });
     }

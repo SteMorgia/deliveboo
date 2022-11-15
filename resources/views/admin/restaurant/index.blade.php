@@ -10,7 +10,7 @@
 
         <div class="card mb-3">
             @if ($restaurant->image)
-                <img class="card-img-top" src="{{asset($restaurant->image)}}" alt="{{$restaurant->name}}">
+                <img class="card-img-top" src="{{asset('storage/' . $restaurant->image)}}" alt="{{$restaurant->name}}">
             @else
                 <img class="card-img-top" style="width:20%" src="{{asset('images/no_img.jpg')}}" alt="{{$restaurant->name}}">
             @endif

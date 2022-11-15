@@ -15,7 +15,7 @@ const router = new VueRouter({
             component: HomePage
         },
         {
-            path: '/restaurant/:name', // parametro dinamico {slug-ristorante}
+            path: '/restaurant/:slug', // parametro dinamico {slug-ristorante}
             name: 'restaurant',
             component: SingleRestaurantPage
         }

@@ -9,7 +9,6 @@ use App\Dish;
 use App\Restaurant;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
-
 use Illuminate\Support\Facades\Storage;
 
 class DishController extends Controller
@@ -57,7 +56,7 @@ class DishController extends Controller
             'description' => 'required|max:1000|min:10|string',
             'price' => 'required|numeric|between:0,999.99',
             'visibility' => 'required|boolean',
-            'cover' => 'nullable|mimes:png,jpg,jpeg'
+            'cover' => 'nullable|mimes:jpg,jpeg,png|max:8000'
         ],
         [
             'name.required' => 'Inserisci il nome (almeno tre caratteri)',
@@ -79,11 +78,10 @@ class DishController extends Controller
         $image_path = Storage::put('cover', $data['cover']);
         $data['image'] = $image_path;
 
-        $newDish = new Dish();
-
         $slug = $this->calculateSlug($data['name']);
         $data['slug'] = $slug;
 
+        $newDish = new Dish();
         $newDish->fill($data);
 
         $id = Auth::id();

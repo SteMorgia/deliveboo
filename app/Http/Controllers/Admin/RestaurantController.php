@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use App\Restaurant;
 use App\Category;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class RestaurantController extends Controller
 {
@@ -49,6 +51,7 @@ class RestaurantController extends Controller
             'phone_number' => 'required|digits_between:6,30',
             'description' => 'nullable|max:65535|string',
             'vat' => 'required|numeric|digits:11',
+            'cover' => 'mimes:jpg,jpeg,png|max:8000',
             'categories' => 'exists:categories,id'
         ],
         [
@@ -64,14 +67,24 @@ class RestaurantController extends Controller
             'vat.required' => 'Inserisci la partita iva',
             'vat.numeric' => 'La partita iva deve essere un numero',
             'vat.digits' => 'La partita iva deve essere di 11 numeri',
+            'cover.mimes' => 'Caricare un\'immagine in formato jpg, jpeg o png',
+            'cover.max' => 'L\'immagine deve pesare massimo 8 mb'
         ]);
 
         $data = $request->all();
 
+        $image_path = Storage::put('cover', $data['cover']);
+        $data['image'] = $image_path;
+
+        $slug = $this->calculateSlug($data['name']);
+        $data['slug'] = $slug;
+
         $newRestaurant = new Restaurant();
         $newRestaurant->fill($data);
+
         $id = Auth::id();
         $newRestaurant->user_id = $id;
+        
         $newRestaurant->save();
 
         if (array_key_exists('categories', $data)) {
@@ -124,5 +137,17 @@ class RestaurantController extends Controller
     public function destroy($id)
     {
 
+    }
+
+    protected function calculateSlug($name) {
+        $slug = Str::slug($name, '-');
+        $checkRestaurant = Restaurant::where('slug', $slug)->first();
+        $counter = 1;
+        while ($checkRestaurant) {
+            $slug = Str::slug($name . '-' . $counter, '-');
+            $counter++;
+            $checkRestaurant = Restaurant::where('slug', $slug)->first();
+        }
+        return $slug;
     }
 }

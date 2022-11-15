@@ -1,5 +1,14 @@
 <template>
     <div class="container mt-3 mb-3">
+
+        <h1>Ristorante:</h1>
+
+        
+
+        <hr>
+
+        <h1>Menu:</h1>
+        
         <div class="card" style="width: 18rem;">
             <img class="card-img-top" src="#" alt="Card image cap">
             <div class="card-body">
@@ -8,12 +17,26 @@
                 <a href="/" class="btn btn-primary">Go somewhere</a>
             </div>
         </div>
+
+        <router-link :to="{name: 'homepage'}" class="btn mt-3" style="background-color:#ff8906;" >Torna alla homepage</router-link>
+
     </div>
 </template>
 
 <script>
 export default {
-    name: 'SingleRestaurantPage'
+    name: 'SingleRestaurantPage',
+    data() {
+        return {
+
+        }
+    },
+    methods: {
+
+    },
+    mounted() {
+
+    }
 }
 </script>
 

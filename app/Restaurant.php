@@ -12,7 +12,8 @@ class Restaurant extends Model
         'phone_number',
         'description',
         'vat',
-        'image'
+        'slug',
+        'image',
     ];
 
     public function user()

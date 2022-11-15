@@ -2017,7 +2017,12 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'SingleRestaurantPage'
+  name: 'SingleRestaurantPage',
+  data: function data() {
+    return {};
+  },
+  methods: {},
+  mounted: function mounted() {}
 });
 
 /***/ }),
@@ -2345,7 +2350,8 @@ var render = function render() {
         to: {
           name: "restaurant",
           params: {
-            name: restaurant.name
+            slug: restaurant.slug,
+            restaurant: restaurant
           }
         }
       }
@@ -2396,14 +2402,24 @@ __webpack_require__.r(__webpack_exports__);
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _vm._m(0);
+  return _c("div", {
+    staticClass: "container mt-3 mb-3"
+  }, [_c("h1", [_vm._v("Ristorante:")]), _vm._v(" "), _c("hr"), _vm._v(" "), _c("h1", [_vm._v("Menu:")]), _vm._v(" "), _vm._m(0), _vm._v(" "), _c("router-link", {
+    staticClass: "btn mt-3",
+    staticStyle: {
+      "background-color": "#ff8906"
+    },
+    attrs: {
+      to: {
+        name: "homepage"
+      }
+    }
+  }, [_vm._v("Torna alla homepage")])], 1);
 };
 var staticRenderFns = [function () {
   var _vm = this,
     _c = _vm._self._c;
   return _c("div", {
-    staticClass: "container mt-3 mb-3"
-  }, [_c("div", {
     staticClass: "card",
     staticStyle: {
       width: "18rem"
@@ -2425,7 +2441,7 @@ var staticRenderFns = [function () {
     attrs: {
       href: "/"
     }
-  }, [_vm._v("Go somewhere")])])])]);
+  }, [_vm._v("Go somewhere")])])]);
 }];
 render._withStripped = true;
 
@@ -19252,7 +19268,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
     name: 'homepage',
     component: _pages_HomePage_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
   }, {
-    path: '/restaurant/:name',
+    path: '/restaurant/:slug',
     // parametro dinamico {slug-ristorante}
     name: 'restaurant',
     component: _pages_SingleRestaurantPage_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
