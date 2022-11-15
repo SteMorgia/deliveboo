@@ -2068,14 +2068,14 @@ var staticRenderFns = [function () {
   var _vm = this,
     _c = _vm._self._c;
   return _c("footer", {
-    staticClass: "text-center text-lg-start text-muted",
+    staticClass: "text-center text-lg-start text-muted MyFooter",
     staticStyle: {
-      "background-color": "#0f0e17"
+      height: "100%"
     }
   }, [_c("section", [_c("div", {
-    staticClass: "container text-center text-md-start mt-5"
+    staticClass: "container text-center text-md-start"
   }, [_c("div", {
-    staticClass: "row mt-3"
+    staticClass: "row"
   }, [_c("div", {
     staticClass: "col-md-3 col-lg-4 col-xl-3 mx-auto mb-4 mt-5 links"
   }, [_c("h6", {
@@ -2258,17 +2258,22 @@ __webpack_require__.r(__webpack_exports__);
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("div", [_vm._m(0), _vm._v(" "), _vm._m(1), _vm._v(" "), _c("div", {
-    staticClass: "container-fluid"
+  return _c("div", {
+    staticStyle: {
+      "background-color": "rgb(208, 208, 206)"
+    }
+  }, [_vm._m(0), _vm._v(" "), _vm._m(1), _vm._v(" "), _c("div", {
+    staticClass: "container-fluid pb-5"
   }, [_c("div", {
     staticClass: "row"
   }, [_c("div", {
-    staticClass: "col-2"
+    staticClass: "col-3"
   }, [_c("h3", {
-    staticClass: "mb-3"
+    staticClass: "mb-3 px-3"
   }, [_vm._v("Categorie")]), _vm._v(" "), _vm._l(_vm.categories, function (category, index) {
     return _c("div", {
-      key: index
+      key: index,
+      staticClass: "px-3"
     }, [_c("input", {
       directives: [{
         name: "model",
@@ -2311,7 +2316,7 @@ var render = function render() {
       }
     }, [_vm._v("\n                        " + _vm._s(category.name) + "\n                    ")])]);
   })], 2), _vm._v(" "), _c("div", {
-    staticClass: "col-10"
+    staticClass: "col-9"
   }, [_vm.restaurants.length > 0 ? _c("div", [_c("div", {
     staticClass: "d-flex flex-wrap"
   }, _vm._l(_vm.restaurants, function (restaurant, index) {
@@ -2326,6 +2331,9 @@ var render = function render() {
       staticClass: "card-body"
     }, [_c("img", {
       staticClass: "card-img-top",
+      staticStyle: {
+        "min-height": "12rem"
+      },
       attrs: {
         src: restaurant.image,
         alt: restaurant.name
@@ -2466,7 +2474,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".links[data-v-e72d6f5c] {\n  background-color: #a7a9be;\n  padding-top: 2rem;\n  color: white;\n}\n.links[data-v-e72d6f5c] :hover {\n  color: #ff8906;\n  text-decoration: none;\n  cursor: pointer;\n}", ""]);
+exports.push([module.i, ".links[data-v-e72d6f5c] {\n  background-color: #a7a9be;\n  padding-top: 2rem;\n  color: white;\n}\n.links[data-v-e72d6f5c] :hover {\n  color: #ff8906;\n  text-decoration: none;\n  cursor: pointer;\n}\n.MyFooter[data-v-e72d6f5c] {\n  background-color: #0f0e17;\n}", ""]);
 
 // exports
 
@@ -19338,7 +19346,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\LBoolean\Documents\boolean\progetto_finale\file_progetto_finale\deliveboo\resources\js\front.js */"./resources/js/front.js");
+module.exports = __webpack_require__(/*! C:\Users\Andrea\Desktop\deliveboo\resources\js\front.js */"./resources/js/front.js");
 
 
 /***/ })
