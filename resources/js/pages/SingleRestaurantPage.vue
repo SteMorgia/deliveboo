@@ -2,8 +2,10 @@
     <div class="container mt-3 mb-3">
 
         <h1>Ristorante:</h1>
-
-        
+        <p>{{restaurant.name}}</p>
+        <p>{{restaurant.address}}</p>
+        <p>{{restaurant.phone_number}}</p>
+        <p>{{restaurant.description}}</p>
 
         <hr>
 
@@ -28,14 +30,22 @@ export default {
     name: 'SingleRestaurantPage',
     data() {
         return {
-
+            restaurant: {}
         }
     },
     methods: {
+        getSingleRestaurantF() {
+            const slug = this.$route.params.slug;
 
+            axios
+            .get('http://localhost:8000/api/filterRestaurants/' + slug)
+            .then( response => {
+                this.restaurant = response.data.result;
+            });
+        }
     },
     mounted() {
-
+        this.getSingleRestaurantF();
     }
 }
 </script>

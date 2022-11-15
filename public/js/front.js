@@ -2019,10 +2019,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'SingleRestaurantPage',
   data: function data() {
-    return {};
+    return {
+      restaurant: {}
+    };
   },
-  methods: {},
-  mounted: function mounted() {}
+  methods: {
+    getSingleRestaurantF: function getSingleRestaurantF() {
+      var _this = this;
+      var slug = this.$route.params.slug;
+      axios.get('http://localhost:8000/api/filterRestaurants/' + slug).then(function (response) {
+        _this.restaurant = response.data.result;
+      });
+    }
+  },
+  mounted: function mounted() {
+    this.getSingleRestaurantF();
+  }
 });
 
 /***/ }),
@@ -2350,8 +2362,7 @@ var render = function render() {
         to: {
           name: "restaurant",
           params: {
-            slug: restaurant.slug,
-            restaurant: restaurant
+            slug: restaurant.slug
           }
         }
       }
@@ -2404,7 +2415,7 @@ var render = function render() {
     _c = _vm._self._c;
   return _c("div", {
     staticClass: "container mt-3 mb-3"
-  }, [_c("h1", [_vm._v("Ristorante:")]), _vm._v(" "), _c("hr"), _vm._v(" "), _c("h1", [_vm._v("Menu:")]), _vm._v(" "), _vm._m(0), _vm._v(" "), _c("router-link", {
+  }, [_c("h1", [_vm._v("Ristorante:")]), _vm._v(" "), _c("p", [_vm._v(_vm._s(_vm.restaurant.name))]), _vm._v(" "), _c("p", [_vm._v(_vm._s(_vm.restaurant.address))]), _vm._v(" "), _c("p", [_vm._v(_vm._s(_vm.restaurant.phone_number))]), _vm._v(" "), _c("p", [_vm._v(_vm._s(_vm.restaurant.description))]), _vm._v(" "), _c("hr"), _vm._v(" "), _c("h1", [_vm._v("Menu:")]), _vm._v(" "), _vm._m(0), _vm._v(" "), _c("router-link", {
     staticClass: "btn mt-3",
     staticStyle: {
       "background-color": "#ff8906"

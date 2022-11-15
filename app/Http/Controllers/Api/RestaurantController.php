@@ -91,7 +91,7 @@ class RestaurantController extends Controller
     {
         $restaurant = Restaurant::where('slug', $slug)->first();
         
-        if($restaurant) {
+        if ($restaurant) {
             return response()->json(
                 [
                     'success' => true,
@@ -102,10 +102,10 @@ class RestaurantController extends Controller
             return response()->json(
                 [
                     'success' => false,
-                    'message' => 'restaurant not found!'
+                    'message' => 'Ristorante non trovato'
                 ]
             );
-            }
+        }
     }         
     /**
      * Show the form for editing the specified resource.
