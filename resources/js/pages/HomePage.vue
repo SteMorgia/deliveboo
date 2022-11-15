@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div style="background-color: rgb(208, 208, 206);">
 
         <!-- inizio jumbotron -->
         <div class="MyWrapper">
@@ -13,11 +13,11 @@
         <!-- fine jumbotron -->
 
         <!-- main -->
-        <div class="container-fluid">
+        <div class="container-fluid pb-5">
             <div class="row">
-                <div class="col-2">
-                    <h3 class="mb-3">Categorie</h3>
-                    <div v-for="(category, index) in categories" :key="index">
+                <div class="col-3 ">
+                    <h3 class="mb-3 px-3">Categorie</h3>
+                    <div class="px-3" v-for="(category, index) in categories" :key="index">
                         <input
                             type="checkbox"
                             :value="category.id"
@@ -31,13 +31,13 @@
                     </div>
                 </div>
 
-                <div class="col-10">
+                <div class="col-9">
                     <div v-if="restaurants.length > 0">
                         <div class="d-flex flex-wrap">
                             <div v-for="(restaurant, index) in restaurants" :key="'a' + index">      
                                 <div class="card m-2" style="width: 18rem;">
                                     <div class="card-body">
-                                        <img class="card-img-top" :src="restaurant.image" :alt="restaurant.name">
+                                        <img class="card-img-top" style="min-height: 12rem;" :src="restaurant.image" :alt="restaurant.name">
                                         <div class="card-body">
                                             <h5 class="card-title">{{restaurant.name}}</h5>
                                             <p class="card-text">{{truncateText(restaurant.description, 20)}}</p>
@@ -128,6 +128,7 @@
             background-image: url('/images/jumbotron.jpg');
             background-size: cover;
             height: 300px;
+            
         }
         
         .MyOverlay {
@@ -148,4 +149,5 @@
 
     /* fine jumbotron */
 
+    
 </style>
