@@ -13,17 +13,16 @@
 
         <div class="row">
 
-            <div :class=" (cart.length>0)?'col-10':'col-12' ">
+            <div :class=" (cart.length>0)?'col-6':'col-12' ">
 
                 <div v-if="dishes" class="d-flex flex-wrap">
                     <div v-for="(dish, index) in dishes" :key="index"
-                        class="card m-2" style="width: 18rem;">
+                        class="card m-2" style="width: 14rem;">
                         <img class="card-img-top" :src="'/storage/' + dish.image" :alt="dish.name">
                         <div class="card-body">
                             <h5 class="card-title">{{dish.name}}</h5>
                             <p class="card-text">{{dish.description}}</p>
                             <p class="card-text">{{dish.price}} €</p>
-                            <p class="card-text">{{dish.quantity}} quantità</p>
                             <button class="btn btn-primary" @click="addToCart(dish)">Aggiungi al carrello</button>
                         </div>
                     </div>
@@ -37,16 +36,31 @@
             </div>
 
             <!-- inizio carrello -->
-            <div v-if="cart.length > 0" :class=" ( cart.length > 0 )?'col-2':'' ">
-                
-                <div v-for="(cartItem, index) in cart" :key="index">
-                    <p>{{cartItem.name}}</p>
-                    <p>{{cartItem.price}}</p>
-                    <p>{{cartItem.quantity}}</p>
-                </div>
+            <div v-if="cart.length > 0" :class=" ( cart.length > 0 )?'col-6':'' ">
 
-                <h1>{{itemTotalAmount}}</h1>
-                <h1>{{cartTotalAmount}}</h1>
+                <table class="table">
+                    <thead>
+                        <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Prodotto</th>
+                        <th scope="col">Prezzo unitario</th>
+                        <th scope="col">Quantità</th>
+                        <th scope="col">Modifica ordine</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="(cartItem, index) in cart" :key="index">
+                        <th scope="row">{{index+1}}</th>
+                        <td>{{cartItem.name}}</td>
+                        <td>{{cartItem.price}} €</td>
+                        <td>{{cartItem.quantity}}</td>
+                        <td>aggiungi - rimuovi - cancella</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h4>Totale articoli nel carrello: {{itemTotalAmount}}</h4>
+                <h4>Totale ordine: {{cartTotalAmount}} €</h4>
 
             </div>
             <!-- fine carrello -->
@@ -91,9 +105,11 @@ export default {
             });
         },
         addToCart(dishP) {
-            for (let i = 0; i < this.cart.length; i++) {
+            for ( let i = 0; i < this.cart.length; i++ ) {
                 if ( this.cart[i].id === dishP.id ) {
-                    return this.cart[i].quantity++;
+                    this.cart[i].quantity++;
+                    this.saveCartToLocalStorage();
+                    return
                 }
             }
             this.cart.push(
@@ -104,26 +120,33 @@ export default {
                     quantity: 1
                 }
             );
+            this.saveCartToLocalStorage();
         },
+        
+        saveCartToLocalStorage() {
+            localStorage.setItem( 'localCart', JSON.stringify(this.cart) ); // in localStorage salvo i dati come stringa;
+        }
     },
     computed: {
         itemTotalAmount() {
             let itemTotal = 0;
-            for (let dish in this.cart) {
-                    itemTotal += (this.cart[dish].quantity);
+            for ( let dish in this.cart ) {
+                    itemTotal += ( this.cart[dish].quantity );
                 }
             return itemTotal;
         },
         cartTotalAmount() {
             let total = 0;
-            for (let item in this.cart) {
-                total += (this.cart[item].quantity * this.cart[item].price);
+            for ( let item in this.cart ) {
+                total += ( this.cart[item].quantity * this.cart[item].price );
             }
             return total;
-            },
         },
+    },
     mounted() {
         this.getSingleRestaurantF();
+        let localCart = localStorage.getItem( 'localCart' ); // recupero carrello salvato in localStorage;
+        this.cart = ( localCart != null ) ? JSON.parse( localCart ) : []; // se in localStorage ho un carrello con oggetti, converto il file json;
     }
 }
 </script>
