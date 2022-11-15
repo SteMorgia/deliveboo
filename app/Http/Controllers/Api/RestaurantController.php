@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Restaurant;
 
+use App\Dish;
+
 class RestaurantController extends Controller
 {
     /**
@@ -148,6 +150,16 @@ class RestaurantController extends Controller
         return response()->json([
             'success'=> true,
             'results'=> $randomRestaurants
+        ]);
+    }
+
+    public function filterDishes($id)
+    {
+        $dishes = Dish::where('restaurant_id', $id)->get();
+        
+        return response()->json([
+            'success'=> true,
+            'results'=> $dishes
         ]);
     }
 }

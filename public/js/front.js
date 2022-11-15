@@ -2020,15 +2020,29 @@ __webpack_require__.r(__webpack_exports__);
   name: 'SingleRestaurantPage',
   data: function data() {
     return {
-      restaurant: {}
+      restaurant: {},
+      dishes: [],
+      doDishesExists: true
     };
   },
   methods: {
     getSingleRestaurantF: function getSingleRestaurantF() {
       var _this = this;
       var slug = this.$route.params.slug;
-      axios.get('http://localhost:8000/api/filterRestaurants/' + slug).then(function (response) {
+      axios.get('http://localhost:8000/api/filterRestaurants/' + slug) // va in show() in Api\RestaurantController;
+      .then(function (response) {
         _this.restaurant = response.data.result;
+        _this.getSingleRestaurantDishesF(_this.restaurant.id);
+      });
+    },
+    getSingleRestaurantDishesF: function getSingleRestaurantDishesF(idRestaurant) {
+      var _this2 = this;
+      // va in filterDishes() in Api\RestaurantController;
+      axios.get('http://localhost:8000/api/filterDishes/' + idRestaurant).then(function (response) {
+        _this2.dishes = response.data.results;
+        if (_this2.dishes == 0) {
+          _this2.doDishesExists = false;
+        }
       });
     }
   },
@@ -2423,7 +2437,38 @@ var render = function render() {
     _c = _vm._self._c;
   return _c("div", {
     staticClass: "container mt-3 mb-3"
-  }, [_c("h1", [_vm._v("Ristorante:")]), _vm._v(" "), _c("p", [_vm._v(_vm._s(_vm.restaurant.name))]), _vm._v(" "), _c("p", [_vm._v(_vm._s(_vm.restaurant.address))]), _vm._v(" "), _c("p", [_vm._v(_vm._s(_vm.restaurant.phone_number))]), _vm._v(" "), _c("p", [_vm._v(_vm._s(_vm.restaurant.description))]), _vm._v(" "), _c("hr"), _vm._v(" "), _c("h1", [_vm._v("Menu:")]), _vm._v(" "), _vm._m(0), _vm._v(" "), _c("router-link", {
+  }, [_c("h1", [_vm._v("Ristorante:")]), _vm._v(" "), _c("p", [_vm._v(_vm._s(_vm.restaurant.name))]), _vm._v(" "), _c("p", [_vm._v(_vm._s(_vm.restaurant.address))]), _vm._v(" "), _c("p", [_vm._v(_vm._s(_vm.restaurant.phone_number))]), _vm._v(" "), _c("p", [_vm._v(_vm._s(_vm.restaurant.description))]), _vm._v(" "), _c("hr"), _vm._v(" "), _c("h1", [_vm._v("Menu:")]), _vm._v(" "), _vm.dishes ? _c("div", {
+    staticClass: "d-flex flex-wrap"
+  }, _vm._l(_vm.dishes, function (dish, index) {
+    return _c("div", {
+      key: index,
+      staticClass: "card m-2",
+      staticStyle: {
+        width: "18rem"
+      }
+    }, [_c("img", {
+      staticClass: "card-img-top",
+      attrs: {
+        src: "/storage/" + dish.image,
+        alt: dish.name
+      }
+    }), _vm._v(" "), _c("div", {
+      staticClass: "card-body"
+    }, [_c("h5", {
+      staticClass: "card-title"
+    }, [_vm._v(_vm._s(dish.name))]), _vm._v(" "), _c("p", {
+      staticClass: "card-text"
+    }, [_vm._v(_vm._s(dish.description))]), _vm._v(" "), _c("a", {
+      staticClass: "btn btn-danger",
+      attrs: {
+        href: "#"
+      }
+    }, [_vm._v("Aggiungi al carrello")])])]);
+  }), 0) : _vm._e(), _vm._v(" "), _vm.dishes.length == 0 && _vm.doDishesExists == false ? _c("div", [_c("h2", {
+    staticStyle: {
+      color: "#f25f4c"
+    }
+  }, [_vm._v("Non esiste nessun piatto in questo ristorante")])]) : _vm._e(), _vm._v(" "), _c("router-link", {
     staticClass: "btn mt-3",
     staticStyle: {
       "background-color": "#ff8906"
@@ -2435,33 +2480,7 @@ var render = function render() {
     }
   }, [_vm._v("Torna alla homepage")])], 1);
 };
-var staticRenderFns = [function () {
-  var _vm = this,
-    _c = _vm._self._c;
-  return _c("div", {
-    staticClass: "card",
-    staticStyle: {
-      width: "18rem"
-    }
-  }, [_c("img", {
-    staticClass: "card-img-top",
-    attrs: {
-      src: "#",
-      alt: "Card image cap"
-    }
-  }), _vm._v(" "), _c("div", {
-    staticClass: "card-body"
-  }, [_c("h5", {
-    staticClass: "card-title"
-  }, [_vm._v("Card title")]), _vm._v(" "), _c("p", {
-    staticClass: "card-text"
-  }, [_vm._v("Some quick example text to build on the card title and make up the bulk of the card's content.")]), _vm._v(" "), _c("a", {
-    staticClass: "btn btn-primary",
-    attrs: {
-      href: "/"
-    }
-  }, [_vm._v("Go somewhere")])])]);
-}];
+var staticRenderFns = [];
 render._withStripped = true;
 
 
@@ -19373,7 +19392,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\Andrea\Desktop\deliveboo\resources\js\front.js */"./resources/js/front.js");
+module.exports = __webpack_require__(/*! C:\Users\LBoolean\Documents\boolean\progetto_finale\file_progetto_finale\deliveboo\resources\js\front.js */"./resources/js/front.js");
 
 
 /***/ })
