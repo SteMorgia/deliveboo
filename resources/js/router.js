@@ -6,7 +6,6 @@ Vue.use(VueRouter);
 import HomePage from './pages/HomePage.vue';
 import SingleRestaurantPage from './pages/SingleRestaurantPage.vue';
 
-
 const router = new VueRouter({
     mode: "history",
     routes: [
@@ -16,8 +15,8 @@ const router = new VueRouter({
             component: HomePage
         },
         {
-            path: '/restaurant', // parametro dinamico {slug-ristorante}
-            name: 'prova',
+            path: '/restaurant/:name', // parametro dinamico {slug-ristorante}
+            name: 'restaurant',
             component: SingleRestaurantPage
         }
     ]

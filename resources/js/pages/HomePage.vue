@@ -41,7 +41,7 @@
                                         <div class="card-body">
                                             <h5 class="card-title">{{restaurant.name}}</h5>
                                             <p class="card-text">{{truncateText(restaurant.description, 20)}}</p>
-                                            <a href="/restaurant" class="btn btn-sm text-white" style="background-color:#ff8906;">Vai al ristorante</a>
+                                            <router-link :to="{name: 'restaurant', params: {name: restaurant.name}}" class="btn" style="background-color:#ff8906;" >Vai al ristorante</router-link>
                                         </div>
                                     </div>
                                 </div>

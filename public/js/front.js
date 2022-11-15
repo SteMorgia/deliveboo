@@ -2336,15 +2336,20 @@ var render = function render() {
       staticClass: "card-title"
     }, [_vm._v(_vm._s(restaurant.name))]), _vm._v(" "), _c("p", {
       staticClass: "card-text"
-    }, [_vm._v(_vm._s(_vm.truncateText(restaurant.description, 20)))]), _vm._v(" "), _c("a", {
-      staticClass: "btn btn-sm text-white",
+    }, [_vm._v(_vm._s(_vm.truncateText(restaurant.description, 20)))]), _vm._v(" "), _c("router-link", {
+      staticClass: "btn",
       staticStyle: {
         "background-color": "#ff8906"
       },
       attrs: {
-        href: "/restaurant"
+        to: {
+          name: "restaurant",
+          params: {
+            name: restaurant.name
+          }
+        }
       }
-    }, [_vm._v("Vai al ristorante")])])])])]);
+    }, [_vm._v("Vai al ristorante")])], 1)])])]);
   }), 0)]) : _vm._e(), _vm._v(" "), _vm.doRestaurantsExist == false && _vm.restaurants.length == 0 ? _c("div", [_c("h2", {
     staticStyle: {
       color: "#f25f4c"
@@ -19247,9 +19252,9 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
     name: 'homepage',
     component: _pages_HomePage_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
   }, {
-    path: '/restaurant',
+    path: '/restaurant/:name',
     // parametro dinamico {slug-ristorante}
-    name: 'prova',
+    name: 'restaurant',
     component: _pages_SingleRestaurantPage_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
   }]
 });
