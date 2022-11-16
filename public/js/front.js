@@ -2066,10 +2066,9 @@ __webpack_require__.r(__webpack_exports__);
       dishP.quantity++;
       this.saveCartToLocalStorage();
     },
-    decreaseCartItem: function decreaseCartItem(dishP) {
+    decreaseCartItem: function decreaseCartItem(dishP, indexP) {
       if (dishP.quantity == 1) {
-        this.removeCartItem(dishP);
-        this.saveCartToLocalStorage();
+        this.removeCartItem(indexP);
       } else {
         dishP.quantity--;
         this.saveCartToLocalStorage();
@@ -2554,7 +2553,7 @@ var render = function render() {
       staticClass: "btn btn-secondary m-1",
       on: {
         click: function click($event) {
-          return _vm.decreaseCartItem(cartDish);
+          return _vm.decreaseCartItem(cartDish, index);
         }
       }
     }, [_vm._v("-")]), _vm._v(" "), _c("button", {
@@ -2564,7 +2563,7 @@ var render = function render() {
           return _vm.removeCartItem(index);
         }
       }
-    }, [_vm._v("Cancella")])])]);
+    }, [_vm._v("x")])])]);
   }), 0)]), _vm._v(" "), _c("table", {
     staticClass: "table"
   }, [_c("tbody", [_c("tr", [_c("th", {

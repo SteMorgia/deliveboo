@@ -56,8 +56,8 @@
                         <td>{{cartDish.quantity}}</td>
                         <td>
                             <button @click="increaseCartItem(cartDish)" class="btn btn-primary m-1">+</button>
-                            <button @click="decreaseCartItem(cartDish)" class="btn btn-secondary m-1">-</button>
-                            <button @click="removeCartItem(index)" class="btn btn-danger m-1" >Cancella</button>
+                            <button @click="decreaseCartItem(cartDish, index)" class="btn btn-secondary m-1">-</button>
+                            <button @click="removeCartItem(index)" class="btn btn-danger m-1" >x</button>
                         </td>
                         </tr>
                     </tbody>
@@ -141,10 +141,9 @@ export default {
             dishP.quantity++;
             this.saveCartToLocalStorage();
         },
-        decreaseCartItem(dishP) {
+        decreaseCartItem(dishP, indexP) {
             if ( dishP.quantity == 1 ) {
-                this.removeCartItem(dishP);
-                this.saveCartToLocalStorage();
+                this.removeCartItem(indexP);
             } else {
                 dishP.quantity--;
                 this.saveCartToLocalStorage();
@@ -162,8 +161,8 @@ export default {
         itemTotalAmount() {
             let itemTotal = 0;
             for ( let dish in this.cart ) {
-                    itemTotal += ( this.cart[dish].quantity );
-                }
+                itemTotal += ( this.cart[dish].quantity );
+            }
             return itemTotal;
         },
         cartTotalAmount() {

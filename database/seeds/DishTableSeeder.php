@@ -22,7 +22,7 @@ class DishTableSeeder extends Seeder
             $newDish->price = $dish['price'];
             $newDish->visibility = true;
             $newDish->slug = $dish['slug'];
-            $newDish->image = 'cover/lasagne.jpg'; //inserire immagine lasagne in storage->app->public->cover
+            $newDish->image = 'cover/lasagne.jpg'; // inserire immagine lasagne in storage/app/public/cover;
             $newDish->save();
         }
     }
