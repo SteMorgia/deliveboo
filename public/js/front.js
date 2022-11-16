@@ -2062,8 +2062,25 @@ __webpack_require__.r(__webpack_exports__);
       });
       this.saveCartToLocalStorage();
     },
+    increaseCartItem: function increaseCartItem(dishP) {
+      dishP.quantity++;
+      this.saveCartToLocalStorage();
+    },
+    decreaseCartItem: function decreaseCartItem(dishP) {
+      if (dishP.quantity == 1) {
+        this.removeCartItem(dishP);
+        this.saveCartToLocalStorage();
+      } else {
+        dishP.quantity--;
+        this.saveCartToLocalStorage();
+      }
+    },
+    removeCartItem: function removeCartItem(indexP) {
+      confirm('Confermi di voler cancellare questi piatti dall\'ordine?') ? this.$delete(this.cart, indexP) : '';
+      this.saveCartToLocalStorage();
+    },
     saveCartToLocalStorage: function saveCartToLocalStorage() {
-      localStorage.setItem('localCart', JSON.stringify(this.cart)); // in localStorage salvo i dati come stringa;
+      localStorage.setItem('localCart', JSON.stringify(this.cart)); // in localStorage devo salvare i dati come stringa;
     }
   },
 
@@ -2476,7 +2493,7 @@ var render = function render() {
     _c = _vm._self._c;
   return _c("div", {
     staticClass: "container mt-3 mb-3"
-  }, [_c("h1", [_vm._v("Ristorante:")]), _vm._v(" "), _c("p", [_vm._v(_vm._s(_vm.restaurant.name))]), _vm._v(" "), _c("p", [_vm._v(_vm._s(_vm.restaurant.address))]), _vm._v(" "), _c("p", [_vm._v(_vm._s(_vm.restaurant.phone_number))]), _vm._v(" "), _c("p", [_vm._v(_vm._s(_vm.restaurant.description))]), _vm._v(" "), _c("hr"), _vm._v(" "), _c("h1", [_vm._v("Menu:")]), _vm._v(" "), _c("div", {
+  }, [_c("h1", [_vm._v(_vm._s(_vm.restaurant.name))]), _vm._v(" "), _c("p", [_vm._v("Indirizzo: "), _c("br"), _vm._v(" " + _vm._s(_vm.restaurant.address))]), _vm._v(" "), _c("p", [_vm._v("Telefono: "), _c("br"), _vm._v(" " + _vm._s(_vm.restaurant.phone_number))]), _vm._v(" "), _c("p", [_vm._v("Descrizione: "), _c("br"), _vm._v(" " + _vm._s(_vm.restaurant.description))]), _vm._v(" "), _c("hr"), _vm._v(" "), _c("h1", [_vm._v("Menu:")]), _vm._v(" "), _c("div", {
     staticClass: "row"
   }, [_c("div", {
     "class": _vm.cart.length > 0 ? "col-6" : "col-12"
@@ -2519,15 +2536,42 @@ var render = function render() {
     "class": _vm.cart.length > 0 ? "col-6" : ""
   }, [_c("table", {
     staticClass: "table"
-  }, [_vm._m(0), _vm._v(" "), _c("tbody", _vm._l(_vm.cart, function (cartItem, index) {
+  }, [_vm._m(0), _vm._v(" "), _c("tbody", _vm._l(_vm.cart, function (cartDish, index) {
     return _c("tr", {
       key: index
     }, [_c("th", {
       attrs: {
         scope: "row"
       }
-    }, [_vm._v(_vm._s(index + 1))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(cartItem.name))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(cartItem.price) + " €")]), _vm._v(" "), _c("td", [_vm._v(_vm._s(cartItem.quantity))]), _vm._v(" "), _c("td", [_vm._v("aggiungi - rimuovi - cancella")])]);
-  }), 0)]), _vm._v(" "), _c("h4", [_vm._v("Totale articoli nel carrello: " + _vm._s(_vm.itemTotalAmount))]), _vm._v(" "), _c("h4", [_vm._v("Totale ordine: " + _vm._s(_vm.cartTotalAmount) + " €")])]) : _vm._e()]), _vm._v(" "), _c("router-link", {
+    }, [_vm._v(_vm._s(index + 1))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(cartDish.name))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(cartDish.price) + " €")]), _vm._v(" "), _c("td", [_vm._v(_vm._s(cartDish.quantity))]), _vm._v(" "), _c("td", [_c("button", {
+      staticClass: "btn btn-primary m-1",
+      on: {
+        click: function click($event) {
+          return _vm.increaseCartItem(cartDish);
+        }
+      }
+    }, [_vm._v("+")]), _vm._v(" "), _c("button", {
+      staticClass: "btn btn-secondary m-1",
+      on: {
+        click: function click($event) {
+          return _vm.decreaseCartItem(cartDish);
+        }
+      }
+    }, [_vm._v("-")]), _vm._v(" "), _c("button", {
+      staticClass: "btn btn-danger m-1",
+      on: {
+        click: function click($event) {
+          return _vm.removeCartItem(index);
+        }
+      }
+    }, [_vm._v("Cancella")])])]);
+  }), 0)]), _vm._v(" "), _c("table", {
+    staticClass: "table"
+  }, [_c("tbody", [_c("tr", [_c("th", {
+    staticClass: "text-right"
+  }, [_vm._v("Totale articoli nel carrello: " + _vm._s(_vm.itemTotalAmount))])]), _vm._v(" "), _c("tr", [_c("th", {
+    staticClass: "text-right"
+  }, [_vm._v("Totale ordine: € " + _vm._s(_vm.cartTotalAmount))])])])])]) : _vm._e()]), _vm._v(" "), _c("router-link", {
     staticClass: "btn mt-3",
     staticStyle: {
       "background-color": "#ff8906"

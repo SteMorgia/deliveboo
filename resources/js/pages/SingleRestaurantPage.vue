@@ -1,11 +1,10 @@
 <template>
     <div class="container mt-3 mb-3">
 
-        <h1>Ristorante:</h1>
-        <p>{{restaurant.name}}</p>
-        <p>{{restaurant.address}}</p>
-        <p>{{restaurant.phone_number}}</p>
-        <p>{{restaurant.description}}</p>
+        <h1>{{restaurant.name}}</h1>
+        <p>Indirizzo: <br> {{restaurant.address}}</p>
+        <p>Telefono: <br> {{restaurant.phone_number}}</p>
+        <p>Descrizione: <br> {{restaurant.description}}</p>
 
         <hr>
 
@@ -35,9 +34,10 @@
 
             </div>
 
-            <!-- inizio carrello -->
+            <!-- inizio contenitore carrello + riepilogo -->
             <div v-if="cart.length > 0" :class=" ( cart.length > 0 )?'col-6':'' ">
 
+                <!-- inizio carrello -->
                 <table class="table">
                     <thead>
                         <tr>
@@ -49,21 +49,36 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="(cartItem, index) in cart" :key="index">
-                        <th scope="row">{{index+1}}</th>
-                        <td>{{cartItem.name}}</td>
-                        <td>{{cartItem.price}} €</td>
-                        <td>{{cartItem.quantity}}</td>
-                        <td>aggiungi - rimuovi - cancella</td>
+                        <tr v-for="(cartDish, index) in cart" :key="index">
+                        <th scope="row">{{index + 1}}</th>
+                        <td>{{cartDish.name}}</td>
+                        <td>{{cartDish.price}} €</td>
+                        <td>{{cartDish.quantity}}</td>
+                        <td>
+                            <button @click="increaseCartItem(cartDish)" class="btn btn-primary m-1">+</button>
+                            <button @click="decreaseCartItem(cartDish)" class="btn btn-secondary m-1">-</button>
+                            <button @click="removeCartItem(index)" class="btn btn-danger m-1" >Cancella</button>
+                        </td>
                         </tr>
                     </tbody>
                 </table>
-
-                <h4>Totale articoli nel carrello: {{itemTotalAmount}}</h4>
-                <h4>Totale ordine: {{cartTotalAmount}} €</h4>
+                <!-- fine carrello -->
+                
+                <!-- inizio riepilogo -->
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <th class="text-right">Totale articoli nel carrello: {{itemTotalAmount}}</th>
+                        </tr>
+                        <tr>
+                            <th class="text-right">Totale ordine: € {{cartTotalAmount}}</th>
+                        </tr>
+                    </tbody>
+                </table>
+                <!-- fine riepilogo -->
 
             </div>
-            <!-- fine carrello -->
+            <!-- fine contenitore carrello + riepilogo -->
 
         </div>
 
@@ -122,9 +137,25 @@ export default {
             );
             this.saveCartToLocalStorage();
         },
-        
+        increaseCartItem(dishP) {
+            dishP.quantity++;
+            this.saveCartToLocalStorage();
+        },
+        decreaseCartItem(dishP) {
+            if ( dishP.quantity == 1 ) {
+                this.removeCartItem(dishP);
+                this.saveCartToLocalStorage();
+            } else {
+                dishP.quantity--;
+                this.saveCartToLocalStorage();
+            }
+        },
+        removeCartItem(indexP) {
+            confirm('Confermi di voler cancellare questi piatti dall\'ordine?') ? this.$delete(this.cart, indexP) : '';
+            this.saveCartToLocalStorage();
+        },
         saveCartToLocalStorage() {
-            localStorage.setItem( 'localCart', JSON.stringify(this.cart) ); // in localStorage salvo i dati come stringa;
+            localStorage.setItem( 'localCart', JSON.stringify(this.cart) ); // in localStorage devo salvare i dati come stringa;
         }
     },
     computed: {
