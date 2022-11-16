@@ -23,6 +23,7 @@ class RestaurantTableSeeder extends Seeder
             $newRestaurant->image = $restaurant['restaurant_image'];
             $newRestaurant->vat = $restaurant['vat_number'];
             $newRestaurant->user_id = $restaurant['user_id'];
+            $newRestaurant->slug = $restaurant['slug'];
             $newRestaurant->save();
         }
     }
