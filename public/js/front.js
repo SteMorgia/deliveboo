@@ -1944,6 +1944,51 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Payment.vue?vue&type=script&lang=js&":
+/*!******************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Payment.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: 'Payment',
+  components: {},
+  props: {
+    authorization: {
+      required: true,
+      type: String
+    }
+  },
+  data: function data() {
+    return {
+      error: ''
+    };
+  },
+  methods: {
+    onLoad: function onLoad() {
+      this.$emit('loading');
+    },
+    onSuccess: function onSuccess(payload) {
+      var token = payload.nonce;
+      this.$emit('onSuccess', token);
+    },
+    onError: function onError(error) {
+      var message = error.message;
+      if (message === 'No payment method is available.') {
+        this.error = 'Seleziona un metodo di Pagamento';
+      } else {
+        this.error = message;
+      }
+      this.$emit('onError', message);
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/HomePage.vue?vue&type=script&lang=js&":
 /*!**************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/HomePage.vue?vue&type=script&lang=js& ***!
@@ -2011,10 +2056,130 @@ __webpack_require__.r(__webpack_exports__);
 /*!**************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/SingleRestaurantPage.vue?vue&type=script&lang=js& ***!
   \**************************************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: /Users/marta/Desktop/Progetto/deliveboo-1/resources/js/pages/SingleRestaurantPage.vue: Unexpected token, expected \",\" (103:14)\n\n\u001b[0m \u001b[90m 101 |\u001b[39m             )\u001b[0m\n\u001b[0m \u001b[90m 102 |\u001b[39m                 \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39m$router\u001b[33m.\u001b[39mpush({ path\u001b[33m:\u001b[39m \u001b[32m'/checkout/thankyou'\u001b[39m })\u001b[0m\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 103 |\u001b[39m             } \u001b[36mcatch\u001b[39m (error) {\u001b[0m\n\u001b[0m \u001b[90m     |\u001b[39m               \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 104 |\u001b[39m                 \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mdisableBuyButton \u001b[33m=\u001b[39m \u001b[36mfalse\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 105 |\u001b[39m                 \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mloadingPayment \u001b[33m=\u001b[39m \u001b[36mfalse\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 106 |\u001b[39m             }\u001b[0m\n    at instantiate (/Users/marta/Desktop/Progetto/deliveboo-1/node_modules/@babel/parser/lib/index.js:67:32)\n    at constructor (/Users/marta/Desktop/Progetto/deliveboo-1/node_modules/@babel/parser/lib/index.js:364:12)\n    at Parser.raise (/Users/marta/Desktop/Progetto/deliveboo-1/node_modules/@babel/parser/lib/index.js:3364:19)\n    at Parser.unexpected (/Users/marta/Desktop/Progetto/deliveboo-1/node_modules/@babel/parser/lib/index.js:3397:16)\n    at Parser.expect (/Users/marta/Desktop/Progetto/deliveboo-1/node_modules/@babel/parser/lib/index.js:3760:28)\n    at Parser.parseObjectLike (/Users/marta/Desktop/Progetto/deliveboo-1/node_modules/@babel/parser/lib/index.js:11982:14)\n    at Parser.parseExprAtom (/Users/marta/Desktop/Progetto/deliveboo-1/node_modules/@babel/parser/lib/index.js:11464:23)\n    at Parser.parseExprSubscripts (/Users/marta/Desktop/Progetto/deliveboo-1/node_modules/@babel/parser/lib/index.js:11171:23)\n    at Parser.parseUpdate (/Users/marta/Desktop/Progetto/deliveboo-1/node_modules/@babel/parser/lib/index.js:11153:21)\n    at Parser.parseMaybeUnary (/Users/marta/Desktop/Progetto/deliveboo-1/node_modules/@babel/parser/lib/index.js:11127:23)\n    at Parser.parseMaybeUnaryOrPrivate (/Users/marta/Desktop/Progetto/deliveboo-1/node_modules/@babel/parser/lib/index.js:10956:61)\n    at Parser.parseExprOps (/Users/marta/Desktop/Progetto/deliveboo-1/node_modules/@babel/parser/lib/index.js:10962:23)\n    at Parser.parseMaybeConditional (/Users/marta/Desktop/Progetto/deliveboo-1/node_modules/@babel/parser/lib/index.js:10937:23)\n    at Parser.parseMaybeAssign (/Users/marta/Desktop/Progetto/deliveboo-1/node_modules/@babel/parser/lib/index.js:10895:21)\n    at /Users/marta/Desktop/Progetto/deliveboo-1/node_modules/@babel/parser/lib/index.js:10863:39\n    at Parser.allowInAnd (/Users/marta/Desktop/Progetto/deliveboo-1/node_modules/@babel/parser/lib/index.js:12640:12)\n    at Parser.parseMaybeAssignAllowIn (/Users/marta/Desktop/Progetto/deliveboo-1/node_modules/@babel/parser/lib/index.js:10863:17)\n    at Parser.parseObjectProperty (/Users/marta/Desktop/Progetto/deliveboo-1/node_modules/@babel/parser/lib/index.js:12127:83)\n    at Parser.parseObjPropValue (/Users/marta/Desktop/Progetto/deliveboo-1/node_modules/@babel/parser/lib/index.js:12154:100)\n    at Parser.parsePropertyDefinition (/Users/marta/Desktop/Progetto/deliveboo-1/node_modules/@babel/parser/lib/index.js:12083:17)\n    at Parser.parseObjectLike (/Users/marta/Desktop/Progetto/deliveboo-1/node_modules/@babel/parser/lib/index.js:11993:21)\n    at Parser.parseExprAtom (/Users/marta/Desktop/Progetto/deliveboo-1/node_modules/@babel/parser/lib/index.js:11464:23)\n    at Parser.parseExprSubscripts (/Users/marta/Desktop/Progetto/deliveboo-1/node_modules/@babel/parser/lib/index.js:11171:23)\n    at Parser.parseUpdate (/Users/marta/Desktop/Progetto/deliveboo-1/node_modules/@babel/parser/lib/index.js:11153:21)\n    at Parser.parseMaybeUnary (/Users/marta/Desktop/Progetto/deliveboo-1/node_modules/@babel/parser/lib/index.js:11127:23)\n    at Parser.parseMaybeUnaryOrPrivate (/Users/marta/Desktop/Progetto/deliveboo-1/node_modules/@babel/parser/lib/index.js:10956:61)\n    at Parser.parseExprOps (/Users/marta/Desktop/Progetto/deliveboo-1/node_modules/@babel/parser/lib/index.js:10962:23)\n    at Parser.parseMaybeConditional (/Users/marta/Desktop/Progetto/deliveboo-1/node_modules/@babel/parser/lib/index.js:10937:23)\n    at Parser.parseMaybeAssign (/Users/marta/Desktop/Progetto/deliveboo-1/node_modules/@babel/parser/lib/index.js:10895:21)\n    at /Users/marta/Desktop/Progetto/deliveboo-1/node_modules/@babel/parser/lib/index.js:10863:39\n    at Parser.allowInAnd (/Users/marta/Desktop/Progetto/deliveboo-1/node_modules/@babel/parser/lib/index.js:12635:16)\n    at Parser.parseMaybeAssignAllowIn (/Users/marta/Desktop/Progetto/deliveboo-1/node_modules/@babel/parser/lib/index.js:10863:17)\n    at Parser.parseExportDefaultExpression (/Users/marta/Desktop/Progetto/deliveboo-1/node_modules/@babel/parser/lib/index.js:14171:22)\n    at Parser.parseExport (/Users/marta/Desktop/Progetto/deliveboo-1/node_modules/@babel/parser/lib/index.js:14075:25)\n    at Parser.parseStatementContent (/Users/marta/Desktop/Progetto/deliveboo-1/node_modules/@babel/parser/lib/index.js:13020:27)\n    at Parser.parseStatement (/Users/marta/Desktop/Progetto/deliveboo-1/node_modules/@babel/parser/lib/index.js:12917:17)\n    at Parser.parseBlockOrModuleBlockBody (/Users/marta/Desktop/Progetto/deliveboo-1/node_modules/@babel/parser/lib/index.js:13497:25)\n    at Parser.parseBlockBody (/Users/marta/Desktop/Progetto/deliveboo-1/node_modules/@babel/parser/lib/index.js:13489:10)\n    at Parser.parseProgram (/Users/marta/Desktop/Progetto/deliveboo-1/node_modules/@babel/parser/lib/index.js:12832:10)\n    at Parser.parseTopLevel (/Users/marta/Desktop/Progetto/deliveboo-1/node_modules/@babel/parser/lib/index.js:12822:25)\n    at Parser.parse (/Users/marta/Desktop/Progetto/deliveboo-1/node_modules/@babel/parser/lib/index.js:14674:10)\n    at parse (/Users/marta/Desktop/Progetto/deliveboo-1/node_modules/@babel/parser/lib/index.js:14716:38)\n    at parser (/Users/marta/Desktop/Progetto/deliveboo-1/node_modules/@babel/core/lib/parser/index.js:41:34)\n    at parser.next (<anonymous>)\n    at normalizeFile (/Users/marta/Desktop/Progetto/deliveboo-1/node_modules/@babel/core/lib/transformation/normalize-file.js:66:38)\n    at normalizeFile.next (<anonymous>)\n    at run (/Users/marta/Desktop/Progetto/deliveboo-1/node_modules/@babel/core/lib/transformation/index.js:21:50)\n    at run.next (<anonymous>)\n    at transform (/Users/marta/Desktop/Progetto/deliveboo-1/node_modules/@babel/core/lib/transform.js:22:41)\n    at transform.next (<anonymous>)");
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _components_Payment_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/Payment.vue */ "./resources/js/components/Payment.vue");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: 'SingleRestaurantPage',
+  components: {
+    Payment: _components_Payment_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
+  data: function data() {
+    return {
+      restaurant: {},
+      dishes: [],
+      doDishesExists: true,
+      cart: [],
+      tokenApi: '',
+      form: {
+        token: '',
+        cart: this.cart
+      }
+    };
+  },
+  methods: {
+    getSingleRestaurantF: function getSingleRestaurantF() {
+      var _this = this;
+      var slug = this.$route.params.slug;
+      axios.get('http://localhost:8000/api/filterRestaurants/' + slug) // va in show() in Api\RestaurantController;
+      .then(function (response) {
+        _this.restaurant = response.data.result;
+        _this.getSingleRestaurantDishesF(_this.restaurant.id);
+      });
+    },
+    getSingleRestaurantDishesF: function getSingleRestaurantDishesF(idRestaurant) {
+      var _this2 = this;
+      // va in filterDishes() in Api\RestaurantController;
+      axios.get('http://localhost:8000/api/filterDishes/' + idRestaurant).then(function (response) {
+        _this2.dishes = response.data.results;
+        if (_this2.dishes == 0) {
+          _this2.doDishesExists = false;
+        }
+      });
+    },
+    addToCart: function addToCart(dishP) {
+      for (var i = 0; i < this.cart.length; i++) {
+        if (this.cart[i].id === dishP.id) {
+          this.cart[i].quantity++;
+          this.saveCartToLocalStorage();
+          return;
+        }
+      }
+      this.cart.push({
+        id: dishP.id,
+        name: dishP.name,
+        price: dishP.price,
+        quantity: 1
+      });
+      this.saveCartToLocalStorage();
+    },
+    increaseCartItem: function increaseCartItem(dishP) {
+      dishP.quantity++;
+      this.saveCartToLocalStorage();
+    },
+    decreaseCartItem: function decreaseCartItem(dishP, indexP) {
+      if (dishP.quantity == 1) {
+        this.removeCartItem(indexP);
+      } else {
+        dishP.quantity--;
+        this.saveCartToLocalStorage();
+      }
+    },
+    removeCartItem: function removeCartItem(indexP) {
+      confirm('Confermi di voler cancellare questi piatti dall\'ordine?') ? this.$delete(this.cart, indexP) : '';
+      this.saveCartToLocalStorage();
+    },
+    saveCartToLocalStorage: function saveCartToLocalStorage() {
+      localStorage.setItem('localCart', JSON.stringify(this.cart)); // in localStorage devo salvare i dati come stringa;
+    },
+    getTokenApi: function getTokenApi() {
+      var _this3 = this;
+      axios.get('http://localhost:8000/api/orders/generate').then(function (response) {
+        _this3.tokenApi = response.data.token;
+        console.log(_this3.tokenApi);
+      });
+    },
+    paymentOnSuccess: function paymentOnSuccess(nonce) {
+      this.form.token = nonce;
+      // this.funzioneBuy()
+    },
+    funzioneBuy: function funzioneBuy() {
+      this.form.cart = this.cart;
+      axios.post('/api/orders/make/payment', _objectSpread({}, this.form)).then(function (response) {
+        console.log(response.data);
+      });
+    }
+  },
+  computed: {
+    itemTotalAmount: function itemTotalAmount() {
+      var itemTotal = 0;
+      for (var dish in this.cart) {
+        itemTotal += this.cart[dish].quantity;
+      }
+      return itemTotal;
+    },
+    cartTotalAmount: function cartTotalAmount() {
+      var total = 0;
+      for (var item in this.cart) {
+        total += this.cart[item].quantity * this.cart[item].price;
+      }
+      return total;
+    }
+  },
+  mounted: function mounted() {
+    this.getSingleRestaurantF();
+    var localCart = localStorage.getItem('localCart'); // recupero carrello salvato in localStorage;
+    this.cart = localCart != null ? JSON.parse(localCart) : []; // se in localStorage ho un carrello con oggetti, converto il file json;
+    this.getTokenApi();
+  }
+});
 
 /***/ }),
 
@@ -2233,6 +2398,38 @@ var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c("main", [_c("router-view")], 1);
+};
+var staticRenderFns = [];
+render._withStripped = true;
+
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Payment.vue?vue&type=template&id=7bace86b&":
+/*!****************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Payment.vue?vue&type=template&id=7bace86b& ***!
+  \****************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function render() {
+  var _vm = this,
+    _c = _vm._self._c;
+  return _c("div", [_c("v-braintree", {
+    attrs: {
+      authorization: _vm.authorization,
+      locale: "it_IT"
+    },
+    on: {
+      success: _vm.onSuccess,
+      error: _vm.onError,
+      load: _vm.onLoad
+    }
+  })], 1);
 };
 var staticRenderFns = [];
 render._withStripped = true;
@@ -2480,14 +2677,14 @@ var render = function render() {
     staticClass: "text-right"
   }, [_vm._v("Totale articoli nel carrello: " + _vm._s(_vm.itemTotalAmount))])]), _vm._v(" "), _c("tr", [_c("th", {
     staticClass: "text-right"
-  }, [_vm._v("Totale ordine: € " + _vm._s(_vm.cartTotalAmount))])])])]), _vm._v(" "), _c("div", [_c("Payment", {
+  }, [_vm._v("Totale ordine: € " + _vm._s(_vm.cartTotalAmount))])])])]), _vm._v(" "), _vm.tokenApi.length > 0 ? _c("div", [_c("Payment", {
     attrs: {
       authorization: _vm.tokenApi
     },
     on: {
       onSuccess: _vm.paymentOnSuccess
     }
-  })], 1)]) : _vm._e()]), _vm._v(" "), _c("router-link", {
+  })], 1) : _vm._e()]) : _vm._e()]), _vm._v(" "), _c("router-link", {
     staticClass: "btn mt-3",
     staticStyle: {
       "background-color": "#ff8906"
@@ -44531,6 +44728,75 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/Payment.vue":
+/*!*********************************************!*\
+  !*** ./resources/js/components/Payment.vue ***!
+  \*********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Payment_vue_vue_type_template_id_7bace86b___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Payment.vue?vue&type=template&id=7bace86b& */ "./resources/js/components/Payment.vue?vue&type=template&id=7bace86b&");
+/* harmony import */ var _Payment_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Payment.vue?vue&type=script&lang=js& */ "./resources/js/components/Payment.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _Payment_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Payment_vue_vue_type_template_id_7bace86b___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Payment_vue_vue_type_template_id_7bace86b___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Payment.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/Payment.vue?vue&type=script&lang=js&":
+/*!**********************************************************************!*\
+  !*** ./resources/js/components/Payment.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Payment_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./Payment.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Payment.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Payment_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/Payment.vue?vue&type=template&id=7bace86b&":
+/*!****************************************************************************!*\
+  !*** ./resources/js/components/Payment.vue?vue&type=template&id=7bace86b& ***!
+  \****************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ref_6_node_modules_vue_loader_lib_index_js_vue_loader_options_Payment_vue_vue_type_template_id_7bace86b___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!../../../node_modules/vue-loader/lib??vue-loader-options!./Payment.vue?vue&type=template&id=7bace86b& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Payment.vue?vue&type=template&id=7bace86b&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ref_6_node_modules_vue_loader_lib_index_js_vue_loader_options_Payment_vue_vue_type_template_id_7bace86b___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ref_6_node_modules_vue_loader_lib_index_js_vue_loader_options_Payment_vue_vue_type_template_id_7bace86b___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/front.js":
 /*!*******************************!*\
   !*** ./resources/js/front.js ***!
@@ -44698,9 +44964,7 @@ component.options.__file = "resources/js/pages/SingleRestaurantPage.vue"
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SingleRestaurantPage_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./SingleRestaurantPage.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/SingleRestaurantPage.vue?vue&type=script&lang=js&");
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SingleRestaurantPage_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SingleRestaurantPage_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SingleRestaurantPage_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SingleRestaurantPage_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
- /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SingleRestaurantPage_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0___default.a); 
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SingleRestaurantPage_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 

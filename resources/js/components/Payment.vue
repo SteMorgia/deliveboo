@@ -7,6 +7,7 @@
         @error="onError"
         @load="onLoad"
         >
+
         </v-braintree>
     </div>
 </template>
@@ -19,8 +20,8 @@ export default {
     },
     props: {
         authorization: {
-        required: true,
-        type: String
+            required: true,
+            type: String
         }
     },
     data () {

@@ -77,13 +77,14 @@
                 </table>
                 <!-- fine riepilogo -->
 
-                <div>
+                <div v-if="tokenApi.length > 0">
                     <Payment
                     :authorization="tokenApi"
                     @onSuccess="paymentOnSuccess"
                     >
                     </Payment>
                 </div>
+
             </div>
             <!-- fine contenitore carrello + riepilogo -->
 
@@ -111,7 +112,7 @@ export default {
             tokenApi: '',
             form: {
                 token: '',
-                carrello: ''
+                cart: this.cart
             }
         }
     },
@@ -174,33 +175,26 @@ export default {
             localStorage.setItem( 'localCart', JSON.stringify(this.cart) ); // in localStorage devo salvare i dati come stringa;
         },
         getTokenApi() {
-            // this.tokenApi = null;
             axios
             .get('http://localhost:8000/api/orders/generate')
             .then( response => {
                 this.tokenApi = response.data.token;
                 console.log(this.tokenApi);
+                
             });
-
         },
         paymentOnSuccess (nonce) {
-            // alert(nonce);
-            this.form.token = nonce
-            this.funzioneBuy()
+            this.form.token = nonce;
+            // this.funzioneBuy()
         },
         funzioneBuy() {
-
+            this.form.cart = this.cart;
             axios
             .post('/api/orders/make/payment', { ...this.form })
-            .then(
-                
-            )
-                this.$router.push({ path: '/checkout/thankyou' })
-            } catch (error) {
-                this.disableBuyButton = false
-                this.loadingPayment = false
-            }
-        }
+            .then( response => {
+                console.log(response.data);
+            })
+        },
     },
     computed: {
         itemTotalAmount() {
@@ -216,13 +210,14 @@ export default {
                 total += ( this.cart[item].quantity * this.cart[item].price );
             }
             return total;
-        },
+        }
     },
+    
     mounted() {
-        this.getTokenApi();
         this.getSingleRestaurantF();
         let localCart = localStorage.getItem( 'localCart' ); // recupero carrello salvato in localStorage;
         this.cart = ( localCart != null ) ? JSON.parse( localCart ) : []; // se in localStorage ho un carrello con oggetti, converto il file json;
+        this.getTokenApi();
     }
 }
 </script>

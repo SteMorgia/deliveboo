@@ -26,8 +26,9 @@ class DishController extends Controller
             abort(404, 'Non esistono piatti per questo ristorante');
         };
         $dishes = Dish::where('restaurant_id', $restaurant->id)->get();
-    
+        
         return view('admin.dishes.index', compact('dishes', 'id', 'restaurant'));
+        
     }
 
     /**
