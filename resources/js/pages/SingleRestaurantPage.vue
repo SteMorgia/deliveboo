@@ -77,6 +77,13 @@
                 </table>
                 <!-- fine riepilogo -->
 
+                <div>
+                    <Payment
+                    :authorization="tokenApi"
+                    @onSuccess="paymentOnSuccess"
+                    >
+                    </Payment>
+                </div>
             </div>
             <!-- fine contenitore carrello + riepilogo -->
 
@@ -88,14 +95,24 @@
 </template>
 
 <script>
+import Payment from '../components/Payment.vue';
+
 export default {
     name: 'SingleRestaurantPage',
+    components: {
+        Payment
+    },
     data() {
         return {
             restaurant: {},
             dishes: [],
             doDishesExists: true,
-            cart: []
+            cart: [],
+            tokenApi: '',
+            form: {
+                token: '',
+                carrello: ''
+            }
         }
     },
     methods: {
@@ -155,6 +172,34 @@ export default {
         },
         saveCartToLocalStorage() {
             localStorage.setItem( 'localCart', JSON.stringify(this.cart) ); // in localStorage devo salvare i dati come stringa;
+        },
+        getTokenApi() {
+            // this.tokenApi = null;
+            axios
+            .get('http://localhost:8000/api/orders/generate')
+            .then( response => {
+                this.tokenApi = response.data.token;
+                console.log(this.tokenApi);
+            });
+
+        },
+        paymentOnSuccess (nonce) {
+            // alert(nonce);
+            this.form.token = nonce
+            this.funzioneBuy()
+        },
+        funzioneBuy() {
+
+            axios
+            .post('/api/orders/make/payment', { ...this.form })
+            .then(
+                
+            )
+                this.$router.push({ path: '/checkout/thankyou' })
+            } catch (error) {
+                this.disableBuyButton = false
+                this.loadingPayment = false
+            }
         }
     },
     computed: {
@@ -174,6 +219,7 @@ export default {
         },
     },
     mounted() {
+        this.getTokenApi();
         this.getSingleRestaurantF();
         let localCart = localStorage.getItem( 'localCart' ); // recupero carrello salvato in localStorage;
         this.cart = ( localCart != null ) ? JSON.parse( localCart ) : []; // se in localStorage ho un carrello con oggetti, converto il file json;
