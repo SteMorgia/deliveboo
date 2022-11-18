@@ -7,7 +7,9 @@
         @error="onError"
         @load="onLoad"
         >
-
+            <template #button="slotProps">
+                <v-btn ref="paymentBtnRef" @click="slotProps.submit" /> <!-- al click manda la props -->
+            </template>
         </v-braintree>
     </div>
 </template>

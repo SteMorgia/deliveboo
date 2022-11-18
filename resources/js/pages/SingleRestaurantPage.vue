@@ -79,10 +79,17 @@
 
                 <div v-if="tokenApi.length > 0">
                     <Payment
+                    ref="paymentRef"
                     :authorization="tokenApi"
                     @onSuccess="paymentOnSuccess"
                     >
                     </Payment>
+
+                    <button type="button" 
+                    class="btn btn-primary"
+                    @click.prevent="beforeBuy"
+                    >Primary
+                    </button>
                 </div>
 
             </div>
@@ -185,7 +192,10 @@ export default {
         },
         paymentOnSuccess (nonce) {
             this.form.token = nonce;
-            // this.funzioneBuy()
+            this.funzioneBuy()
+        },
+        beforeBuy () {
+            this.$refs.paymentRef.$refs.paymentBtnRef.click()
         },
         funzioneBuy() {
             this.form.cart = this.cart;
