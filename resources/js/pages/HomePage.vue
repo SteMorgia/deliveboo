@@ -33,6 +33,7 @@
 
                 <div class="col-9 m-auto">
                     <div v-if="restaurants.length > 0">
+                        <h1>Ecco i tuoi ristoranti</h1>
                         <div class="d-flex flex-wrap">
                             <div v-for="(restaurant, index) in restaurants" :key="'a' + index">      
                                 <div class="card m-2" style="width: 15rem;">
@@ -54,7 +55,7 @@
                     </div>
 
                     <div v-if="doRestaurantsExist == false && restaurants.length == 0">
-                        <h2 style="color: #f25f4c;">Non esiste nessun ristorante in questa categoria</h2>
+                        <h2 style="color: #f25f4c;">La ricerca non ha prodotto alcun risultato. <br> Per favore, seleziona un'altra categoria.</h2>
                     </div>
 
                 </div>

@@ -2046,40 +2046,63 @@ __webpack_require__.r(__webpack_exports__);
         }
       });
     },
-    addToCart: function addToCart(dishP) {
-      for (var i = 0; i < this.cart.length; i++) {
-        if (this.cart[i].id === dishP.id) {
-          this.cart[i].quantity++;
-          this.saveCartToLocalStorage();
-          return;
-        }
+    addToCart: function addToCart(dishP, restaurantP2) {
+      // console.log(localStorage);
+      var localRestaurantTemporary = localStorage.getItem('localRestaurant'); // recupero il ristorante dalla localStorage;
+      // console.log(localRestaurantTemporary);
+      if (localRestaurantTemporary == null) {
+        this.saveRestaurantToLocalStorage(restaurantP2);
+        localRestaurantTemporary = localStorage.getItem('localRestaurant');
       }
-      this.cart.push({
-        id: dishP.id,
-        name: dishP.name,
-        price: dishP.price,
-        quantity: 1
-      });
-      this.saveCartToLocalStorage();
+      var localRestaurantRecovered = JSON.parse(localRestaurantTemporary); // decodifico il ristorante salvato in localStorage;
+      // console.log(localRestaurantRecovered);
+
+      if (restaurantP2.id == localRestaurantRecovered.id) {
+        for (var i = 0; i < this.cart.length; i++) {
+          if (this.cart[i].id === dishP.id) {
+            this.cart[i].quantity++;
+            return;
+          }
+        }
+        this.cart.push({
+          id: dishP.id,
+          name: dishP.name,
+          price: dishP.price,
+          quantity: 1
+        });
+        this.saveCartToLocalStorage(restaurantP2);
+      } else {
+        alert('Attenzione! Al momento non è possibile aggiungere al carrello piatti di ristoranti diversi.');
+      }
     },
-    increaseCartItem: function increaseCartItem(dishP) {
+    increaseCartItem: function increaseCartItem(dishP, restaurantP) {
       dishP.quantity++;
-      this.saveCartToLocalStorage();
+      this.saveCartToLocalStorage(restaurantP);
     },
-    decreaseCartItem: function decreaseCartItem(dishP, indexP) {
+    decreaseCartItem: function decreaseCartItem(dishP, indexP, restaurantP) {
       if (dishP.quantity == 1) {
         this.removeCartItem(indexP);
       } else {
         dishP.quantity--;
-        this.saveCartToLocalStorage();
+        this.saveCartToLocalStorage(restaurantP);
       }
     },
-    removeCartItem: function removeCartItem(indexP) {
+    removeCartItem: function removeCartItem(indexP, restaurantP) {
       confirm('Confermi di voler cancellare questi piatti dall\'ordine?') ? this.$delete(this.cart, indexP) : '';
-      this.saveCartToLocalStorage();
+      if (this.cart.length == 0) {
+        localStorage.removeItem('localCart');
+        localStorage.removeItem('localRestaurant');
+      } else {
+        this.saveCartToLocalStorage(restaurantP);
+      }
+      // console.log(localStorage);
     },
-    saveCartToLocalStorage: function saveCartToLocalStorage() {
+    saveCartToLocalStorage: function saveCartToLocalStorage(restaurantP1) {
+      this.saveRestaurantToLocalStorage(restaurantP1);
       localStorage.setItem('localCart', JSON.stringify(this.cart)); // in localStorage devo salvare i dati come stringa;
+    },
+    saveRestaurantToLocalStorage: function saveRestaurantToLocalStorage(restaurantP) {
+      localStorage.setItem('localRestaurant', JSON.stringify(restaurantP)); // salvo ristorante in localStorage;
     }
   },
 
@@ -2403,7 +2426,7 @@ var render = function render() {
     }, [_vm._v("\n                        " + _vm._s(category.name) + "\n                    ")])]);
   })], 2), _vm._v(" "), _c("div", {
     staticClass: "col-9 m-auto"
-  }, [_vm.restaurants.length > 0 ? _c("div", [_c("div", {
+  }, [_vm.restaurants.length > 0 ? _c("div", [_c("h1", [_vm._v("Ecco i tuoi ristoranti")]), _vm._v(" "), _c("div", {
     staticClass: "d-flex flex-wrap"
   }, _vm._l(_vm.restaurants, function (restaurant, index) {
     return _c("div", {
@@ -2444,11 +2467,7 @@ var render = function render() {
         }
       }
     }, [_vm._v("\n                                            Vai al ristorante\n                                        ")])], 1)])])]);
-  }), 0)]) : _vm._e(), _vm._v(" "), _vm.doRestaurantsExist == false && _vm.restaurants.length == 0 ? _c("div", [_c("h2", {
-    staticStyle: {
-      color: "#f25f4c"
-    }
-  }, [_vm._v("Non esiste nessun ristorante in questa categoria")])]) : _vm._e()])])])]);
+  }), 0)]) : _vm._e(), _vm._v(" "), _vm.doRestaurantsExist == false && _vm.restaurants.length == 0 ? _c("div", [_vm._m(2)]) : _vm._e()])])])]);
 };
 var staticRenderFns = [function () {
   var _vm = this,
@@ -2470,6 +2489,14 @@ var staticRenderFns = [function () {
   }, [_vm._v("Scegli il tuo piatto")]), _vm._v(" "), _c("p", {
     staticClass: "lead text-white"
   }, [_vm._v("A casa tua con un click.")])]);
+}, function () {
+  var _vm = this,
+    _c = _vm._self._c;
+  return _c("h2", {
+    staticStyle: {
+      color: "#f25f4c"
+    }
+  }, [_vm._v("La ricerca non ha prodotto alcun risultato. "), _c("br"), _vm._v(" Per favore, seleziona un'altra categoria.")]);
 }];
 render._withStripped = true;
 
@@ -2523,19 +2550,15 @@ var render = function render() {
       staticClass: "btn btn-primary",
       on: {
         click: function click($event) {
-          return _vm.addToCart(dish);
+          return _vm.addToCart(dish, _vm.restaurant);
         }
       }
     }, [_vm._v("Aggiungi al carrello")])])]);
-  }), 0) : _vm._e(), _vm._v(" "), _vm.dishes.length == 0 && _vm.doDishesExists == false ? _c("div", [_c("h2", {
-    staticStyle: {
-      color: "#f25f4c"
-    }
-  }, [_vm._v("Non esiste nessun piatto in questo ristorante")])]) : _vm._e()]), _vm._v(" "), _vm.cart.length > 0 ? _c("div", {
+  }), 0) : _vm._e(), _vm._v(" "), _vm.dishes.length == 0 && _vm.doDishesExists == false ? _c("div", [_vm._m(0)]) : _vm._e()]), _vm._v(" "), _vm.cart.length > 0 ? _c("div", {
     "class": _vm.cart.length > 0 ? "col-6" : ""
   }, [_c("table", {
     staticClass: "table"
-  }, [_vm._m(0), _vm._v(" "), _c("tbody", _vm._l(_vm.cart, function (cartDish, index) {
+  }, [_vm._m(1), _vm._v(" "), _c("tbody", _vm._l(_vm.cart, function (cartDish, index) {
     return _c("tr", {
       key: index
     }, [_c("th", {
@@ -2546,21 +2569,21 @@ var render = function render() {
       staticClass: "btn btn-primary m-1",
       on: {
         click: function click($event) {
-          return _vm.increaseCartItem(cartDish);
+          return _vm.increaseCartItem(cartDish, _vm.restaurant);
         }
       }
     }, [_vm._v("+")]), _vm._v(" "), _c("button", {
       staticClass: "btn btn-secondary m-1",
       on: {
         click: function click($event) {
-          return _vm.decreaseCartItem(cartDish, index);
+          return _vm.decreaseCartItem(cartDish, index, _vm.restaurant);
         }
       }
     }, [_vm._v("-")]), _vm._v(" "), _c("button", {
       staticClass: "btn btn-danger m-1",
       on: {
         click: function click($event) {
-          return _vm.removeCartItem(index);
+          return _vm.removeCartItem(index, _vm.restaurant);
         }
       }
     }, [_vm._v("x")])])]);
@@ -2583,6 +2606,14 @@ var render = function render() {
   }, [_vm._v("Torna alla homepage")])], 1);
 };
 var staticRenderFns = [function () {
+  var _vm = this,
+    _c = _vm._self._c;
+  return _c("h2", {
+    staticStyle: {
+      color: "#f25f4c"
+    }
+  }, [_vm._v("Al momento questo ristorante non ha alcun piatto. "), _c("br"), _vm._v(" Per favore, scegline un altro.")]);
+}, function () {
   var _vm = this,
     _c = _vm._self._c;
   return _c("thead", [_c("tr", [_c("th", {
