@@ -22,14 +22,14 @@
                             <h5 class="card-title">{{dish.name}}</h5>
                             <p class="card-text">{{dish.description}}</p>
                             <p class="card-text">{{dish.price}} €</p>
-                            <button class="btn btn-primary" @click="addToCart(dish)">Aggiungi al carrello</button>
+                            <button class="btn btn-primary" @click="addToCart(dish, restaurant)">Aggiungi al carrello</button>
                         </div>
                     </div>
 
                 </div>
 
                 <div v-if="dishes.length == 0 && doDishesExists == false">
-                    <h2 style="color: #f25f4c;">Non esiste nessun piatto in questo ristorante</h2>
+                    <h2 style="color: #f25f4c;">Al momento questo ristorante non ha alcun piatto. <br> Per favore, scegline un altro.</h2>
                 </div>
 
             </div>
@@ -119,23 +119,38 @@ export default {
                 }
             });
         },
-        addToCart(dishP) {
-            for ( let i = 0; i < this.cart.length; i++ ) {
-                if ( this.cart[i].id === dishP.id ) {
-                    this.cart[i].quantity++;
-                    this.saveCartToLocalStorage();
-                    return
-                }
+        addToCart(dishP, restaurantP2) {
+
+            // console.log(localStorage);
+            let localRestaurantTemporary = localStorage.getItem('localRestaurant'); // recupero il ristorante dalla localStorage;
+            // console.log(localRestaurantTemporary);
+            if (localRestaurantTemporary == null) {
+                this.saveRestaurantToLocalStorage(restaurantP2);
+                localRestaurantTemporary = localStorage.getItem('localRestaurant');
             }
-            this.cart.push(
-                {
-                    id: dishP.id,
-                    name: dishP.name,
-                    price: dishP.price,
-                    quantity: 1
+            let localRestaurantRecovered = JSON.parse(localRestaurantTemporary); // decodifico il ristorante salvato in localStorage;
+            // console.log(localRestaurantRecovered);
+
+            if (restaurantP2.id == localRestaurantRecovered.id) {
+                for ( let i = 0; i < this.cart.length; i++ ) {
+                    if ( this.cart[i].id === dishP.id ) {
+                        this.cart[i].quantity++;
+                        return
+                    }
                 }
-            );
-            this.saveCartToLocalStorage();
+                this.cart.push(
+                    {
+                        id: dishP.id,
+                        name: dishP.name,
+                        price: dishP.price,
+                        quantity: 1
+                    }
+                );
+                this.saveCartToLocalStorage();
+            } else {
+                alert('Attenzione! Al momento non è possibile aggiungere al carrello piatti di ristoranti diversi.');
+            }
+            // console.log(localStorage.getItem('localRestaurant') + ' TEST TEST TEST'); // test id ristorante ad aggiunta piatto;
         },
         increaseCartItem(dishP) {
             dishP.quantity++;
@@ -151,10 +166,18 @@ export default {
         },
         removeCartItem(indexP) {
             confirm('Confermi di voler cancellare questi piatti dall\'ordine?') ? this.$delete(this.cart, indexP) : '';
-            this.saveCartToLocalStorage();
+            if (this.cart.length == 0) {
+                localStorage.removeItem('localCart');
+                localStorage.removeItem('localRestaurant');
+            } else {
+                this.saveCartToLocalStorage();
+            }
         },
         saveCartToLocalStorage() {
             localStorage.setItem( 'localCart', JSON.stringify(this.cart) ); // in localStorage devo salvare i dati come stringa;
+        },
+        saveRestaurantToLocalStorage(restaurantP) {
+            localStorage.setItem( 'localRestaurant', JSON.stringify(restaurantP) ); // salvo ristorante in localStorage;
         }
     },
     computed: {
@@ -177,6 +200,7 @@ export default {
         this.getSingleRestaurantF();
         let localCart = localStorage.getItem( 'localCart' ); // recupero carrello salvato in localStorage;
         this.cart = ( localCart != null ) ? JSON.parse( localCart ) : []; // se in localStorage ho un carrello con oggetti, converto il file json;
+        // console.log(localStorage);
     }
 }
 </script>
