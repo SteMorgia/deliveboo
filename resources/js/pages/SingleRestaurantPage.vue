@@ -200,7 +200,7 @@ export default {
         this.getSingleRestaurantF();
         let localCart = localStorage.getItem( 'localCart' ); // recupero carrello salvato in localStorage;
         this.cart = ( localCart != null ) ? JSON.parse( localCart ) : []; // se in localStorage ho un carrello con oggetti, converto il file json;
-        console.log(localStorage);
+        // console.log(localStorage);
     }
 }
 </script>

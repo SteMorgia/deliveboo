@@ -2128,7 +2128,7 @@ __webpack_require__.r(__webpack_exports__);
     this.getSingleRestaurantF();
     var localCart = localStorage.getItem('localCart'); // recupero carrello salvato in localStorage;
     this.cart = localCart != null ? JSON.parse(localCart) : []; // se in localStorage ho un carrello con oggetti, converto il file json;
-    console.log(localStorage);
+    // console.log(localStorage);
   }
 });
 
