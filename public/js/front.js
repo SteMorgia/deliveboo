@@ -1960,7 +1960,8 @@ __webpack_require__.r(__webpack_exports__);
       categories: [],
       restaurants: [],
       selectedCategories: [],
-      doRestaurantsExist: true
+      doRestaurantsExist: true,
+      switchMessage: true
     };
   },
   methods: {
@@ -1981,12 +1982,14 @@ __webpack_require__.r(__webpack_exports__);
       var _this3 = this;
       if (this.selectedCategories.length === 0) {
         this.getRandomRestaurantsF();
+        this.switchMessage = true;
       } else {
         axios
         // .get(`http://localhost:8000/api/restaurants?${this.selectedCategories.map((n)=>`category=${n}`).join('&')}`)
         .get('http://localhost:8000/api/restaurants?categories=' + this.selectedCategories).then(function (response) {
           _this3.restaurants = response.data.results;
           _this3.doRestaurantsExist = false;
+          _this3.switchMessage = false;
         });
       }
       ;
@@ -2104,6 +2107,19 @@ __webpack_require__.r(__webpack_exports__);
     saveRestaurantToLocalStorage: function saveRestaurantToLocalStorage(restaurantP) {
       localStorage.setItem('localRestaurant', JSON.stringify(restaurantP)); // salvo ristorante in localStorage;
     }
+    /*
+    getLocalRestaurant() {
+        let tempRest = localStorage.getItem('localRestaurant');
+        let tempRest2 = JSON.parse(tempRest);
+        if (localRestaurant !== undefined) {
+            this.localRestaurant = tempRest2;
+        }
+    }
+      getRestaurantLater() {
+        setTimeout(this.getLocalRestaurant(), 2000) {
+          }
+    }
+    */
   },
 
   computed: {
@@ -2126,6 +2142,7 @@ __webpack_require__.r(__webpack_exports__);
     this.getSingleRestaurantF();
     var localCart = localStorage.getItem('localCart'); // recupero carrello salvato in localStorage;
     this.cart = localCart != null ? JSON.parse(localCart) : []; // se in localStorage ho un carrello con oggetti, converto il file json;
+    // this.getRestaurantLater();
   }
 });
 
@@ -2426,7 +2443,7 @@ var render = function render() {
     }, [_vm._v("\n                        " + _vm._s(category.name) + "\n                    ")])]);
   })], 2), _vm._v(" "), _c("div", {
     staticClass: "col-9 m-auto"
-  }, [_vm.restaurants.length > 0 ? _c("div", [_c("h1", [_vm._v("Ecco i tuoi ristoranti")]), _vm._v(" "), _c("div", {
+  }, [_vm.restaurants.length > 0 ? _c("div", [_c("h1", [_vm._v(_vm._s(_vm.switchMessage ? "I migliori ristoranti:" : "I ristoranti delle categorie selezionate:"))]), _vm._v(" "), _c("div", {
     staticClass: "d-flex flex-wrap"
   }, _vm._l(_vm.restaurants, function (restaurant, index) {
     return _c("div", {

@@ -33,7 +33,7 @@
 
                 <div class="col-9 m-auto">
                     <div v-if="restaurants.length > 0">
-                        <h1>Ecco i tuoi ristoranti</h1>
+                        <h1>{{ switchMessage ? 'I migliori ristoranti:' : 'I ristoranti delle categorie selezionate:' }}</h1>
                         <div class="d-flex flex-wrap">
                             <div v-for="(restaurant, index) in restaurants" :key="'a' + index">      
                                 <div class="card m-2" style="width: 15rem;">
@@ -72,7 +72,8 @@
                 categories: [],
                 restaurants: [],
                 selectedCategories: [],
-                doRestaurantsExist: true
+                doRestaurantsExist: true,
+                switchMessage: true
             }
         },
         methods: {
@@ -94,6 +95,7 @@
             filterRestaurants() {
                 if (this.selectedCategories.length === 0) {
                     this.getRandomRestaurantsF();
+                    this.switchMessage = true;
                 } else {
                 axios
                 // .get(`http://localhost:8000/api/restaurants?${this.selectedCategories.map((n)=>`category=${n}`).join('&')}`)
@@ -101,6 +103,7 @@
                 .then( response => {
                     this.restaurants = response.data.results;
                     this.doRestaurantsExist = false;
+                    this.switchMessage = false;
                 })};
             },
             truncateText(text, maxLength) {

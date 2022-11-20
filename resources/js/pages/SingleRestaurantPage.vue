@@ -185,6 +185,22 @@ export default {
         saveRestaurantToLocalStorage(restaurantP) {
             localStorage.setItem( 'localRestaurant', JSON.stringify(restaurantP) ); // salvo ristorante in localStorage;
         }
+
+        /*
+        getLocalRestaurant() {
+            let tempRest = localStorage.getItem('localRestaurant');
+            let tempRest2 = JSON.parse(tempRest);
+            if (localRestaurant !== undefined) {
+                this.localRestaurant = tempRest2;
+            }
+        }
+
+        getRestaurantLater() {
+            setTimeout(this.getLocalRestaurant(), 2000) {
+
+            }
+        }
+        */
     },
     computed: {
         itemTotalAmount() {
@@ -206,6 +222,7 @@ export default {
         this.getSingleRestaurantF();
         let localCart = localStorage.getItem( 'localCart' ); // recupero carrello salvato in localStorage;
         this.cart = ( localCart != null ) ? JSON.parse( localCart ) : []; // se in localStorage ho un carrello con oggetti, converto il file json;
+        // this.getRestaurantLater();
     }
 }
 </script>
