@@ -55,9 +55,9 @@
                         <td>{{cartDish.price}} €</td>
                         <td>{{cartDish.quantity}}</td>
                         <td>
-                            <button @click="increaseCartItem(cartDish, restaurant)" class="btn btn-primary m-1">+</button>
-                            <button @click="decreaseCartItem(cartDish, index, restaurant)" class="btn btn-secondary m-1">-</button>
-                            <button @click="removeCartItem(index, restaurant)" class="btn btn-danger m-1" >x</button>
+                            <button @click="increaseCartItem(cartDish)" class="btn btn-primary m-1">+</button>
+                            <button @click="decreaseCartItem(cartDish, index)" class="btn btn-secondary m-1">-</button>
+                            <button @click="removeCartItem(index)" class="btn btn-danger m-1" >x</button>
                         </td>
                         </tr>
                     </tbody>
@@ -146,61 +146,39 @@ export default {
                         quantity: 1
                     }
                 );
-                this.saveCartToLocalStorage(restaurantP2);
+                this.saveCartToLocalStorage();
             } else {
                 alert('Attenzione! Al momento non è possibile aggiungere al carrello piatti di ristoranti diversi.');
             }
-
+            // console.log(localStorage.getItem('localRestaurant') + ' TEST TEST TEST'); // test id ristorante ad aggiunta piatto;
         },
-        increaseCartItem(dishP, restaurantP) {
+        increaseCartItem(dishP) {
             dishP.quantity++;
-            this.saveCartToLocalStorage(restaurantP);
+            this.saveCartToLocalStorage();
         },
-        decreaseCartItem(dishP, indexP, restaurantP) {
+        decreaseCartItem(dishP, indexP) {
             if ( dishP.quantity == 1 ) {
                 this.removeCartItem(indexP);
             } else {
                 dishP.quantity--;
-                this.saveCartToLocalStorage(restaurantP);
+                this.saveCartToLocalStorage();
             }
         },
-        removeCartItem(indexP, restaurantP) {
+        removeCartItem(indexP) {
             confirm('Confermi di voler cancellare questi piatti dall\'ordine?') ? this.$delete(this.cart, indexP) : '';
             if (this.cart.length == 0) {
                 localStorage.removeItem('localCart');
                 localStorage.removeItem('localRestaurant');
             } else {
-                this.saveCartToLocalStorage(restaurantP);
+                this.saveCartToLocalStorage();
             }
-            // console.log(localStorage);
         },
-
-
-        saveCartToLocalStorage(restaurantP1) {
-            this.saveRestaurantToLocalStorage(restaurantP1);
+        saveCartToLocalStorage() {
             localStorage.setItem( 'localCart', JSON.stringify(this.cart) ); // in localStorage devo salvare i dati come stringa;
         },
-
-
         saveRestaurantToLocalStorage(restaurantP) {
             localStorage.setItem( 'localRestaurant', JSON.stringify(restaurantP) ); // salvo ristorante in localStorage;
         }
-
-        /*
-        getLocalRestaurant() {
-            let tempRest = localStorage.getItem('localRestaurant');
-            let tempRest2 = JSON.parse(tempRest);
-            if (localRestaurant !== undefined) {
-                this.localRestaurant = tempRest2;
-            }
-        }
-
-        getRestaurantLater() {
-            setTimeout(this.getLocalRestaurant(), 2000) {
-
-            }
-        }
-        */
     },
     computed: {
         itemTotalAmount() {
@@ -222,7 +200,7 @@ export default {
         this.getSingleRestaurantF();
         let localCart = localStorage.getItem( 'localCart' ); // recupero carrello salvato in localStorage;
         this.cart = ( localCart != null ) ? JSON.parse( localCart ) : []; // se in localStorage ho un carrello con oggetti, converto il file json;
-        // this.getRestaurantLater();
+        console.log(localStorage);
     }
 }
 </script>
