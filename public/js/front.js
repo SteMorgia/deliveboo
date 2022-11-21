@@ -2726,6 +2726,7 @@ var render = function render() {
       staticClass: "card-text"
     }, [_vm._v(_vm._s(dish.price) + " €")]), _vm._v(" "), _c("button", {
       staticClass: "btn btn-primary",
+      "class": _vm.btnDisabled ? "disabled" : "",
       on: {
         click: function click($event) {
           return _vm.addToCart(dish);

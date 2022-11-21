@@ -22,7 +22,7 @@
                             <h5 class="card-title">{{dish.name}}</h5>
                             <p class="card-text">{{dish.description}}</p>
                             <p class="card-text">{{dish.price}} €</p>
-                            <button class="btn btn-primary" @click="addToCart(dish)">Aggiungi al carrello</button>
+                            <button class="btn btn-primary" :class="btnDisabled?'disabled':''" @click="addToCart(dish)">Aggiungi al carrello</button>
                         </div>
                     </div>
 
