@@ -96,30 +96,47 @@ class OrderController extends Controller
         return response()->json($data);
     }
 
-    public function makePayment(OrderRequest $request, Gateway $gateway) {
-        $dish = Dish::find($request->dish);
+    public function makePayment(OrderRequest $request, Gateway $gateway){
+
+        // $dish = Dish::find($request->dish);
 
         $result = $gateway->transaction()->sale([
-            'amount' => $dish->price,
+            'amount' => $request->amount,
             'paymentMethodNonce' => $request->token,
-            'options' => ['submitForSettlement' => true]
+            'options' => [
+                'submitForSettlement' => true
+            ]
         ]);
 
-        if($result->success) {
-            $data = [
-                'success' => true,
-                'message' => 'Transazione eseguita.'
-            ];
+        // \Log::info($request->amount);
 
-            return response()->json($data);
+            if($result->success){
 
-        } else {
-            $data = [
-                'success' => false,
-                'message' => 'Transazione fallita.'
-            ];
+                $data = [
+                
+                    'success' => true,
+            
+                    'message' => ' Transazione eseguita'
+                
+                ];
+                
+                return response()->json($data, 200);               
+            
+            }else{
+            
+                $data = [
+                
+                    'success' => false,
+            
+                    'message' => 'Transazione fallita'
+                
+                ];
+                
+                return response()->json($data, 401);
+            
+            }
 
-            return response()->json($data);
-        }
-    }
+            
+
+	}
 }

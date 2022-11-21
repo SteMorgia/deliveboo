@@ -3,7 +3,7 @@ window.axios = require('axios');
 //require('./bootstrap');
 
 import Vue from 'vue';
-import vueBraintree from './braintree.js';
+import vueBraintree from 'vue-braintree'
 import App from './views/App';
 
 import router from './router.js';
@@ -13,3 +13,5 @@ const app = new Vue({
     render: h => h(App),
     router
 });
+
+Vue.use(vueBraintree)

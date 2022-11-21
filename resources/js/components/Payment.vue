@@ -8,7 +8,7 @@
         @load="onLoad"
         >
             <template #button="slotProps">
-                <v-btn ref="paymentBtnRef" @click="slotProps.submit" /> <!-- al click manda la props -->
+                <button ref="paymentBtnRef" @click="slotProps.submit" style="display:none"></button> <!-- al click manda la props -->
             </template>
         </v-braintree>
     </div>
@@ -25,6 +25,8 @@ export default {
             required: true,
             type: String
         }
+        // formData: Object,
+        // cart: Array
     },
     data () {
         return {

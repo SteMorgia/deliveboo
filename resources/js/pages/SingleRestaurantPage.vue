@@ -82,13 +82,15 @@
                     ref="paymentRef"
                     :authorization="tokenApi"
                     @onSuccess="paymentOnSuccess"
+                    @onError="paymentOnError"
                     >
                     </Payment>
 
                     <button type="button" 
                     class="btn btn-primary"
                     @click.prevent="beforeBuy"
-                    >Primary
+                    >
+                    Procedi al pagamento
                     </button>
                 </div>
 
@@ -119,7 +121,7 @@ export default {
             tokenApi: '',
             form: {
                 token: '',
-                cart: this.cart
+                amount: null
             }
         }
     },
@@ -192,19 +194,27 @@ export default {
         },
         paymentOnSuccess (nonce) {
             this.form.token = nonce;
-            this.funzioneBuy()
+            this.funzioneBuy();
+        },
+        paymentOnError (error) {
+            // Codice..
         },
         beforeBuy () {
-            this.$refs.paymentRef.$refs.paymentBtnRef.click()
+            this.$refs.paymentRef.$refs.paymentBtnRef.click();        
         },
-        funzioneBuy() {
-            this.form.cart = this.cart;
-            axios
-            .post('/api/orders/make/payment', { ...this.form })
-            .then( response => {
-                console.log(response.data);
-            })
-        },
+        async funzioneBuy() {
+            try {                
+                await axios
+                .post('/api/orders/make/payment?' + 'amount=' + this.form.amount + '&' + 'token=' + this.form.token)      
+                .then( response => {
+                    console.log(response);
+                    // console.log(this.form.amount)
+                    window.location.href = "/redirect";
+                })
+            } catch(err) {
+                console.log(err);
+            } 
+        }
     },
     computed: {
         itemTotalAmount() {
@@ -215,11 +225,11 @@ export default {
             return itemTotal;
         },
         cartTotalAmount() {
-            let total = 0;
+            this.form.amount = 0;
             for ( let item in this.cart ) {
-                total += ( this.cart[item].quantity * this.cart[item].price );
+                this.form.amount += ( this.cart[item].quantity * this.cart[item].price );
             }
-            return total;
+            return this.form.amount;
         }
     },
     
