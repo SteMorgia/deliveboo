@@ -2095,6 +2095,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       dishes: [],
       doDishesExists: true,
       cart: [],
+      btnDisabled: false,
       tokenApi: '',
       form: {
         token: '',
@@ -2181,26 +2182,28 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                _context.prev = 0;
-                _context.next = 3;
+                _this4.btnDisabled = true;
+                _context.prev = 1;
+                _context.next = 4;
                 return axios.post('/api/orders/make/payment?' + 'amount=' + _this4.form.amount + '&' + 'token=' + _this4.form.token).then(function (response) {
                   console.log(response);
                   // console.log(this.form.amount)
                   window.location.href = "/redirect";
                 });
-              case 3:
-                _context.next = 8;
+              case 4:
+                _context.next = 10;
                 break;
-              case 5:
-                _context.prev = 5;
-                _context.t0 = _context["catch"](0);
+              case 6:
+                _context.prev = 6;
+                _context.t0 = _context["catch"](1);
                 console.log(_context.t0);
-              case 8:
+                _this4.btnDisabled = false;
+              case 10:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[0, 5]]);
+        }, _callee, null, [[1, 6]]);
       }))();
     }
   },
@@ -2659,7 +2662,7 @@ var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c("div", {
-    staticClass: "container-fluid my-container"
+    staticClass: "container-fluid my-container text-center mt-5"
   }, [_c("h1", [_vm._v("Grazie dell'acquisto!")]), _vm._v(" "), _c("router-link", {
     staticClass: "btn mt-3",
     staticStyle: {
@@ -2783,6 +2786,7 @@ var render = function render() {
     }
   }), _vm._v(" "), _c("button", {
     staticClass: "btn btn-primary",
+    "class": _vm.btnDisabled ? "disabled" : "",
     attrs: {
       type: "button"
     },
@@ -2792,7 +2796,7 @@ var render = function render() {
         return _vm.beforeBuy.apply(null, arguments);
       }
     }
-  }, [_vm._v("\n                Procedi al pagamento\n                ")])], 1) : _vm._e()]) : _vm._e()]), _vm._v(" "), _c("router-link", {
+  }, [_vm._v("\n                    Procedi al pagamento\n                ")])], 1) : _vm._e()]) : _vm._e()]), _vm._v(" "), _c("router-link", {
     staticClass: "btn mt-3",
     staticStyle: {
       "background-color": "#ff8906"

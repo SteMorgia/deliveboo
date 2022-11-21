@@ -1,5 +1,5 @@
 <template>
-  <div class="container-fluid my-container">
+  <div class="container-fluid my-container text-center mt-5">
     <h1>Grazie dell'acquisto!</h1>
     <router-link :to="{name: 'homepage'}" class="btn mt-3" style="background-color:#ff8906;" >Torna alla homepage</router-link>
   </div>
@@ -8,7 +8,6 @@
 <script>
 export default {
   name: 'Redirect'
-
 }
 </script>
 

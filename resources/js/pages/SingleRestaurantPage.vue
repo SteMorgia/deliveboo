@@ -88,9 +88,10 @@
 
                     <button type="button" 
                     class="btn btn-primary"
+                    :class="btnDisabled?'disabled':''"
                     @click.prevent="beforeBuy"
                     >
-                    Procedi al pagamento
+                        Procedi al pagamento
                     </button>
                 </div>
 
@@ -118,6 +119,7 @@ export default {
             dishes: [],
             doDishesExists: true,
             cart: [],
+            btnDisabled: false,
             tokenApi: '',
             form: {
                 token: '',
@@ -203,6 +205,7 @@ export default {
             this.$refs.paymentRef.$refs.paymentBtnRef.click();        
         },
         async funzioneBuy() {
+            this.btnDisabled = true;
             try {                
                 await axios
                 .post('/api/orders/make/payment?' + 'amount=' + this.form.amount + '&' + 'token=' + this.form.token)      
@@ -213,6 +216,7 @@ export default {
                 })
             } catch(err) {
                 console.log(err);
+                this.btnDisabled = false;
             } 
         }
     },
