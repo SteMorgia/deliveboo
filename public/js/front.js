@@ -2049,21 +2049,22 @@ __webpack_require__.r(__webpack_exports__);
         }
       });
     },
-    addToCart: function addToCart(dishP, restaurantP2) {
+    addToCart: function addToCart(dishP, restaurantP) {
       // console.log(localStorage);
       var localRestaurantTemporary = localStorage.getItem('localRestaurant'); // recupero il ristorante dalla localStorage;
       // console.log(localRestaurantTemporary);
       if (localRestaurantTemporary == null) {
-        this.saveRestaurantToLocalStorage(restaurantP2);
+        this.saveRestaurantToLocalStorage(restaurantP);
         localRestaurantTemporary = localStorage.getItem('localRestaurant');
       }
       var localRestaurantRecovered = JSON.parse(localRestaurantTemporary); // decodifico il ristorante salvato in localStorage;
       // console.log(localRestaurantRecovered);
 
-      if (restaurantP2.id == localRestaurantRecovered.id) {
+      if (restaurantP.id == localRestaurantRecovered.id) {
         for (var i = 0; i < this.cart.length; i++) {
           if (this.cart[i].id === dishP.id) {
             this.cart[i].quantity++;
+            this.saveCartToLocalStorage();
             return;
           }
         }

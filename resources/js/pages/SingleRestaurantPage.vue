@@ -119,22 +119,23 @@ export default {
                 }
             });
         },
-        addToCart(dishP, restaurantP2) {
+        addToCart(dishP, restaurantP) {
 
             // console.log(localStorage);
             let localRestaurantTemporary = localStorage.getItem('localRestaurant'); // recupero il ristorante dalla localStorage;
             // console.log(localRestaurantTemporary);
             if (localRestaurantTemporary == null) {
-                this.saveRestaurantToLocalStorage(restaurantP2);
+                this.saveRestaurantToLocalStorage(restaurantP);
                 localRestaurantTemporary = localStorage.getItem('localRestaurant');
             }
             let localRestaurantRecovered = JSON.parse(localRestaurantTemporary); // decodifico il ristorante salvato in localStorage;
             // console.log(localRestaurantRecovered);
 
-            if (restaurantP2.id == localRestaurantRecovered.id) {
+            if (restaurantP.id == localRestaurantRecovered.id) {
                 for ( let i = 0; i < this.cart.length; i++ ) {
                     if ( this.cart[i].id === dishP.id ) {
                         this.cart[i].quantity++;
+                        this.saveCartToLocalStorage();
                         return
                     }
                 }
