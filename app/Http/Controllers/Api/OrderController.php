@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Dish;
+
+use App\Order;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Orders\OrderRequest;
 use Braintree\Gateway;
@@ -98,8 +99,6 @@ class OrderController extends Controller
 
     public function makePayment(OrderRequest $request, Gateway $gateway) {
 
-        // $dish = Dish::find($request->dish);
-
         $result = $gateway->transaction()->sale([
 
             'amount' => $request->amount,
@@ -110,33 +109,85 @@ class OrderController extends Controller
 
         ]);
 
+        if ( $result->success ) {
 
-            if ( $result->success ) {
+            $data = [
+                'success' => true,
+                'message' => 'Transazione eseguita'
+            ];
 
-                $data = [
-                    'success' => true,
-                    'message' => ' Transazione eseguita'
-                ];
+            $this->newOrder($request, $result);
 
-                
-                return response()->json($data, 200);
+            return response()->json($request);
             
-            } else {
+        } else {
             
-                $data = [
-                    'success' => false,
-                    'message' => 'Transazione fallita'
-                ];
-                
-                return response()->json($data, 401);
+            $data = [
+                'success' => false,
+                'message' => 'Transazione fallita'
+            ];
+            
+            return response()->json($data, 401);
         
-            }
-
-            // $this->newOrder($request);
-            // $resulta->success per gestire la colonna payment_approved nel database;
+        }
 	}
 
-    public function newOrder(Request $request) {
-        // validazione + creazione nuovo ordine + quantità in tabella pivot;
+    public function newOrder(OrderRequest $request, $result) {
+
+        $request->validate(
+            [
+                'name' => 'required|string|max:30|min:3',
+                'address' => 'required|string|max:255|min:6',
+                'phone_number' => 'required|string|max:30|min:6',
+                'amount' => 'required|digits_between:0,9999.99',
+                'cart' => 'required|array'
+            ],
+            [
+                'name.required' => 'Inserisci nome e cognome',
+                'name.max' => 'Inserisci massimo 30 lettere',
+                'name.min' => 'Inserisci almeno 3 lettere',
+                'address.required' => 'Inserisci un indirizzo',
+                'address.max' => 'L\' indirizzo deve avere massimo 255 caratteri',
+                'address.min' => 'L\'indirizzo deve avere almeno 6 caratteri',
+                'phone_number.required' => 'Inserire il numero di telefono',
+                'phone_number.max' => 'Il numero di telefono deve avere massimo 30 numeri',
+                'phone_number.min' => 'Il numero di telefono deve avere almeno 6 numeri',
+                'cart.required' => 'Aggiungi piatti a carrello',
+            ]
+        );
+
+        $newOrder = new Order();
+        $newOrder->name = $request->name;
+        $newOrder->address = $request->address;
+        $newOrder->phone_number = $request->phone_number;
+        $newOrder->total_price = $request->amount;
+
+        if ( $result->success == true ) {
+            $newOrder->payment_approved	= true;
+        };
+
+        $newOrder->save();
+
+        // inizio tabella pivot
+        $dishesIdArray = []; //1,2,3
+        $dishesQuantityArray = []; //20,40,60
+        foreach ( $request->cart as $cartDish ) {
+            $dishesIdArray[] = $cartDish['id'];
+            $dishesQuantityArray[] = $cartDish['quantity'];
+        };
+
+        $syncDishIdQuantity = [];
+        for ( $k = 0; $k < count($dishesIdArray); $k++ ) {
+            $syncDishIdQuantity[ $dishesIdArray[$k] ] = [ 'quantity' => $dishesQuantityArray[$k] ];
+        };
+
+        $newOrder->dishes()->sync($syncDishIdQuantity);
+        // fine tabella pivot
+
+        if ( $newOrder ) {
+            return 'Nuovo ordine salvato';
+        } else {
+            return 'Nuovo ordine NON salvato';
+        }
     }
 }

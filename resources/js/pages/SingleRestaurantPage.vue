@@ -110,7 +110,7 @@
                 <!-- inizio form pagamento -->
                 <div v-if="tokenApi.length > 0">
 
-                    <h1 class="mt-3">Effettua il pagamento dopo aver compilato il form:</h1>
+                    <h1 class="mt-3">Effettua il pagamento:</h1>
 
                     <Payment
                         ref="paymentRef"
@@ -123,8 +123,8 @@
                         :class=" btnDisabled ? 'disabled' : '' "
                         @click.prevent="beforeBuy"
                         style="background-color:#f25f4c;"
-                        :disabled="( this.nameF.length === 0 || this.addressF == '' || this.phone_numberF == '' ) ? true : false">
-                        Procedi al pagamento
+                        :disabled="( nameF.length == 0 || addressF.length == 0 || phone_numberF.length == 0 ) ? true : false">
+                            {{ ( nameF.length == 0 || addressF.length == 0 || phone_numberF.length == 0 ) ? 'Compila il form per poter effettuare il pagamento' : 'Effettua il pagamento'}}
                     </button>
 
                 </div>
@@ -156,16 +156,19 @@ export default {
             cart: [],
             btnDisabled: false,
             tokenApi: '',
+            token2: '',
+            amount2: '',
             nameF: '',
             addressF: '',
             phone_numberF: '',
+            areInputsCompiled: false,
             form: {
-                token: '',
-                amount: '',
-                name: this.nameF,
-                address: this.addressF,
-                phone_number: this.phone_numberF,
-                cart: this.cart
+                token: null,
+                amount: null,
+                name: null,
+                address: null,
+                phone_number: null,
+                cart: null
             }
         }
     },
@@ -255,7 +258,7 @@ export default {
             });
         },
         paymentOnSuccess(nonce) {
-            this.form.token = nonce;
+            this.token2 = nonce;
             this.buy();
         },
         paymentOnError (error) {
@@ -269,7 +272,16 @@ export default {
             if ( this.nameF == '' || this.addressF == '' || this.phone_numberF == '' ) {
                 alert('Compila il form prima di effettuare l\'ordine');
                 return;
-            }
+            };
+
+            this.form = {
+                token: this.token2,
+                amount: this.amount2,
+                name: this.nameF,
+                address: this.addressF,
+                phone_number: this.phone_numberF,
+                cart: this.cart
+            };
 
             this.btnDisabled = true;
             axios
@@ -302,11 +314,11 @@ export default {
             return itemTotal;
         },
         cartTotalAmount() {
-            this.form.amount = 0;
+            this.amount2 = 0;
             for ( let item in this.cart ) {
-                this.form.amount += ( this.cart[item].quantity * this.cart[item].price );
+                this.amount2 += ( this.cart[item].quantity * this.cart[item].price );
             }
-            return this.form.amount;
+            return this.amount2;
         }
     },
     mounted() {

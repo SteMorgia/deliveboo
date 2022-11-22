@@ -2103,16 +2103,19 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       cart: [],
       btnDisabled: false,
       tokenApi: '',
+      token2: '',
+      amount2: '',
       nameF: '',
       addressF: '',
       phone_numberF: '',
+      areInputsCompiled: false,
       form: {
-        token: '',
-        amount: '',
-        name: this.nameF,
-        address: this.addressF,
-        phone_number: this.phone_numberF,
-        cart: this.cart
+        token: null,
+        amount: null,
+        name: null,
+        address: null,
+        phone_number: null,
+        cart: null
       }
     };
   },
@@ -2197,7 +2200,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       });
     },
     paymentOnSuccess: function paymentOnSuccess(nonce) {
-      this.form.token = nonce;
+      this.token2 = nonce;
       this.buy();
     },
     paymentOnError: function paymentOnError(error) {
@@ -2214,6 +2217,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         alert('Compila il form prima di effettuare l\'ordine');
         return;
       }
+      ;
+      this.form = {
+        token: this.token2,
+        amount: this.amount2,
+        name: this.nameF,
+        address: this.addressF,
+        phone_number: this.phone_numberF,
+        cart: this.cart
+      };
       this.btnDisabled = true;
       axios.post('/api/orders/make/payment', _objectSpread({}, this.form)).then(function (response) {
         if (response.data.success == true) {
@@ -2240,11 +2252,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       return itemTotal;
     },
     cartTotalAmount: function cartTotalAmount() {
-      this.form.amount = 0;
+      this.amount2 = 0;
       for (var item in this.cart) {
-        this.form.amount += this.cart[item].quantity * this.cart[item].price;
+        this.amount2 += this.cart[item].quantity * this.cart[item].price;
       }
-      return this.form.amount;
+      return this.amount2;
     }
   },
   mounted: function mounted() {
@@ -2909,7 +2921,7 @@ var render = function render() {
     }
   }), _vm._v(" "), _vm.tokenApi.length > 0 ? _c("div", [_c("h1", {
     staticClass: "mt-3"
-  }, [_vm._v("Effettua il pagamento dopo aver compilato il form:")]), _vm._v(" "), _c("Payment", {
+  }, [_vm._v("Effettua il pagamento:")]), _vm._v(" "), _c("Payment", {
     ref: "paymentRef",
     attrs: {
       authorization: _vm.tokenApi
@@ -2926,7 +2938,7 @@ var render = function render() {
     },
     attrs: {
       type: "button",
-      disabled: this.nameF.length === 0 || this.addressF == "" || this.phone_numberF == "" ? true : false
+      disabled: _vm.nameF.length == 0 || _vm.addressF.length == 0 || _vm.phone_numberF.length == 0 ? true : false
     },
     on: {
       click: function click($event) {
@@ -2934,7 +2946,7 @@ var render = function render() {
         return _vm.beforeBuy.apply(null, arguments);
       }
     }
-  }, [_vm._v("\n                    Procedi al pagamento\n                ")])], 1) : _vm._e()]) : _vm._e()]), _vm._v(" "), _c("router-link", {
+  }, [_vm._v("\n                        " + _vm._s(_vm.nameF.length == 0 || _vm.addressF.length == 0 || _vm.phone_numberF.length == 0 ? "Compila il form per poter effettuare il pagamento" : "Effettua il pagamento") + "\n                ")])], 1) : _vm._e()]) : _vm._e()]), _vm._v(" "), _c("router-link", {
     staticClass: "btn mt-3",
     staticStyle: {
       "background-color": "#ff8906"
