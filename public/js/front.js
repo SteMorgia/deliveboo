@@ -2065,8 +2065,13 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _components_MyFooter_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/MyFooter.vue */ "./resources/js/components/MyFooter.vue");
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'Redirect'
+  name: 'Redirect',
+  components: {
+    MyFooter: _components_MyFooter_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+  }
 });
 
 /***/ }),
@@ -2098,13 +2103,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       cart: [],
       btnDisabled: false,
       tokenApi: '',
+      nameF: '',
+      addressF: '',
+      phone_numberF: '',
       form: {
         token: '',
-        amount: ''
-        // this.cart: ???
-      },
-
-      message: ''
+        amount: '',
+        name: this.nameF,
+        address: this.addressF,
+        phone_number: this.phone_numberF,
+        cart: this.cart
+      }
     };
   },
   methods: {
@@ -2156,7 +2165,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       } else {
         alert('Attenzione! Al momento non è possibile aggiungere al carrello piatti di ristoranti diversi.');
       }
-      // console.log(localStorage.getItem('localRestaurant') + ' TEST TEST TEST'); // test id ristorante ad aggiunta piatto;
     },
     increaseCartItem: function increaseCartItem(dishP) {
       dishP.quantity++;
@@ -2201,6 +2209,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     buy: function buy() {
       var _this4 = this;
       // vado nella makePayment();
+
+      if (this.nameF == '' || this.addressF == '' || this.phone_numberF == '') {
+        alert('Compila il form prima di effettuare l\'ordine');
+        return;
+      }
       this.btnDisabled = true;
       axios.post('/api/orders/make/payment', _objectSpread({}, this.form)).then(function (response) {
         if (response.data.success == true) {
@@ -2208,8 +2221,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           localStorage.removeItem('localCart');
           localStorage.removeItem('localRestaurant');
           window.location.href = "/redirect";
-        } else {
-          _this4.message = response.data.message;
         }
         // invio dati al backend;
         _this4.btnDisabled = false;
@@ -2687,7 +2698,7 @@ var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c("div", {
-    staticClass: "container-fluid my-container text-center mt-5"
+    staticClass: "container-fluid my-container text-center"
   }, [_c("h1", [_vm._v("Grazie dell'acquisto!")]), _vm._v(" "), _c("router-link", {
     staticClass: "btn mt-3",
     staticStyle: {
@@ -2698,7 +2709,7 @@ var render = function render() {
         name: "homepage"
       }
     }
-  }, [_vm._v("Torna alla homepage")])], 1);
+  }, [_vm._v("Torna alla homepage")]), _vm._v(" "), _c("MyFooter")], 1);
 };
 var staticRenderFns = [];
 render._withStripped = true;
@@ -2813,7 +2824,92 @@ var render = function render() {
     staticClass: "text-right"
   }, [_vm._v("Totale articoli nel carrello: " + _vm._s(_vm.itemTotalAmount))])]), _vm._v(" "), _c("tr", [_c("th", {
     staticClass: "text-right"
-  }, [_vm._v("Totale ordine: € " + _vm._s(_vm.cartTotalAmount))])])])]), _vm._v(" "), _vm.tokenApi.length > 0 ? _c("div", [_c("Payment", {
+  }, [_vm._v("Totale ordine: € " + _vm._s(_vm.cartTotalAmount))])])])]), _vm._v(" "), _c("h1", {
+    staticClass: "mt-3"
+  }, [_vm._v("Compila il form:")]), _vm._v(" "), _c("label", {
+    attrs: {
+      "for": "nameId"
+    }
+  }, [_vm._v("Nome e cognome")]), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.nameF,
+      expression: "nameF"
+    }],
+    staticClass: "d-block mb-3",
+    attrs: {
+      type: "text",
+      id: "nameId",
+      placeholder: "Inserisci il tuo nome e il tuo cognome",
+      required: ""
+    },
+    domProps: {
+      value: _vm.nameF
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.nameF = $event.target.value;
+      }
+    }
+  }), _vm._v(" "), _c("label", {
+    attrs: {
+      "for": "addressId"
+    }
+  }, [_vm._v("Indirizzo")]), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.addressF,
+      expression: "addressF"
+    }],
+    staticClass: "d-block mb-3",
+    attrs: {
+      type: "text",
+      id: "addressId",
+      placeholder: "Inserisci il tuo indirizzo",
+      required: ""
+    },
+    domProps: {
+      value: _vm.addressF
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.addressF = $event.target.value;
+      }
+    }
+  }), _vm._v(" "), _c("label", {
+    attrs: {
+      "for": "phoneId"
+    }
+  }, [_vm._v("Numero di telefono")]), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.phone_numberF,
+      expression: "phone_numberF"
+    }],
+    staticClass: "d-block mb-3",
+    attrs: {
+      type: "tel",
+      id: "phoneId",
+      placeholder: "Inserisci il tuo numero di telefono",
+      required: ""
+    },
+    domProps: {
+      value: _vm.phone_numberF
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.phone_numberF = $event.target.value;
+      }
+    }
+  }), _vm._v(" "), _vm.tokenApi.length > 0 ? _c("div", [_c("h1", {
+    staticClass: "mt-3"
+  }, [_vm._v("Effettua il pagamento dopo aver compilato il form:")]), _vm._v(" "), _c("Payment", {
     ref: "paymentRef",
     attrs: {
       authorization: _vm.tokenApi
@@ -2829,7 +2925,8 @@ var render = function render() {
       "background-color": "#f25f4c"
     },
     attrs: {
-      type: "button"
+      type: "button",
+      disabled: this.nameF.length === 0 || this.addressF == "" || this.phone_numberF == "" ? true : false
     },
     on: {
       click: function click($event) {
@@ -2837,7 +2934,7 @@ var render = function render() {
         return _vm.beforeBuy.apply(null, arguments);
       }
     }
-  }, [_vm._v("\n                    Procedi al pagamento\n                ")])], 1) : _vm._e(), _vm._v(" "), _c("h1", [_vm._v("\n                " + _vm._s(_vm.message) + "\n            ")])]) : _vm._e()]), _vm._v(" "), _c("router-link", {
+  }, [_vm._v("\n                    Procedi al pagamento\n                ")])], 1) : _vm._e()]) : _vm._e()]), _vm._v(" "), _c("router-link", {
     staticClass: "btn mt-3",
     staticStyle: {
       "background-color": "#ff8906"

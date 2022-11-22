@@ -21,3 +21,4 @@ Route::get('filterRestaurants/{slug}', 'Api\RestaurantController@show'); // filt
 Route::get('filterDishes/{id}', 'Api\RestaurantController@filterDishes'); // filtraggio piatti per singolo ristorante singlePageRestaurant;
 Route::get('orders/generate', 'Api\OrderController@generate');
 Route::post('orders/make/payment', 'Api\OrderController@makePayment');
+Route::post('orders/new-order', 'Api\OrderController@newOrder');

@@ -29,8 +29,12 @@ class OrderRequest extends FormRequest
         return [
 			
 			'token' => 'required',
-            'amount' => 'required'
-
+            'amount' => 'required',
+            'name' => 'required',
+            'address' => 'required',
+            'phone_number' => 'required',
+            'cart' => 'required'
+            
 		];
     }
 }

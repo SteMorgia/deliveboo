@@ -5,8 +5,7 @@
         locale="it_IT"
         @success="onSuccess"
         @error="onError"
-        @load="onLoad"
-        >
+        @load="onLoad">
             <template #button="slotProps">
                 <button ref="paymentBtnRef" @click="slotProps.submit" style="display:none"></button> <!-- al click manda la props -->
             </template>

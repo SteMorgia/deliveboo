@@ -96,7 +96,7 @@ class OrderController extends Controller
         return response()->json($data);
     }
 
-    public function makePayment(OrderRequest $request, Gateway $gateway){
+    public function makePayment(OrderRequest $request, Gateway $gateway) {
 
         // $dish = Dish::find($request->dish);
 
@@ -110,31 +110,33 @@ class OrderController extends Controller
 
         ]);
 
-        // \Log::info($request->amount);
 
             if ( $result->success ) {
 
                 $data = [
-                
                     'success' => true,
                     'message' => ' Transazione eseguita'
-                
                 ];
+
                 
                 return response()->json($data, 200);
             
             } else {
             
                 $data = [
-                
                     'success' => false,
                     'message' => 'Transazione fallita'
-                
                 ];
                 
                 return response()->json($data, 401);
-            
+        
             }
 
+            // $this->newOrder($request);
+            // $resulta->success per gestire la colonna payment_approved nel database;
 	}
+
+    public function newOrder(Request $request) {
+        // validazione + creazione nuovo ordine + quantità in tabella pivot;
+    }
 }

@@ -79,8 +79,38 @@
                 </table>
                 <!-- fine riepilogo -->
 
+                <!-- inizio form input -->
+                <h1 class="mt-3">Compila il form:</h1>
+
+                <label for="nameId">Nome e cognome</label>
+                <input type="text"
+                    id="nameId"
+                    v-model="nameF"
+                    class="d-block mb-3"
+                    placeholder="Inserisci il tuo nome e il tuo cognome"
+                    required />
+
+                <label for="addressId">Indirizzo</label>
+                <input type="text"
+                    id="addressId"
+                    v-model="addressF"
+                    class="d-block mb-3"
+                    placeholder="Inserisci il tuo indirizzo"
+                    required />
+
+                <label for="phoneId">Numero di telefono</label>
+                <input type="tel"
+                    id="phoneId"
+                    v-model="phone_numberF"
+                    class="d-block mb-3"
+                    placeholder="Inserisci il tuo numero di telefono"
+                    required />
+                <!-- fine form input -->
+
                 <!-- inizio form pagamento -->
                 <div v-if="tokenApi.length > 0">
+
+                    <h1 class="mt-3">Effettua il pagamento dopo aver compilato il form:</h1>
 
                     <Payment
                         ref="paymentRef"
@@ -92,22 +122,19 @@
                         class="btn text-white"
                         :class=" btnDisabled ? 'disabled' : '' "
                         @click.prevent="beforeBuy"
-                        style="background-color:#f25f4c;">
+                        style="background-color:#f25f4c;"
+                        :disabled="( this.nameF.length === 0 || this.addressF == '' || this.phone_numberF == '' ) ? true : false">
                         Procedi al pagamento
                     </button>
 
                 </div>
                 <!-- fine form pagamento -->
 
-                <h1>
-                    {{ message }}
-                </h1>
-
             </div>
             <!-- fine contenitore carrello + pagamento -->
 
         </div>
-
+    
         <router-link :to="{name: 'homepage'}" class="btn mt-3" style="background-color:#ff8906;" >Torna alla homepage</router-link>
 
     </div>
@@ -129,12 +156,17 @@ export default {
             cart: [],
             btnDisabled: false,
             tokenApi: '',
+            nameF: '',
+            addressF: '',
+            phone_numberF: '',
             form: {
                 token: '',
                 amount: '',
-                // this.cart: ???
-            },
-            message: ''
+                name: this.nameF,
+                address: this.addressF,
+                phone_number: this.phone_numberF,
+                cart: this.cart
+            }
         }
     },
     methods: {
@@ -190,7 +222,6 @@ export default {
             } else {
                 alert('Attenzione! Al momento non è possibile aggiungere al carrello piatti di ristoranti diversi.');
             }
-            // console.log(localStorage.getItem('localRestaurant') + ' TEST TEST TEST'); // test id ristorante ad aggiunta piatto;
         },
         increaseCartItem(dishP) {
             dishP.quantity++;
@@ -234,18 +265,24 @@ export default {
             this.$refs.paymentRef.$refs.paymentBtnRef.click();
         },
         buy() { // vado nella makePayment();
+
+            if ( this.nameF == '' || this.addressF == '' || this.phone_numberF == '' ) {
+                alert('Compila il form prima di effettuare l\'ordine');
+                return;
+            }
+
             this.btnDisabled = true;
             axios
             .post( '/api/orders/make/payment', { ...this.form } )
             .then( response => {
                 
                 if ( response.data.success == true ) {
+
                     this.cart = [];
                     localStorage.removeItem( 'localCart' );
                     localStorage.removeItem( 'localRestaurant' );
                     window.location.href = "/redirect";
-                } else {
-                    this.message = response.data.message;
+
                 }
                 // invio dati al backend;
                 this.btnDisabled = false;
