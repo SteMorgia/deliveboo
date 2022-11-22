@@ -78,7 +78,12 @@
                 <!-- fine riepilogo -->
 
                 <!-- inizio pagamento -->
-                <MyPayment v-if="tokenApi.length > 0" :authorizationP="tokenApi" />
+                <MyPayment v-if="tokenApi.length > 0"
+                    :authorizationP="tokenApi"
+                    @loading='handleLoading'
+                    @secondToken='paymentOnSuccess'
+                    @onError='paymentOnError'
+                    ref='paymentRef' /> <!-- grazie al ref, cliccando sul bottone e avviando la beforeBuy() posso cliccare il bottone interno al form che a sua volta ha un attributo <ref> -->
 
                 <button v-if="!disableBuyButton"
                         @click.prevent="beforeBuy"
@@ -92,6 +97,10 @@
                     {{ loadingPayment ? 'Caricamento...' : 'Procedi con l\'acquisto' }}
                 </button>
                 <!-- fine pagamento -->
+
+                <h1>
+                    {{ message }}
+                </h1>
 
             </div>
             <!-- fine contenitore carrello + riepilogo -->
@@ -119,7 +128,12 @@ export default {
             cart: [],
             disableBuyButton: true,
             loadingPayment: true,
-            tokenApi: ''
+            tokenApi: '',
+            form: {
+                token: '',
+                amount: '16'
+            },
+            message: ''
         }
     },
     methods: {
@@ -208,10 +222,37 @@ export default {
             .get( 'http://localhost:8000/api/orders/generate' )
             .then( response => {
                 this.tokenApi = response.data.token;
-                this.disableBuyButton = false;
+                // this.disableBuyButton = false;
                 this.loadingPayment = false;
                 // console.log(this.tokenApi);
             })
+        },
+        handleLoading() {
+            this.disableBuyButton = false;
+        },
+        paymentOnSuccess(nonce) { // se carta valida, il form genera un secondo token che uso per la transazione;
+            this.form.token = nonce;
+            this.buy();
+        },
+        beforeBuy() { // valido il form prima di fare l'acquisto;
+            // quando clicco su 'procedi con l'acquisto' è come se cliccassi sul bottone interno a <v-braintree>;
+            // in questo modo valido quanto inserito dentro al form del pagamento;
+            // collego i due bottoni (quello in questa page e quello nel payment) grazie alle refs;
+            this.$refs.paymentRef.$refs.paymentBtnRef.click();
+        },
+        buy() {
+            this.disableBuyButton = true;
+            this.loadingPayment = true;
+            axios
+            .post( 'http://localhost:8000/api/orders/make/payment', {...this.form})
+            .then( response => {
+                this.message = response.data.message; // fa apparire messaggio di transazione eseguita con successo;
+                this.loadingPayment = false;
+                // il carrello si svuota???;
+            })
+        },
+        paymentOnError() {
+
         }
     },
     computed: {

@@ -1958,19 +1958,29 @@ __webpack_require__.r(__webpack_exports__);
   props: {
     authorizationP: String
   },
-  mounted: function mounted() {
-    console.log(this.authorizationP);
+  data: function data() {
+    return {
+      error: ''
+    };
+  },
+  methods: {
+    onLoad: function onLoad() {
+      this.$emit('loading');
+    },
+    onSuccess: function onSuccess(payload) {
+      var nonceToken = payload.nonce;
+      this.$emit('secondToken', nonceToken);
+    },
+    onError: function onError(error) {
+      var message = error.message;
+      if (message === 'No payment method is available.') {
+        this.error = 'Seleziona un metodo di pagamento';
+      } else {
+        this.error = message;
+      }
+      this.$emit('onError', message);
+    }
   }
-  /*     methods: {
-          onSuccess (payload) {
-          let nonce = payload.nonce;
-          // Do something great with the nonce...
-          },
-          onError (error) {
-          let message = error.message;
-          // Whoops, an error has occured while trying to get the nonce
-          }
-      } */
 });
 
 /***/ }),
@@ -2051,6 +2061,9 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_MyPayment_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/MyPayment.vue */ "./resources/js/components/MyPayment.vue");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'SingleRestaurantPage',
@@ -2065,7 +2078,12 @@ __webpack_require__.r(__webpack_exports__);
       cart: [],
       disableBuyButton: true,
       loadingPayment: true,
-      tokenApi: ''
+      tokenApi: '',
+      form: {
+        token: '',
+        amount: '16'
+      },
+      message: ''
     };
   },
   methods: {
@@ -2149,13 +2167,38 @@ __webpack_require__.r(__webpack_exports__);
       var _this3 = this;
       axios.get('http://localhost:8000/api/orders/generate').then(function (response) {
         _this3.tokenApi = response.data.token;
-        _this3.disableBuyButton = false;
+        // this.disableBuyButton = false;
         _this3.loadingPayment = false;
         // console.log(this.tokenApi);
       });
-    }
+    },
+    handleLoading: function handleLoading() {
+      this.disableBuyButton = false;
+    },
+    paymentOnSuccess: function paymentOnSuccess(nonce) {
+      // se carta valida, il form genera un secondo token che uso per la transazione;
+      this.form.token = nonce;
+      this.buy();
+    },
+    beforeBuy: function beforeBuy() {
+      // valido il form prima di fare l'acquisto;
+      // quando clicco su 'procedi con l'acquisto' è come se cliccassi sul bottone interno a <v-braintree>;
+      // in questo modo valido quanto inserito dentro al form del pagamento;
+      // collego i due bottoni (quello in questa page e quello nel payment) grazie alle refs;
+      this.$refs.paymentRef.$refs.paymentBtnRef.click();
+    },
+    buy: function buy() {
+      var _this4 = this;
+      this.disableBuyButton = true;
+      this.loadingPayment = true;
+      axios.post('http://localhost:8000/api/orders/make/payment', _objectSpread({}, this.form)).then(function (response) {
+        _this4.message = response.data.message; // fa apparire messaggio di transazione eseguita con successo;
+        _this4.loadingPayment = false;
+        // il carrello si svuota???;
+      });
+    },
+    paymentOnError: function paymentOnError() {}
   },
-
   computed: {
     itemTotalAmount: function itemTotalAmount() {
       var itemTotal = 0;
@@ -2426,9 +2469,23 @@ var render = function render() {
     },
     on: {
       success: _vm.onSuccess,
-      error: _vm.onError
-    }
-  }) : _vm._e()], 1);
+      error: _vm.onError,
+      load: _vm.onLoad
+    },
+    scopedSlots: _vm._u([{
+      key: "button",
+      fn: function fn(slotProps) {
+        return [_c("v-btn", {
+          ref: "paymentBtnRef",
+          on: {
+            click: slotProps.submit
+          }
+        })];
+      }
+    }], null, false, 3749850300)
+  }) : _vm._e(), _vm._v(" "), _c("div", [_vm.error ? _c("p", {
+    staticClass: "danger"
+  }, [_vm._v("\n            " + _vm._s(_vm.error) + "\n        ")]) : _vm._e()])], 1);
 };
 var staticRenderFns = [];
 render._withStripped = true;
@@ -2677,8 +2734,14 @@ var render = function render() {
   }, [_vm._v("Totale articoli nel carrello: " + _vm._s(_vm.itemTotalAmount))])]), _vm._v(" "), _c("tr", [_c("th", {
     staticClass: "text-right"
   }, [_vm._v("Totale ordine: € " + _vm._s(_vm.cartTotalAmount))])])])]), _vm._v(" "), _vm.tokenApi.length > 0 ? _c("MyPayment", {
+    ref: "paymentRef",
     attrs: {
       authorizationP: _vm.tokenApi
+    },
+    on: {
+      loading: _vm.handleLoading,
+      secondToken: _vm.paymentOnSuccess,
+      onError: _vm.paymentOnError
     }
   }) : _vm._e(), _vm._v(" "), !_vm.disableBuyButton ? _c("button", {
     staticClass: "btn btn-success",
@@ -2691,7 +2754,7 @@ var render = function render() {
   }, [_vm._v("\n                Procedi con l'acquisto\n            ")]) : _c("button", {
     staticClass: "btn btn-success",
     "class": _vm.loadingPayment ? "disabled" : ""
-  }, [_vm._v("\n                " + _vm._s(_vm.loadingPayment ? "Caricamento..." : "Procedi con l'acquisto") + "\n            ")])], 1) : _vm._e()]), _vm._v(" "), _c("router-link", {
+  }, [_vm._v("\n                " + _vm._s(_vm.loadingPayment ? "Caricamento..." : "Procedi con l'acquisto") + "\n            ")]), _vm._v(" "), _c("h1", [_vm._v("\n                " + _vm._s(_vm.message) + "\n            ")])], 1) : _vm._e()]), _vm._v(" "), _c("router-link", {
     staticClass: "btn mt-3",
     staticStyle: {
       "background-color": "#ff8906"
