@@ -1,10 +1,13 @@
 <template>
-    <div class="container mt-3 mb-3">
-
+    <div class="container p-3">
+        <div class="p-5 rounded " style="background-color:white; border:2px solid #a7a9be;">
         <h1>{{restaurant.name}}</h1>
-        <p>Indirizzo: <br> {{restaurant.address}}</p>
-        <p>Telefono: <br> {{restaurant.phone_number}}</p>
-        <p>Descrizione: <br> {{restaurant.description}}</p>
+            <p>Indirizzo: <br> {{restaurant.address}}</p>
+            <p>Telefono: <br> {{restaurant.phone_number}}</p>
+            <p>Descrizione: <br> {{restaurant.description}}</p>
+
+        </div>
+        
 
         <hr>
 
@@ -16,13 +19,13 @@
 
                 <div v-if="dishes" class="d-flex flex-wrap">
                     <div v-for="(dish, index) in dishes" :key="index"
-                        class="card m-2" style="width: 14rem;">
-                        <img class="card-img-top" :src="'/storage/' + dish.image" :alt="dish.name">
-                        <div class="card-body">
+                        class="card m-2 p-1 border:2px solid black;" style="width: 14rem; border:2px solid #a7a9be;">
+                        <img class="card-img-top" style="min-height: 12rem" :src="'/storage/' + dish.image" :alt="dish.name">
+                        <div class="card-body"  style="width: 15rem" >
                             <h5 class="card-title">{{dish.name}}</h5>
                             <p class="card-text">{{dish.description}}</p>
                             <p class="card-text">{{dish.price}} €</p>
-                            <button class="btn btn-primary" :class="btnDisabled?'disabled':''" @click="addToCart(dish, restaurant)">Aggiungi al carrello</button>
+                            <button class="btn text-white " style="background-color: #f25f4c" :class="btnDisabled?'disabled':''" @click="addToCart(dish, restaurant)">Aggiungi al carrello</button>
                         </div>
                     </div>
 
@@ -271,5 +274,10 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
+table{
+    border:2px solid #a7a9be;
+    background-color:white ;
+}
+
 </style>

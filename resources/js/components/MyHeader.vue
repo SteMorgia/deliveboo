@@ -25,10 +25,7 @@
   .my_header {
     background-color: #ff8906;
 
-    .navbar {
-      height: 60px;
-    }
-
+   
     :hover {
       color: white;
     }
