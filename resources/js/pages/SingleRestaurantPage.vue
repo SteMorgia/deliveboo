@@ -87,9 +87,10 @@
                     </Payment>
 
                     <button type="button" 
-                    class="btn btn-primary"
+                    class="btn text-white"
                     :class="btnDisabled?'disabled':''"
                     @click.prevent="beforeBuy"
+                    style="background-color:#f25f4c;"
                     >
                         Procedi al pagamento
                     </button>

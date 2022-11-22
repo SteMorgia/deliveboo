@@ -2786,8 +2786,11 @@ var render = function render() {
       onError: _vm.paymentOnError
     }
   }), _vm._v(" "), _c("button", {
-    staticClass: "btn btn-primary",
+    staticClass: "btn text-white",
     "class": _vm.btnDisabled ? "disabled" : "",
+    staticStyle: {
+      "background-color": "#f25f4c"
+    },
     attrs: {
       type: "button"
     },
