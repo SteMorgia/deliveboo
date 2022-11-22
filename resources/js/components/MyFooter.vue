@@ -9,7 +9,7 @@
         <!-- Grid row -->
         <div class="row">
           <!-- Grid column -->
-          <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4 mt-5 links">
+          <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4 mt-5 links rounded">
             <!-- Content -->
             <h6 class="text-uppercase fw-bold mb-4">
               <i class="fas fa-gem me-3"></i>deliveboo
@@ -21,7 +21,7 @@
           <!-- Grid column -->
 
           <!-- Grid column -->
-          <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4 mt-5 links" >
+          <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4 mt-5 links rounded" >
             <!-- Links -->
             <h6 class="text-uppercase fw-bold mb-4">
               Discover Deliveroo
@@ -42,7 +42,7 @@
           <!-- Grid column -->
 
           <!-- Grid column -->
-          <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4 mt-5 links">
+          <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4 mt-5 links rounded">
             <!-- Links -->
             <h6 class="text-uppercase fw-bold mb-4">
               Legal
@@ -63,7 +63,7 @@
           <!-- Grid column -->
 
           <!-- Grid column -->
-          <div class="col-md-4 col-lg-3 col-xl-3 mx-auto  mb-4 mt-5 links">
+          <div class="col-md-4 col-lg-3 col-xl-3 mx-auto  mb-4 mt-5 links rounded">
             <!-- Links -->
             <h6 class="text-uppercase fw-bold mb-4">Help</h6>
             <p><a href="#!" class="text-reset">Contact</a></p>
