@@ -2081,7 +2081,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       tokenApi: '',
       form: {
         token: '',
-        amount: '16'
+        amount: '17'
       },
       message: ''
     };
@@ -2195,6 +2195,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         _this4.message = response.data.message; // fa apparire messaggio di transazione eseguita con successo;
         _this4.loadingPayment = false;
         // il carrello si svuota???;
+        // chiamata axios get per salvare l'ordine sul database, prendendo in ingresso i dati dell'utente + il carrello?;
       });
     },
     paymentOnError: function paymentOnError() {}
