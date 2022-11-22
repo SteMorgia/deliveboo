@@ -77,6 +77,22 @@
                 </table>
                 <!-- fine riepilogo -->
 
+                <!-- inizio pagamento -->
+                <MyPayment v-if="tokenApi.length > 0" :authorizationP="tokenApi" />
+
+                <button v-if="!disableBuyButton"
+                        @click.prevent="beforeBuy"
+                        class="btn btn-success">
+                    Procedi con l'acquisto
+                </button>
+
+                <button v-else
+                    class="btn btn-success"
+                    :class=" loadingPayment ? 'disabled' : ''">
+                    {{ loadingPayment ? 'Caricamento...' : 'Procedi con l\'acquisto' }}
+                </button>
+                <!-- fine pagamento -->
+
             </div>
             <!-- fine contenitore carrello + riepilogo -->
 
@@ -88,14 +104,22 @@
 </template>
 
 <script>
+import MyPayment from '../components/MyPayment.vue';
+
 export default {
     name: 'SingleRestaurantPage',
+    components: {
+        MyPayment
+    },
     data() {
         return {
             restaurant: {},
             dishes: [],
             doDishesExists: true,
-            cart: []
+            cart: [],
+            disableBuyButton: true,
+            loadingPayment: true,
+            tokenApi: ''
         }
     },
     methods: {
@@ -178,6 +202,16 @@ export default {
         },
         saveRestaurantToLocalStorage(restaurantP) {
             localStorage.setItem( 'localRestaurant', JSON.stringify(restaurantP) ); // salvo ristorante in localStorage;
+        },
+        generateFirstBraintreeToken() {
+            axios
+            .get( 'http://localhost:8000/api/orders/generate' )
+            .then( response => {
+                this.tokenApi = response.data.token;
+                this.disableBuyButton = false;
+                this.loadingPayment = false;
+                // console.log(this.tokenApi);
+            })
         }
     },
     computed: {
@@ -200,6 +234,7 @@ export default {
         this.getSingleRestaurantF();
         let localCart = localStorage.getItem( 'localCart' ); // recupero carrello salvato in localStorage;
         this.cart = ( localCart != null ) ? JSON.parse( localCart ) : []; // se in localStorage ho un carrello con oggetti, converto il file json;
+        this.generateFirstBraintreeToken(); // genero il primo token;
         // console.log(localStorage);
     }
 }

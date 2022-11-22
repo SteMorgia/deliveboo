@@ -23,9 +23,11 @@ class OrderRequest extends FormRequest
      */
     public function rules()
     {
+        // controlla i dati in ingresso nella $request della makePyament() in api\orderController;
         return [
             'token' => 'required',
             'amount' => 'required'
+            // 'product' => 'required' // prendo l'id in ingresso del singolo piatto, verificando che esista nel db;
         ];
     }
 }
