@@ -19,3 +19,5 @@ Route::get('categories', 'Api\CategoryController@index');
 Route::get('filterRestaurants', 'Api\RestaurantController@getRandomRestaurantsB'); // filtraggio ristoranti homepage;
 Route::get('filterRestaurants/{slug}', 'Api\RestaurantController@show'); // filtraggio singolo ristorante singlePageRestaurant;
 Route::get('filterDishes/{id}', 'Api\RestaurantController@filterDishes'); // filtraggio piatti per singolo ristorante singlePageRestaurant;
+Route::get('orders/generate', 'Api\OrderController@generate');
+Route::post('orders/make/payment', 'Api\OrderController@makePayment');

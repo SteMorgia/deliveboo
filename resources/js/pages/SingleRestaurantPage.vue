@@ -22,7 +22,7 @@
                             <h5 class="card-title">{{dish.name}}</h5>
                             <p class="card-text">{{dish.description}}</p>
                             <p class="card-text">{{dish.price}} €</p>
-                            <button class="btn btn-primary" @click="addToCart(dish, restaurant)">Aggiungi al carrello</button>
+                            <button class="btn btn-primary" :class="btnDisabled?'disabled':''" @click="addToCart(dish, restaurant)">Aggiungi al carrello</button>
                         </div>
                     </div>
 
@@ -77,6 +77,25 @@
                 </table>
                 <!-- fine riepilogo -->
 
+                <div v-if="tokenApi.length > 0">
+                    <Payment
+                    ref="paymentRef"
+                    :authorization="tokenApi"
+                    @onSuccess="paymentOnSuccess"
+                    @onError="paymentOnError"
+                    >
+                    </Payment>
+
+                    <button type="button" 
+                    class="btn text-white"
+                    :class="btnDisabled?'disabled':''"
+                    @click.prevent="beforeBuy"
+                    style="background-color:#f25f4c;"
+                    >
+                        Procedi al pagamento
+                    </button>
+                </div>
+
             </div>
             <!-- fine contenitore carrello + riepilogo -->
 
@@ -88,14 +107,25 @@
 </template>
 
 <script>
+import Payment from '../components/Payment.vue';
+
 export default {
     name: 'SingleRestaurantPage',
+    components: {
+        Payment
+    },
     data() {
         return {
             restaurant: {},
             dishes: [],
             doDishesExists: true,
-            cart: []
+            cart: [],
+            btnDisabled: false,
+            tokenApi: '',
+            form: {
+                token: '',
+                amount: null
+            }
         }
     },
     methods: {
@@ -177,6 +207,40 @@ export default {
         saveCartToLocalStorage() {
             localStorage.setItem( 'localCart', JSON.stringify(this.cart) ); // in localStorage devo salvare i dati come stringa;
         },
+        getTokenApi() {
+            axios
+            .get('http://localhost:8000/api/orders/generate')
+            .then( response => {
+                this.tokenApi = response.data.token;
+                console.log(this.tokenApi);
+                
+            });
+        },
+        paymentOnSuccess (nonce) {
+            this.form.token = nonce;
+            this.funzioneBuy();
+        },
+        paymentOnError (error) {
+            // Codice..
+        },
+        beforeBuy () {
+            this.$refs.paymentRef.$refs.paymentBtnRef.click();        
+        },
+        async funzioneBuy() {
+            this.btnDisabled = true;
+            try {                
+                await axios
+                .post('/api/orders/make/payment?' + 'amount=' + this.form.amount + '&' + 'token=' + this.form.token)      
+                .then( response => {
+                    console.log(response);
+                    // console.log(this.form.amount)
+                    window.location.href = "/redirect";
+                })
+            } catch(err) {
+                console.log(err);
+                this.btnDisabled = false;
+            } 
+        },
         saveRestaurantToLocalStorage(restaurantP) {
             localStorage.setItem( 'localRestaurant', JSON.stringify(restaurantP) ); // salvo ristorante in localStorage;
         }
@@ -190,18 +254,19 @@ export default {
             return itemTotal;
         },
         cartTotalAmount() {
-            let total = 0;
+            this.form.amount = 0;
             for ( let item in this.cart ) {
-                total += ( this.cart[item].quantity * this.cart[item].price );
+                this.form.amount += ( this.cart[item].quantity * this.cart[item].price );
             }
-            return total;
-        },
+            return this.form.amount;
+        }
     },
+    
     mounted() {
         this.getSingleRestaurantF();
         let localCart = localStorage.getItem( 'localCart' ); // recupero carrello salvato in localStorage;
         this.cart = ( localCart != null ) ? JSON.parse( localCart ) : []; // se in localStorage ho un carrello con oggetti, converto il file json;
-        // console.log(localStorage);
+        this.getTokenApi();
     }
 }
 </script>
