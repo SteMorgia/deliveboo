@@ -30,6 +30,7 @@ class OrderRequest extends FormRequest
 			
 			'token' => 'required',
             'amount' => 'required'
+
 		];
     }
 }

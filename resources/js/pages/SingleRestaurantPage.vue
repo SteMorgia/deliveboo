@@ -6,8 +6,7 @@
             <p>Telefono: <br> {{restaurant.phone_number}}</p>
             <p>Descrizione: <br> {{restaurant.description}}</p>
 
-        </div>
-        
+        </div>        
 
         <hr>
 
@@ -37,7 +36,7 @@
 
             </div>
 
-            <!-- inizio contenitore carrello + riepilogo -->
+            <!-- inizio contenitore carrello + pagamento -->
             <div v-if="cart.length > 0" :class=" ( cart.length > 0 )?'col-6':'' ">
 
                 <!-- inizio carrello -->
@@ -80,27 +79,32 @@
                 </table>
                 <!-- fine riepilogo -->
 
+                <!-- inizio form pagamento -->
                 <div v-if="tokenApi.length > 0">
-                    <Payment
-                    ref="paymentRef"
-                    :authorization="tokenApi"
-                    @onSuccess="paymentOnSuccess"
-                    @onError="paymentOnError"
-                    >
-                    </Payment>
 
+                    <Payment
+                        ref="paymentRef"
+                        :authorization="tokenApi"
+                        @onSuccess="paymentOnSuccess"
+                        @onError="paymentOnError" />
+                        
                     <button type="button" 
-                    class="btn text-white"
-                    :class="btnDisabled?'disabled':''"
-                    @click.prevent="beforeBuy"
-                    style="background-color:#f25f4c;"
-                    >
+                        class="btn text-white"
+                        :class=" btnDisabled ? 'disabled' : '' "
+                        @click.prevent="beforeBuy"
+                        style="background-color:#f25f4c;">
                         Procedi al pagamento
                     </button>
+
                 </div>
+                <!-- fine form pagamento -->
+
+                <h1>
+                    {{ message }}
+                </h1>
 
             </div>
-            <!-- fine contenitore carrello + riepilogo -->
+            <!-- fine contenitore carrello + pagamento -->
 
         </div>
 
@@ -127,8 +131,10 @@ export default {
             tokenApi: '',
             form: {
                 token: '',
-                amount: null
-            }
+                amount: '',
+                // this.cart: ???
+            },
+            message: ''
         }
     },
     methods: {
@@ -215,34 +221,36 @@ export default {
             .get('http://localhost:8000/api/orders/generate')
             .then( response => {
                 this.tokenApi = response.data.token;
-                console.log(this.tokenApi);
-                
             });
         },
-        paymentOnSuccess (nonce) {
+        paymentOnSuccess(nonce) {
             this.form.token = nonce;
-            this.funzioneBuy();
+            this.buy();
         },
         paymentOnError (error) {
             // Codice..
         },
-        beforeBuy () {
-            this.$refs.paymentRef.$refs.paymentBtnRef.click();        
+        beforeBuy() {
+            this.$refs.paymentRef.$refs.paymentBtnRef.click();
         },
-        async funzioneBuy() {
+        buy() { // vado nella makePayment();
             this.btnDisabled = true;
-            try {                
-                await axios
-                .post('/api/orders/make/payment?' + 'amount=' + this.form.amount + '&' + 'token=' + this.form.token)      
-                .then( response => {
-                    console.log(response);
-                    // console.log(this.form.amount)
+            axios
+            .post( '/api/orders/make/payment', { ...this.form } )
+            .then( response => {
+                
+                if ( response.data.success == true ) {
+                    this.cart = [];
+                    localStorage.removeItem( 'localCart' );
+                    localStorage.removeItem( 'localRestaurant' );
                     window.location.href = "/redirect";
-                })
-            } catch(err) {
-                console.log(err);
+                } else {
+                    this.message = response.data.message;
+                }
+                // invio dati al backend;
                 this.btnDisabled = false;
-            } 
+            })
+
         },
         saveRestaurantToLocalStorage(restaurantP) {
             localStorage.setItem( 'localRestaurant', JSON.stringify(restaurantP) ); // salvo ristorante in localStorage;
@@ -264,7 +272,6 @@ export default {
             return this.form.amount;
         }
     },
-    
     mounted() {
         this.getSingleRestaurantF();
         let localCart = localStorage.getItem( 'localCart' ); // recupero carrello salvato in localStorage;
@@ -274,8 +281,9 @@ export default {
 }
 </script>
 
-<style lang="scss">
-table{
+<style lang="scss" scoped>
+
+table {
     border:2px solid #a7a9be;
     background-color:white ;
 }

@@ -101,33 +101,33 @@ class OrderController extends Controller
         // $dish = Dish::find($request->dish);
 
         $result = $gateway->transaction()->sale([
+
             'amount' => $request->amount,
             'paymentMethodNonce' => $request->token,
             'options' => [
                 'submitForSettlement' => true
             ]
+
         ]);
 
         // \Log::info($request->amount);
 
-            if($result->success){
+            if ( $result->success ) {
 
                 $data = [
                 
                     'success' => true,
-            
                     'message' => ' Transazione eseguita'
                 
                 ];
                 
-                return response()->json($data, 200);               
+                return response()->json($data, 200);
             
-            }else{
+            } else {
             
                 $data = [
                 
                     'success' => false,
-            
                     'message' => 'Transazione fallita'
                 
                 ];
@@ -135,8 +135,6 @@ class OrderController extends Controller
                 return response()->json($data, 401);
             
             }
-
-            
 
 	}
 }
