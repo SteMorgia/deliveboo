@@ -68,7 +68,7 @@
                       :alt="restaurant.name"
                     />
                     <div class="card-body">
-                      <h5 class="card-title">{{ restaurant.name }}</h5>
+                      <h5 class="card-title font-weight-bold">{{ restaurant.name }}</h5>
                       <p class="card-text">
                         {{ truncateText(restaurant.description, 20) }}
                       </p>

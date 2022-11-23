@@ -2637,7 +2637,7 @@ var render = function render() {
     }), _vm._v(" "), _c("div", {
       staticClass: "card-body"
     }, [_c("h5", {
-      staticClass: "card-title"
+      staticClass: "card-title font-weight-bold"
     }, [_vm._v(_vm._s(restaurant.name))]), _vm._v(" "), _c("p", {
       staticClass: "card-text"
     }, [_vm._v("\n                      " + _vm._s(_vm.truncateText(restaurant.description, 20)) + "\n                    ")]), _vm._v(" "), _c("router-link", {
@@ -2796,10 +2796,11 @@ var render = function render() {
     staticClass: "d-flex flex-wrap"
   }, _vm._l(_vm.dishes, function (dish, index) {
     return _c("div", {
-      key: index,
+      key: index
+    }, [dish.visibility == 1 ? _c("div", {
       staticClass: "card m-2 p-1 border:2px solid black;",
       staticStyle: {
-        width: "14rem",
+        width: "20rem",
         border: "2px solid #a7a9be"
       }
     }, [_c("img", {
@@ -2812,16 +2813,16 @@ var render = function render() {
         alt: dish.name
       }
     }), _vm._v(" "), _c("div", {
-      staticClass: "card-body",
-      staticStyle: {
-        width: "15rem"
-      }
+      staticClass: "card-body text-center"
     }, [_c("h5", {
-      staticClass: "card-title"
+      staticClass: "card-title font-weight-bold"
     }, [_vm._v(_vm._s(dish.name))]), _vm._v(" "), _c("p", {
-      staticClass: "card-text"
+      staticClass: "card-text",
+      staticStyle: {
+        height: "90px"
+      }
     }, [_vm._v(_vm._s(dish.description))]), _vm._v(" "), _c("p", {
-      staticClass: "card-text"
+      staticClass: "card-text font-weight-bold"
     }, [_vm._v(_vm._s(dish.price) + " €")]), _vm._v(" "), _c("button", {
       staticClass: "btn text-white",
       "class": _vm.btnDisabled ? "disabled" : "",
@@ -2833,10 +2834,10 @@ var render = function render() {
           return _vm.addToCart(dish, _vm.restaurant);
         }
       }
-    }, [_vm._v("Aggiungi al carrello")])])]);
+    }, [_vm._v("Aggiungi al carrello")])])]) : _vm._e()]);
   }), 0) : _vm._e(), _vm._v(" "), _vm.dishes.length == 0 && _vm.doDishesExists == false ? _c("div", [_vm._m(0)]) : _vm._e()]), _vm._v(" "), _vm.cart.length > 0 ? _c("div", {
     "class": _vm.cart.length > 0 ? "col-6" : ""
-  }, [_c("table", {
+  }, [_c("h1", [_vm._v("Il tuo carrello:")]), _vm._v(" "), _c("table", {
     staticClass: "table"
   }, [_vm._m(1), _vm._v(" "), _c("tbody", _vm._l(_vm.cart, function (cartDish, index) {
     return _c("tr", {
@@ -2875,7 +2876,10 @@ var render = function render() {
     staticClass: "text-right"
   }, [_vm._v("Totale ordine: € " + _vm._s(_vm.cartTotalAmount))])])])]), _vm._v(" "), _c("h1", {
     staticClass: "mt-3"
-  }, [_vm._v("Compila il form:")]), _vm._v(" "), _c("label", {
+  }, [_vm._v("Compila il form:")]), _vm._v(" "), _c("div", {
+    staticClass: "input-container"
+  }, [_c("label", {
+    staticClass: "font-weight-bold",
     attrs: {
       "for": "nameId"
     }
@@ -2903,6 +2907,7 @@ var render = function render() {
       }
     }
   }), _vm._v(" "), _c("label", {
+    staticClass: "font-weight-bold",
     attrs: {
       "for": "addressId"
     }
@@ -2930,6 +2935,7 @@ var render = function render() {
       }
     }
   }), _vm._v(" "), _c("label", {
+    staticClass: "font-weight-bold",
     attrs: {
       "for": "phoneId"
     }
@@ -2956,7 +2962,7 @@ var render = function render() {
         _vm.phone_numberF = $event.target.value;
       }
     }
-  }), _vm._v(" "), _vm.tokenApi.length > 0 ? _c("div", [_c("h1", {
+  })]), _vm._v(" "), _vm.tokenApi.length > 0 ? _c("div", [_c("h1", {
     staticClass: "mt-3"
   }, [_vm._v("Effettua il pagamento:")]), _vm._v(" "), _c("Payment", {
     ref: "paymentRef",
@@ -28219,7 +28225,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "table[data-v-c497e646] {\n  border: 2px solid #a7a9be;\n  background-color: white;\n}", ""]);
+exports.push([module.i, "table[data-v-c497e646] {\n  border: 2px solid #a7a9be;\n  background-color: white;\n}\n.input-container[data-v-c497e646] {\n  background-color: white;\n  padding: 15px;\n  border-radius: 3px;\n  border: 2px solid #a7a9be;\n}\n.input-container input[data-v-c497e646] {\n  width: 100%;\n}", ""]);
 
 // exports
 
@@ -45672,7 +45678,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\LBoolean\Documents\boolean\progetto_finale\file_progetto_finale\deliveboo\resources\js\front.js */"./resources/js/front.js");
+module.exports = __webpack_require__(/*! /Users/marta/Desktop/Progetto/deliveboo-1/resources/js/front.js */"./resources/js/front.js");
 
 
 /***/ })

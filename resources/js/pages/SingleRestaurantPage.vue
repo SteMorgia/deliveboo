@@ -17,15 +17,16 @@
             <div :class=" (cart.length>0)?'col-6':'col-12' ">
 
                 <div v-if="dishes" class="d-flex flex-wrap">
-                    <div v-for="(dish, index) in dishes" :key="index"
-                        class="card m-2 p-1 border:2px solid black;" style="width: 14rem; border:2px solid #a7a9be;">
-                        <img class="card-img-top" style="min-height: 12rem" :src="'/storage/' + dish.image" :alt="dish.name">
-                        <div class="card-body"  style="width: 15rem" >
-                            <h5 class="card-title">{{dish.name}}</h5>
-                            <p class="card-text">{{dish.description}}</p>
-                            <p class="card-text">{{dish.price}} €</p>
-                            <button class="btn text-white " style="background-color: #f25f4c" :class="btnDisabled?'disabled':''" @click="addToCart(dish, restaurant)">Aggiungi al carrello</button>
-                        </div>
+                    <div v-for="(dish, index) in dishes" :key="index">
+                        <div v-if="dish.visibility == 1" class="card m-2 p-1 border:2px solid black;" style="width: 20rem; border:2px solid #a7a9be;">
+                            <img class="card-img-top" style="min-height: 12rem" :src="'/storage/' + dish.image" :alt="dish.name">
+                            <div class="card-body text-center">
+                                <h5 class="card-title font-weight-bold">{{dish.name}}</h5>
+                                <p class="card-text" style="height: 90px;">{{dish.description}}</p>
+                                <p class="card-text font-weight-bold">{{dish.price}} €</p>
+                                <button class="btn text-white " style="background-color: #f25f4c" :class="btnDisabled?'disabled':''" @click="addToCart(dish, restaurant)">Aggiungi al carrello</button>
+                            </div>
+                        </div>                        
                     </div>
 
                 </div>
@@ -38,6 +39,8 @@
 
             <!-- inizio contenitore carrello + pagamento -->
             <div v-if="cart.length > 0" :class=" ( cart.length > 0 )?'col-6':'' ">
+
+                <h1>Il tuo carrello:</h1>
 
                 <!-- inizio carrello -->
                 <table class="table">
@@ -82,29 +85,33 @@
                 <!-- inizio form input -->
                 <h1 class="mt-3">Compila il form:</h1>
 
-                <label for="nameId">Nome e cognome</label>
-                <input type="text"
-                    id="nameId"
-                    v-model="nameF"
-                    class="d-block mb-3"
-                    placeholder="Inserisci il tuo nome e il tuo cognome"
-                    required />
+                <div class="input-container">
+                    <label for="nameId" class="font-weight-bold">Nome e cognome</label>
+                    <input type="text"
+                        id="nameId"
+                        v-model="nameF"
+                        class="d-block mb-3"
+                        placeholder="Inserisci il tuo nome e il tuo cognome"
+                        required />
 
-                <label for="addressId">Indirizzo</label>
-                <input type="text"
-                    id="addressId"
-                    v-model="addressF"
-                    class="d-block mb-3"
-                    placeholder="Inserisci il tuo indirizzo"
-                    required />
+                    <label for="addressId" class="font-weight-bold">Indirizzo</label>
+                    <input type="text"
+                        id="addressId"
+                        v-model="addressF"
+                        class="d-block mb-3"
+                        placeholder="Inserisci il tuo indirizzo"
+                        required />
 
-                <label for="phoneId">Numero di telefono</label>
-                <input type="tel"
-                    id="phoneId"
-                    v-model="phone_numberF"
-                    class="d-block mb-3"
-                    placeholder="Inserisci il tuo numero di telefono"
-                    required />
+                    <label for="phoneId" class="font-weight-bold">Numero di telefono</label>
+                    <input type="tel"
+                        id="phoneId"
+                        v-model="phone_numberF"
+                        class="d-block mb-3"
+                        placeholder="Inserisci il tuo numero di telefono"
+                        required />
+
+                </div>
+                
                 <!-- fine form input -->
 
                 <!-- inizio form pagamento -->
@@ -335,6 +342,17 @@ export default {
 table {
     border:2px solid #a7a9be;
     background-color:white ;
+}
+
+.input-container {
+    background-color: white;
+    padding: 15px;
+    border-radius: 3px;
+    border:2px solid #a7a9be;
+
+    input {
+        width: 100%;
+    }
 }
 
 </style>
