@@ -2821,16 +2821,17 @@ var render = function render() {
         width: "20rem",
         border: "2px solid #a7a9be"
       }
-    }, [_c("img", {
+    }, [_c("div", [_c("img", {
       staticClass: "card-img-top",
       staticStyle: {
-        "min-height": "12rem"
+        height: "200px",
+        "object-fit": "cover"
       },
       attrs: {
         src: "/storage/" + dish.image,
         alt: dish.name
       }
-    }), _vm._v(" "), _c("div", {
+    })]), _vm._v(" "), _c("div", {
       staticClass: "card-body text-center"
     }, [_c("h5", {
       staticClass: "card-title font-weight-bold"
