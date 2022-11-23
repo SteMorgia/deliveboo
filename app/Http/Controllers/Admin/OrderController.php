@@ -6,6 +6,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Order;
+use App\Restaurant;
+use App\Dish;
+use Illuminate\Support\Facades\Auth;
+use DB;
 
 class OrderController extends Controller
 {
@@ -16,7 +20,14 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders = Order::all();
+
+        $loggedUser = Auth::user();
+        $userRestaurant = Restaurant::find($loggedUser->id);
+        $restaurantId = $userRestaurant->id;
+
+        $orders = Order::whereHas('dishes', function($query) use ($restaurantId) {
+            $query->where('restaurant_id', $restaurantId);
+        })->get();
 
         return view('admin.orders.index', compact('orders'));
     }
