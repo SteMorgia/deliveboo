@@ -22,6 +22,7 @@
                 <p class="card-text">P.IVA: {{$restaurant->vat}}</p>
                 <p class="card-text">Descrizione: {{$restaurant->description}}</p>
                 <a href="{{route('admin.dishes.index')}}" class="btn btn-primary">Vai ai piatti del tuo ristorante</a>
+                <a href="{{route('admin.orders.index')}}" class="btn btn-primary">Vai agli ordini del tuo ristorante</a>
             </div>
         </div>
         @endforeach

@@ -118,7 +118,7 @@ class OrderController extends Controller
 
             $this->newOrder($request, $result);
 
-            return response()->json($request);
+            return response()->json($data, 200);
             
         } else {
             
@@ -183,11 +183,5 @@ class OrderController extends Controller
 
         $newOrder->dishes()->sync($syncDishIdQuantity);
         // fine tabella pivot
-
-        if ( $newOrder ) {
-            return 'Nuovo ordine salvato';
-        } else {
-            return 'Nuovo ordine NON salvato';
-        }
     }
 }
