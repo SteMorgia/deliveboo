@@ -109,14 +109,14 @@ class OrderController extends Controller
 
         ]);
 
+        $this->newOrder($request, $result);
+
         if ( $result->success ) {
 
             $data = [
                 'success' => true,
                 'message' => 'Transazione eseguita'
             ];
-
-            $this->newOrder($request, $result);
 
             return response()->json($data, 200);
             
