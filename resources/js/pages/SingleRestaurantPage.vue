@@ -1,12 +1,20 @@
 <template>
     <div class="container p-3">
-        <div class="p-5 rounded " style="background-color:white; border:2px solid #a7a9be;">
-        <h1>{{restaurant.name}}</h1>
-            <p>Indirizzo: <br> {{restaurant.address}}</p>
-            <p>Telefono: <br> {{restaurant.phone_number}}</p>
-            <p>Descrizione: <br> {{restaurant.description}}</p>
-
-        </div>        
+        <div class="card bg-dark text-white my-card-container">
+            <img class="card-img h-100" :src="'/storage/' + restaurant.image" alt="Card image">
+            <div class="card-img-overlay">
+                <h1 class="card-title text-right pr-5">{{restaurant.name}}</h1>
+                <p class="card-text">
+                    <span class="h3">Indirizzo:</span>
+                    {{restaurant.address}}
+                </p>
+                <p class="card-text">
+                    <span class="h3">Telefono:</span>
+                    {{restaurant.phone_number}}
+                </p>
+                <p class="card-text">{{restaurant.description}}</p>
+            </div>
+        </div>
 
         <hr>
 
@@ -14,9 +22,9 @@
 
         <div class="row">
 
-            <div :class=" (cart.length>0)?'col-6':'col-12' ">
+            <div :class=" (cart.length>0)?'col-md-6 col-sm-12':'col-12'">
 
-                <div v-if="dishes" class="d-flex flex-wrap">
+                <div v-if="dishes" class="d-flex flex-wrap" :class="(cart.length>0)?'justify-content-center':''">
                     <div v-for="(dish, index) in dishes" :key="index">
                         <div v-if="dish.visibility == 1" class="card m-2 p-1 border:2px solid black;" style="width: 20rem; border:2px solid #a7a9be;">
                             <img class="card-img-top" style="min-height: 12rem" :src="'/storage/' + dish.image" :alt="dish.name">
@@ -28,7 +36,6 @@
                             </div>
                         </div>                        
                     </div>
-
                 </div>
 
                 <div v-if="dishes.length == 0 && doDishesExists == false">
@@ -38,107 +45,110 @@
             </div>
 
             <!-- inizio contenitore carrello + pagamento -->
-            <div v-if="cart.length > 0" :class=" ( cart.length > 0 )?'col-6':'' ">
+            <div v-if="cart.length > 0" :class=" ( cart.length > 0 )?'col-md-6 col-sm-12':'' ">
+                <div>
+                    <h1>Il tuo carrello:</h1>
 
-                <h1>Il tuo carrello:</h1>
-
-                <!-- inizio carrello -->
-                <table class="table">
-                    <thead>
-                        <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Prodotto</th>
-                        <th scope="col">Prezzo unitario</th>
-                        <th scope="col">Quantità</th>
-                        <th scope="col">Modifica ordine</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr v-for="(cartDish, index) in cart" :key="index">
-                        <th scope="row">{{index + 1}}</th>
-                        <td>{{cartDish.name}}</td>
-                        <td>{{cartDish.price}} €</td>
-                        <td>{{cartDish.quantity}}</td>
-                        <td>
-                            <button @click="increaseCartItem(cartDish)" class="btn btn-primary m-1">+</button>
-                            <button @click="decreaseCartItem(cartDish, index)" class="btn btn-secondary m-1">-</button>
-                            <button @click="removeCartItem(index)" class="btn btn-danger m-1" >x</button>
-                        </td>
-                        </tr>
-                    </tbody>
-                </table>
-                <!-- fine carrello -->
+                    <!-- inizio carrello -->
+                    <table class="table">
+                        <thead>
+                            <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Prodotto</th>
+                            <th scope="col">Prezzo unitario</th>
+                            <th scope="col">Quantità</th>
+                            <th scope="col">Modifica ordine</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="(cartDish, index) in cart" :key="index">
+                            <th scope="row">{{index + 1}}</th>
+                            <td>{{cartDish.name}}</td>
+                            <td>{{cartDish.price}} €</td>
+                            <td>{{cartDish.quantity}}</td>
+                            <td>
+                                <button @click="increaseCartItem(cartDish)" class="btn btn-primary m-1">+</button>
+                                <button @click="decreaseCartItem(cartDish, index)" class="btn btn-secondary m-1">-</button>
+                                <button @click="removeCartItem(index)" class="btn btn-danger m-1" >x</button>
+                            </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <!-- fine carrello -->
                 
-                <!-- inizio riepilogo -->
-                <table class="table">
-                    <tbody>
-                        <tr>
-                            <th class="text-right">Totale articoli nel carrello: {{itemTotalAmount}}</th>
-                        </tr>
-                        <tr>
-                            <th class="text-right">Totale ordine: € {{cartTotalAmount}}</th>
-                        </tr>
-                    </tbody>
-                </table>
-                <!-- fine riepilogo -->
+                    <!-- inizio riepilogo -->
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <th class="text-right">Totale articoli nel carrello: {{itemTotalAmount}}</th>
+                            </tr>
+                            <tr>
+                                <th class="text-right">Totale ordine: € {{cartTotalAmount}}</th>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <!-- fine riepilogo -->
 
-                <!-- inizio form input -->
-                <h1 class="mt-3">Compila il form:</h1>
+                    <!-- inizio form input -->
+                    <h1 class="mt-3">Compila il form:</h1>
 
-                <div class="input-container">
-                    <label for="nameId" class="font-weight-bold">Nome e cognome</label>
-                    <input type="text"
-                        id="nameId"
-                        v-model="nameF"
-                        class="d-block mb-3"
-                        placeholder="Inserisci il tuo nome e il tuo cognome"
-                        required />
+                    <div class="input-container">
+                        <label for="nameId" class="font-weight-bold">Nome e cognome</label>
+                        <input type="text"
+                            id="nameId"
+                            v-model="nameF"
+                            class="d-block mb-3"
+                            placeholder="Inserisci il tuo nome e il tuo cognome"
+                            required />
 
-                    <label for="addressId" class="font-weight-bold">Indirizzo</label>
-                    <input type="text"
-                        id="addressId"
-                        v-model="addressF"
-                        class="d-block mb-3"
-                        placeholder="Inserisci il tuo indirizzo"
-                        required />
+                        <label for="addressId" class="font-weight-bold">Indirizzo</label>
+                        <input type="text"
+                            id="addressId"
+                            v-model="addressF"
+                            class="d-block mb-3"
+                            placeholder="Inserisci il tuo indirizzo"
+                            required />
 
-                    <label for="phoneId" class="font-weight-bold">Numero di telefono</label>
-                    <input type="tel"
-                        id="phoneId"
-                        v-model="phone_numberF"
-                        class="d-block mb-3"
-                        placeholder="Inserisci il tuo numero di telefono"
-                        required />
+                        <label for="phoneId" class="font-weight-bold">Numero di telefono</label>
+                        <input type="tel"
+                            id="phoneId"
+                            v-model="phone_numberF"
+                            class="d-block mb-3"
+                            placeholder="Inserisci il tuo numero di telefono"
+                            required />
+
+                    </div>
+                    
+                    <!-- fine form input -->
+
+                    <!-- inizio form pagamento -->
+                    <div v-if="tokenApi.length > 0">
+
+                        <h1 class="mt-3">Effettua il pagamento:</h1>
+
+                        <Payment
+                            ref="paymentRef"
+                            :authorization="tokenApi"
+                            @onSuccess="paymentOnSuccess"
+                            @onError="paymentOnError" />
+                            
+                        <button type="button" 
+                            class="btn text-white"
+                            :class=" btnDisabled ? 'disabled' : '' "
+                            @click.prevent="beforeBuy"
+                            style="background-color:#f25f4c;"
+                            :disabled="( nameF.length == 0 || addressF.length == 0 || phone_numberF.length == 0 ) ? true : false">
+                                {{ ( nameF.length == 0 || addressF.length == 0 || phone_numberF.length == 0 ) ? 'Compila il form per poter effettuare il pagamento' : 'Effettua il pagamento'}}
+                        </button>
+
+                    </div>
+                    <!-- fine form pagamento -->
 
                 </div>
-                
-                <!-- fine form input -->
-
-                <!-- inizio form pagamento -->
-                <div v-if="tokenApi.length > 0">
-
-                    <h1 class="mt-3">Effettua il pagamento:</h1>
-
-                    <Payment
-                        ref="paymentRef"
-                        :authorization="tokenApi"
-                        @onSuccess="paymentOnSuccess"
-                        @onError="paymentOnError" />
-                        
-                    <button type="button" 
-                        class="btn text-white"
-                        :class=" btnDisabled ? 'disabled' : '' "
-                        @click.prevent="beforeBuy"
-                        style="background-color:#f25f4c;"
-                        :disabled="( nameF.length == 0 || addressF.length == 0 || phone_numberF.length == 0 ) ? true : false">
-                            {{ ( nameF.length == 0 || addressF.length == 0 || phone_numberF.length == 0 ) ? 'Compila il form per poter effettuare il pagamento' : 'Effettua il pagamento'}}
-                    </button>
-
-                </div>
-                <!-- fine form pagamento -->
+                <!-- fine contenitore carrello + pagamento -->
 
             </div>
-            <!-- fine contenitore carrello + pagamento -->
+                
 
         </div>
     
@@ -338,7 +348,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.my-card-container {
+    height: 300px;
 
+    img {
+        opacity: 20%;
+        object-fit: cover;
+    }
+}
 table {
     border:2px solid #a7a9be;
     background-color:white ;
