@@ -2342,21 +2342,21 @@ var staticRenderFns = [function () {
     staticClass: "col-md-3 col-lg-4 col-xl-3 mx-auto mb-4 mt-5 links rounded"
   }, [_c("h6", {
     staticClass: "text-uppercase fw-bold mb-4"
-  }, [_vm._v("\n            deliveboo\n          ")]), _vm._v(" "), _c("p", [_vm._v("\n          Your favourite restaurants and takeaways, delivered to your door\n          ")])]), _vm._v(" "), _c("div", {
+  }, [_vm._v("\n            DeliveBoo\n          ")]), _vm._v(" "), _c("p", [_vm._v("\n            I piatti dei ristoranti che ami.\n          ")])]), _vm._v(" "), _c("div", {
     staticClass: "col-md-2 col-lg-2 col-xl-2 mx-auto mb-4 mt-5 links rounded"
   }, [_c("h6", {
     staticClass: "text-uppercase fw-bold mb-4"
   }, [_vm._v("\n            Discover Deliveroo\n          ")]), _vm._v(" "), _c("p", [_c("a", {
     staticClass: "text-reset",
     attrs: {
-      href: "#!"
+      href: "/"
     }
-  }, [_vm._v("Restaurants")])]), _vm._v(" "), _c("p", [_c("a", {
+  }, [_vm._v("Ristoranti")])]), _vm._v(" "), _c("p", [_c("a", {
     staticClass: "text-reset",
     attrs: {
-      href: "#!"
+      href: "#"
     }
-  }, [_vm._v("Dishes")])]), _vm._v(" "), _c("p", [_c("a", {
+  }, [_vm._v("Piatti")])]), _vm._v(" "), _c("p", [_c("a", {
     staticClass: "text-reset",
     attrs: {
       href: "#!"
@@ -2370,36 +2370,31 @@ var staticRenderFns = [function () {
     staticClass: "col-md-3 col-lg-2 col-xl-2 mx-auto mb-4 mt-5 links rounded"
   }, [_c("h6", {
     staticClass: "text-uppercase fw-bold mb-4"
-  }, [_vm._v("\n            Legal\n          ")]), _vm._v(" "), _c("p", [_c("a", {
+  }, [_vm._v("\n            Note legali\n          ")]), _vm._v(" "), _c("p", [_c("a", {
     staticClass: "text-reset",
     attrs: {
       href: "#!"
     }
-  }, [_vm._v("Terms and conditions")])]), _vm._v(" "), _c("p", [_c("a", {
+  }, [_vm._v("Termini & Condizioni")])]), _vm._v(" "), _c("p", [_c("a", {
     staticClass: "text-reset",
     attrs: {
       href: "#!"
     }
-  }, [_vm._v("Privacy")])]), _vm._v(" "), _c("p", [_c("a", {
+  }, [_vm._v("Informativa sulla privacy")])]), _vm._v(" "), _c("p", [_c("a", {
     staticClass: "text-reset",
     attrs: {
       href: "#!"
     }
-  }, [_vm._v("Cookies")])]), _vm._v(" "), _c("p", [_c("a", {
-    staticClass: "text-reset",
-    attrs: {
-      href: "#!"
-    }
-  }, [_vm._v("Speak Up")])])]), _vm._v(" "), _c("div", {
+  }, [_vm._v("Cookies")])])]), _vm._v(" "), _c("div", {
     staticClass: "col-md-4 col-lg-3 col-xl-3 mx-auto mb-4 mt-5 links rounded"
   }, [_c("h6", {
     staticClass: "text-uppercase fw-bold mb-4"
-  }, [_vm._v("Help")]), _vm._v(" "), _c("p", [_c("a", {
+  }, [_vm._v("Aiuto")]), _vm._v(" "), _c("p", [_c("a", {
     staticClass: "text-reset",
     attrs: {
       href: "#!"
     }
-  }, [_vm._v("Contact")])]), _vm._v(" "), _c("p", [_c("a", {
+  }, [_vm._v("Contatti")])]), _vm._v(" "), _c("p", [_c("a", {
     staticClass: "text-reset",
     attrs: {
       href: "#!"
@@ -2409,12 +2404,7 @@ var staticRenderFns = [function () {
     attrs: {
       href: "#!"
     }
-  }, [_vm._v("Cuisines")])]), _vm._v(" "), _c("p", [_c("a", {
-    staticClass: "text-reset",
-    attrs: {
-      href: "#!"
-    }
-  }, [_vm._v("More")])])])])])]), _vm._v(" "), _c("div", {
+  }, [_vm._v("Tipi di cucina")])])])])])]), _vm._v(" "), _c("div", {
     staticClass: "text-center p-4 d-flex justify-content-between",
     staticStyle: {
       "background-color": "rgb(46, 51, 51) links"

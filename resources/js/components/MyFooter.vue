@@ -12,10 +12,10 @@
           <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4 mt-5 links rounded">
             <!-- Content -->
             <h6 class="text-uppercase fw-bold mb-4">
-              deliveboo
+              DeliveBoo
             </h6>
             <p>
-            Your favourite restaurants and takeaways, delivered to your door
+              I piatti dei ristoranti che ami.
             </p>
           </div>
           <!-- Grid column -->
@@ -27,10 +27,10 @@
               Discover Deliveroo
             </h6>
             <p>
-              <a href="#!" class="text-reset">Restaurants</a>
+              <a href="/" class="text-reset">Ristoranti</a>
             </p>
             <p>
-              <a href="#!" class="text-reset">Dishes</a>
+              <a href="#" class="text-reset">Piatti</a>
             </p>
             <p>
               <a href="#!" class="text-reset">Takeaway</a>
@@ -45,19 +45,16 @@
           <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4 mt-5 links rounded">
             <!-- Links -->
             <h6 class="text-uppercase fw-bold mb-4">
-              Legal
+              Note legali
             </h6>
             <p>
-              <a href="#!" class="text-reset">Terms and conditions</a>
+              <a href="#!" class="text-reset">Termini & Condizioni</a>
             </p>
             <p>
-              <a href="#!" class="text-reset">Privacy</a>
+              <a href="#!" class="text-reset">Informativa sulla privacy</a>
             </p>
             <p>
               <a href="#!" class="text-reset">Cookies</a>
-            </p>
-            <p>
-              <a href="#!" class="text-reset">Speak Up</a>
             </p>
           </div>
           <!-- Grid column -->
@@ -65,11 +62,10 @@
           <!-- Grid column -->
           <div class="col-md-4 col-lg-3 col-xl-3 mx-auto  mb-4 mt-5 links rounded">
             <!-- Links -->
-            <h6 class="text-uppercase fw-bold mb-4">Help</h6>
-            <p><a href="#!" class="text-reset">Contact</a></p>
+            <h6 class="text-uppercase fw-bold mb-4">Aiuto</h6>
+            <p><a href="#!" class="text-reset">Contatti</a></p>
             <p><a href="#!" class="text-reset">FAQs</a></p>
-            <p><a href="#!" class="text-reset">Cuisines</a></p>
-            <p><a href="#!" class="text-reset">More</a></p>
+            <p><a href="#!" class="text-reset">Tipi di cucina</a></p>
           </div>
           <!-- Grid column -->
 
