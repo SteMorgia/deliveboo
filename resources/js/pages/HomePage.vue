@@ -1,5 +1,7 @@
 <template>
+
   <div>
+
     <!-- inizio jumbotron -->
     <div class="MyWrapper">
       <div class="MyOverlay"></div>
@@ -15,6 +17,8 @@
     <div class="container-fluid pb-5">
       <div class="row">
         <div class="col-2">
+
+          <!-- inizio categorie -->
           <h3 class="mb-3 px-3">Categorie</h3>
           <div
             class="px-3"
@@ -34,9 +38,13 @@
             </label>
           </div>
         </div>
+        <!-- fine categorie -->
+
 
         <div class="col-9 m-auto">
+
           <div v-if="restaurants.length > 0">
+
             <h1>
               {{
                 switchMessage
@@ -44,17 +52,19 @@
                   : "I migliori ristoranti:"
               }}
             </h1>
+
+            <!-- inizio card ristorante -->
             <div class="d-flex flex-wrap">
+              
               <div
                 v-for="(restaurant, index) in restaurants"
-                :key="'a' + index"
-              >
+                :key="'a' + index">
                 <div class="card m-2" style="width: 15rem">
                   <div class="card-body">
                     <img
                       class="card-img-top"
                       style="min-height: 12rem"
-                      :src="restaurant.image"
+                      :src="'storage/' + restaurant.image"
                       :alt="restaurant.name"
                     />
                     <div class="card-body">
@@ -76,7 +86,10 @@
                   </div>
                 </div>
               </div>
+
             </div>
+            <!-- fine card ristorante -->
+
           </div>
 
           <div v-if="doRestaurantsExist == false && restaurants.length == 0">
@@ -92,11 +105,7 @@
       <h2 class="text-white text-center p-5">HAI FAME ? ORDINA CON UN CLICK! </h2>
 
     </div>
-     
-     
-    
-    
-   
+
   </div>
 </template>
 

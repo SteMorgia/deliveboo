@@ -2628,7 +2628,7 @@ var render = function render() {
         "min-height": "12rem"
       },
       attrs: {
-        src: restaurant.image,
+        src: "storage/" + restaurant.image,
         alt: restaurant.name
       }
     }), _vm._v(" "), _c("div", {
