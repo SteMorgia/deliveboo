@@ -2799,11 +2799,11 @@ var render = function render() {
     staticClass: "card-text"
   }, [_c("span", {
     staticClass: "h3"
-  }, [_vm._v("Indirizzo:")]), _vm._v("\n                " + _vm._s(_vm.restaurant.address) + "\n            ")]), _vm._v(" "), _c("p", {
+  }, [_vm._v("Indirizzo:")]), _vm._v(" "), _c("br"), _vm._v("\n                " + _vm._s(_vm.restaurant.address) + "\n            ")]), _vm._v(" "), _c("p", {
     staticClass: "card-text"
   }, [_c("span", {
     staticClass: "h3"
-  }, [_vm._v("Telefono:")]), _vm._v("\n                " + _vm._s(_vm.restaurant.phone_number) + "\n            ")]), _vm._v(" "), _c("p", {
+  }, [_vm._v("Telefono:")]), _vm._v(" "), _c("br"), _vm._v("\n                " + _vm._s(_vm.restaurant.phone_number) + "\n            ")]), _vm._v(" "), _c("p", {
     staticClass: "card-text"
   }, [_vm._v(_vm._s(_vm.restaurant.description))])])]), _vm._v(" "), _c("hr"), _vm._v(" "), _c("h1", [_vm._v("Menu:")]), _vm._v(" "), _c("div", {
     staticClass: "row"

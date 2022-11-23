@@ -6,10 +6,12 @@
                 <h1 class="card-title text-right pr-5">{{restaurant.name}}</h1>
                 <p class="card-text">
                     <span class="h3">Indirizzo:</span>
+                    <br>
                     {{restaurant.address}}
                 </p>
                 <p class="card-text">
                     <span class="h3">Telefono:</span>
+                    <br>
                     {{restaurant.phone_number}}
                 </p>
                 <p class="card-text">{{restaurant.description}}</p>
