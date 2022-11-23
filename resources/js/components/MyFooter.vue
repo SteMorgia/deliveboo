@@ -12,7 +12,7 @@
           <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4 mt-5 links rounded">
             <!-- Content -->
             <h6 class="text-uppercase fw-bold mb-4">
-              <i class="fas fa-gem me-3"></i>deliveboo
+              deliveboo
             </h6>
             <p>
             Your favourite restaurants and takeaways, delivered to your door
@@ -99,12 +99,12 @@ export default {
 <style lang="scss" scoped>
 
   .links {
-    background-color: #a7a9be;
+    background-color: rgb(208, 208, 206);
     padding-top: 2rem;
-    color: white;
+      color: black;
     
     :hover {
-      color: #ff8906;
+      color: white;
       text-decoration: none;
       cursor: pointer;
     }

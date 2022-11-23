@@ -6,6 +6,7 @@ Vue.use(VueRouter);
 import HomePage from './pages/HomePage.vue';
 import SingleRestaurantPage from './pages/SingleRestaurantPage.vue';
 import Redirect from './pages/Redirect.vue';
+import NotFound from './pages/NotFound.vue';
 
 const router = new VueRouter({
     mode: "history",
@@ -24,8 +25,12 @@ const router = new VueRouter({
             path: '/redirect', 
             name: 'redirect',
             component: Redirect
+        },
+        {
+            path: '/*', // raccolgo tutti gli uri che non sono presenti in questo array.
+            name: 'not-found',
+            component: NotFound
         }
-
     ]
 });
 
