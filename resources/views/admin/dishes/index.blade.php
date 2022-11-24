@@ -27,7 +27,7 @@
                                 <p class="card-text">Descrizione: <br> {{$dish->description}}</p>
                                 <p class="card-text">Prezzo: {{$dish->price}} €</p>
                                 <p class="card-text">Visibile: {{$dish->visibility?'Sì':'No'}}</p>
-                                <a href="{{route('admin.dishes.show', ['dish' => $dish->slug])}}" class="btn text-white m-1" style="background-color:#e53170;">Vedi</a>
+                                <a href="{{route('admin.dishes.show', ['dish' => $dish->slug])}}" class="btn text-white m-1" style="background-color:#f25f4c;">Vedi</a>
                             </div>
 
                         </div>

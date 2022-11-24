@@ -25,8 +25,8 @@
                         @endif
                         
                         <div class="text-right">
-                            <a href="{{route('admin.dishes.index')}}" class="btn text-white mr-2" style="background-color:#e53170;">Vai ai piatti del tuo ristorante</a>
-                            <a href="{{route('admin.orders.index')}}" class="btn text-white" style="background-color:#e53170;">Vai agli ordini del tuo ristorante</a>
+                            <a href="{{route('admin.dishes.index')}}" class="btn text-white mr-2" style="background-color:#f25f4c;">Vai ai piatti del tuo ristorante</a>
+                            <a href="{{route('admin.orders.index')}}" class="btn text-white" style="background-color:#f25f4c;">Vai agli ordini del tuo ristorante</a>
                         </div>                        
                     </div>
                 </div>
