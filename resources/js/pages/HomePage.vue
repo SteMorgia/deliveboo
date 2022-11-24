@@ -60,7 +60,7 @@
                 v-for="(restaurant, index) in restaurants"
                 :key="'a' + index">
                 <div class="card m-2" style="width: 15rem">
-                  <div class="card-body">
+                  <div class="card-body p-1">
                     <img
                       class="card-img-top"
                       style="min-height: 12rem"

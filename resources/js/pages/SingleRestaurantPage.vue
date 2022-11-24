@@ -28,15 +28,17 @@
 
                 <div v-if="dishes" class="d-flex flex-wrap" :class="(cart.length>0)?'justify-content-center':''">
                     <div v-for="(dish, index) in dishes" :key="index">
-                        <div v-if="dish.visibility == 1" class="card m-2 p-1 border:2px solid black;" style="width: 20rem; border:2px solid #a7a9be;">
+                        <div class="card m-2 p-1 border:2px solid black;" style="width: 20rem; border:2px solid #a7a9be;">
                             <div>
                                 <img style="height: 200px; object-fit:cover;" class="card-img-top" :src="'/storage/' + dish.image" :alt="dish.name">
                             </div>
                             <div class="card-body text-center">
                                 <h5 class="card-title font-weight-bold">{{dish.name}}</h5>
                                 <p class="card-text" style="height: 90px;">{{dish.description}}</p>
-                                <p class="card-text font-weight-bold">{{dish.price}} €</p>
-                                <button class="btn text-white " style="background-color: #f25f4c" :class="btnDisabled?'disabled':''" @click="addToCart(dish, restaurant)">Aggiungi al carrello</button>
+                                <p v-if="dish.visibility == 0" class="card-text font-weight-bold">NON DISPONIBILE</p>
+                                <p v-else class="card-text font-weight-bold">{{dish.price}} €</p>
+                                
+                                <button class="btn text-white " :disabled="(dish.visibility == 1) ? false : true" style="background-color: #f25f4c" :class="btnDisabled?'disabled':''" @click="addToCart(dish, restaurant)">Aggiungi al carrello</button>
                             </div>
                         </div>                        
                     </div>

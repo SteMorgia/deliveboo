@@ -47,7 +47,7 @@
         @endif
 
 
-        <a class="btn btn-primary" href='{{route('admin.restaurant.index')}}'>Torna al tuo ristorante</a>
+        <a class="btn" style="background-color:#ff8906;" href='{{route('admin.restaurant.index')}}'>Torna al tuo ristorante</a>
         
     </div>
 

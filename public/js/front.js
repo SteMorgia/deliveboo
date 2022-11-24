@@ -2625,7 +2625,7 @@ var render = function render() {
         width: "15rem"
       }
     }, [_c("div", {
-      staticClass: "card-body"
+      staticClass: "card-body p-1"
     }, [_c("img", {
       staticClass: "card-img-top",
       staticStyle: {
@@ -2815,7 +2815,7 @@ var render = function render() {
   }, _vm._l(_vm.dishes, function (dish, index) {
     return _c("div", {
       key: index
-    }, [dish.visibility == 1 ? _c("div", {
+    }, [_c("div", {
       staticClass: "card m-2 p-1 border:2px solid black;",
       staticStyle: {
         width: "20rem",
@@ -2840,7 +2840,9 @@ var render = function render() {
       staticStyle: {
         height: "90px"
       }
-    }, [_vm._v(_vm._s(dish.description))]), _vm._v(" "), _c("p", {
+    }, [_vm._v(_vm._s(dish.description))]), _vm._v(" "), dish.visibility == 0 ? _c("p", {
+      staticClass: "card-text font-weight-bold"
+    }, [_vm._v("NON DISPONIBILE")]) : _c("p", {
       staticClass: "card-text font-weight-bold"
     }, [_vm._v(_vm._s(dish.price) + " €")]), _vm._v(" "), _c("button", {
       staticClass: "btn text-white",
@@ -2848,12 +2850,15 @@ var render = function render() {
       staticStyle: {
         "background-color": "#f25f4c"
       },
+      attrs: {
+        disabled: dish.visibility == 1 ? false : true
+      },
       on: {
         click: function click($event) {
           return _vm.addToCart(dish, _vm.restaurant);
         }
       }
-    }, [_vm._v("Aggiungi al carrello")])])]) : _vm._e()]);
+    }, [_vm._v("Aggiungi al carrello")])])])]);
   }), 0) : _vm._e(), _vm._v(" "), _vm.dishes.length == 0 && _vm.doDishesExists == false ? _c("div", [_vm._m(0)]) : _vm._e()]), _vm._v(" "), _vm.cart.length > 0 ? _c("div", {
     "class": _vm.cart.length > 0 ? "col-md-6 col-sm-12" : ""
   }, [_c("div", [_c("h1", [_vm._v("Il tuo carrello:")]), _vm._v(" "), _c("table", {

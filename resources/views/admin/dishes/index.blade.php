@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
 
-            <a href="{{route('admin.restaurant.index')}}" class="btn btn-primary">Torna al tuo ristorante</a>
+            <a href="{{route('admin.restaurant.index')}}" class="btn" style="background-color:#ff8906;">Torna al tuo ristorante</a>
             <a href="{{route('admin.dishes.create')}}" class="btn btn-success">Crea un nuovo piatto</a>
 
             <hr>
@@ -27,7 +27,7 @@
                                 <p class="card-text">Descrizione: <br> {{$dish->description}}</p>
                                 <p class="card-text">Prezzo: {{$dish->price}} €</p>
                                 <p class="card-text">Visibile: {{$dish->visibility?'Sì':'No'}}</p>
-                                <a href="{{route('admin.dishes.show', ['dish' => $dish->slug])}}" class="btn btn-primary m-1">Vedi</a>
+                                <a href="{{route('admin.dishes.show', ['dish' => $dish->slug])}}" class="btn text-white m-1" style="background-color:#e53170;">Vedi</a>
                             </div>
 
                         </div>

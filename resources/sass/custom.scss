@@ -1,0 +1,21 @@
+.my-container {
+    height: 100vh;
+
+    span {
+        font-size: 3em;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        background-image: linear-gradient(#ff8906,#ff8906);
+        background-size: 100% 10px;
+        background-repeat: no-repeat;
+        background-position: 100% 0%;
+        transition: background-size .7s, background-position .5s ease-in-out;
+        border-radius: 5px;
+    }
+
+    .my-btn {
+        margin-top: 100px;
+    }
+}
