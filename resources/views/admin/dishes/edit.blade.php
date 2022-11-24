@@ -8,12 +8,12 @@
 
 
         @if ($dish->image !== null)
-            <form class="btn btn-danger mb-3"
+            <form class="mb-3"
                 action="{{route('admin.dishes.deleteDishImage', ['dish' => $dish])}}"
                 method="POST">
                 @csrf
                 @method('DELETE')
-                <button type="submit" class="btn btn-danger">Cancella solo l'immagine del piatto</button>
+                <button type="submit" class="btn btn-danger">Cancella solo l'immagine</button>
             </form>
         @endif
 
@@ -104,11 +104,11 @@
                 @enderror
             </div>
         
-            <button type="submit" class="mt-3 btn btn-primary">Modifica piatto</button>
+            <button type="submit" class="mt-3 btn btn-warning">Modifica piatto</button>
 
         </form>
 
-        <a href="{{route('admin.dishes.index')}}" class="btn btn-primary mt-3">Torna alla lista dei piatti</a>
+        <a href="{{route('admin.dishes.index')}}" class="btn mt-3" style="background-color:#ff8906;">Torna alla lista dei piatti</a>
 
     </div>
 

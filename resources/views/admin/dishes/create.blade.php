@@ -84,13 +84,13 @@
                 @enderror
             </div>
 
-            <button type="submit" class="mt-3 btn btn-primary">Crea piatto</button>
+            <button type="submit" class="mt-3 btn btn-success">Crea piatto</button>
 
         </form>
 
         <br>
 
-        <a href="{{route('admin.dishes.index')}}" class="btn btn-primary">Torna alla lista dei piatti</a>
+        <a href="{{route('admin.dishes.index')}}" class="btn" style="background-color:#ff8906;">Torna alla lista dei piatti</a>
 
     </div>
 
